@@ -1,0 +1,578 @@
+level,error_category,events_count,users_count
+новичок,Выполнение логического оператора If действия id: <id> группы действий id: <id> Результат: false,56,1
+новичок,运行HTMLElement 动作id<id> 动作组id<id> 根据搜索条件未找到HTML元素,38,1
+новичок,"Выполнение действия HtmlElement id: <id> группы действий id: <id> Не найден HTML элемент, по условиям поиска",32,13
+новичок,Null reference,12,4
+новичок,"Searching text on a page action id: <id>of action group id: <id> 未发现, Url: https://tsugaike.nippon-ski.com/ja/checkout/cart/, Regex: 名義人\s+",11,1
+новичок,Server 500,7,1
+новичок,Выполнение действия Emulation id: <id> группы действий id: <id> Выполнение прервано | System.Exception: Выполнение прервано,7,1
+новичок,"Running the WebBrowserSettings action id: <id> action group id: <id> Error reading the file, it probably has wrong format or corrupted",6,1
+новичок,"Searching text on a page action id: <id>of action group id: <id> 未发现, Url: https://tsugaike.nippon-ski.com/ja/checkout/, Regex: 名義人\s+",5,1
+новичок,Executing action ImageProcessing id: <id> Action Group id: <id> Error loading image,4,1
+новичок,Выполнение действия ImageProcessing id: <id> группы действий id: <id> Ошибка при получении изображения,4,1
+новичок,Выполнение действия LaunchProgram id: <id> группы действий id: <id> Указанный исполняемый файл не является действительным приложением для эт,4,1
+новичок,Timeout,3,3
+новичок,Выполнение действия List id: <id> группы действий id: <id> Список пуст | System.Exception: Список пуст,3,2
+новичок,Выполнение действия Emulation id: <id> группы действий id: <id> Входная строка имела неверный формат. | System.FormatException: Входная стро,3,2
+новичок,Argument error,3,1
+новичок,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> [Строка: 22; Cтолбец: 0] <n>.. Нет xpath элемента: //h1[contains(@clas,3,1
+новичок,Rate limit,3,1
+новичок,Выполнение действия LaunchProgram id: <id> группы действий id: <id> Переполнение TimeSpan из-за превышения длительности. | System.OverflowEx,3,1
+новичок,"Выполнение действия CSharp OwnCode: Парсим мемы, постим на сервак. id: <id> группы действий id: <id> [Строка: <n>; Cтолбец: 1] Индекс находи",3,1
+новичок,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> Поток находился в процессе прерывания. | System.Threading.ThreadAbortE,2,2
+новичок,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> Недостаточно памяти. | System.OutOfMemoryException: Недостаточно памят,2,1
+новичок,Выполнение программы C:\mobirise-automation\mobirise.bat действия id: <id> группы действий id: <id> Результат: <n>,2,1
+новичок,Выполнение действия WebBrowserTabManagement id: <id> группы действий id: <id> Не нашли вкладку popup-1 в инстансе. Инстанс <n>:<n>.0.0.1 | S,2,1
+новичок,Running HtmlElement action id: <id> action group id: <id> An HTML element matching the search criteria hasn't been found,2,1
+новичок,Выполнение программы C:\Program Files (x86)\ePochta\ePochta Mailer\ePochtaMailer.exe действия id: <id> группы действий id: <id> Результат: -,2,1
+новичок,"Searching text on a page action id: <id>of action group id: <id> 未发现, Url: https://tsugaike.nippon-ski.com/ja/checkout/#payment, Regex: 名義人\",2,1
+новичок,Выполнение действия Table id: <id> группы действий id: <id> Ошибка при обработке таблицы,2,1
+новичок,File not found,1,1
+новичок,"Выполнение действия Touch HtmlElement id: <id> группы действий id: <id> Не найден HTML элемент либо вкладка, по условиям поиска",1,1
+новичок,Выполнение действия HtmlElement id: <id> группы действий id: <id> Ошибка обращения к Instance.GetTabByAddress | System.Exception: Ошибка обр,1,1
+новичок,Взятие строки из таблицы действия id: <id> группы действий id: <id> Строки с номером не существует в таблице,1,1
+новичок,"Выполнение действия Создать профили ZennoBrowser id: <id> группы действий id: <id> {""ExceptionJson"":[""{\u0022$type\u0022:\u0022ZennoLab.Plat",1,1
+новичок,Выполнение действия WebBrowserExtensions id: <id> группы действий id: <id> Can't uninstall extension pabjfbciaedomjjfelfafejkppknjleh | Syst,1,1
+новичок,Выполнение действия FTPDirectory id: <id> группы действий id: <id> Ошибка при работе с FTP,1,1
+новичок,"Выполнение действия FTPDirectory id: <id> группы действий id: <id> Прокси имеет неверный формат: ""94.<n>.<n>.60"" | System.Exception: Прокси ",1,1
+новичок,"Выполнение действия Получить список профилей ZennoBrowser id: <id> группы действий id: <id> Status(StatusCode=""Unauthenticated"", Detail=""Bad",1,1
+новичок,Выполнение действия FTPFile id: <id> группы действий id: <id> Ошибка при работе с FTP,1,1
+новичок,Выполнение действия LaunchProgram id: <id> группы действий id: <id> Не удается найти указанный файл | System.ComponentModel.Win32Exception (,1,1
+новичок,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> [Строка: <n>; Cтолбец: 1] Не удалось собрать Cookie header для xe.com ,1,1
+новичок,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> No such variable: xe_rates_usd | ZennoLab.TemplateManipulator.V4.Helpe,1,1
+новичок,Выполнение действия Emulation id: <id> группы действий id: <id> Ошибка при обработке,1,1
+новичок,Выполнение действия WebBrowserTabManagement id: <id> группы действий id: <id> Не нашли вкладку popup в инстансе. Инстанс <n>:<n>.0.0.1 | Sys,1,1
+новичок,Выполнение действия HtmlElement id: <id> группы действий id: <id> Индекс находился вне границ массива. | System.IndexOutOfRangeException: Ин,1,1
+новичок,"Поиск текста на странице действия id: <id> группы действий id: <id> Не найден, Url: http://wlb-promo.local/5x-product-check, Regex: Все\s+то",1,1
+новичок,Выполнение действия CSharp OwnCode: Workbench. id: <id> группы действий id: <id> Поток находился в процессе прерывания. | System.Threading.T,1,1
+новичок,Выполнение действия Http id: <id> группы действий id: <id> Ошибка запроса,1,1
+новичок,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> [Строка: 25; Cтолбец: 0] Exit by red branch: table 'parse_promo' not f,1,1
+новичок,Выполнение действия WebBrowserExtensions id: <id> группы действий id: <id> Ошибка обращения к Instance.ActivateExtension | System.Exception:,1,1
+новичок,Выполнение действия Создать профили ZennoBrowser id: <id> группы действий id: <id> Входная строка имела неверный формат. | System.FormatExce,1,1
+новичок,Выполнение действия Запустить инстанс ZennoBrowser id: <id> группы действий id: <id> Ошибка запуска профиля ZennoBrowser (<id>): Can't conne,1,1
+новичок,"Searching text on a page action id: <id>of action group id: <id> 未发现, Url: https://tsugaike.nippon-ski.com/ja/customer/account/, Regex: 名義人\",1,1
+новичок,Выполнение действия CSharp OwnCode: Parser-get. id: <id> группы действий id: <id> Поток находился в процессе прерывания. | System.Threading.,1,1
+новичок,Server unavailable,1,1
+новичок,执行动作C#自定义代码.id: <id> 动作组 id: <id> Thread was being aborted. | System.Threading.ThreadAbortException: Thread was being aborted,1,1
+средний,"Выполнение действия HtmlElement id: <id> группы действий id: <id> Не найден HTML элемент, по условиям поиска",69,22
+средний,Выполнение логического оператора If действия id: <id> группы действий id: <id> Результат: false,31,5
+средний,Captcha/anti-bot,30,3
+средний,Proxy issue,26,11
+средний,Null reference,25,9
+средний,Парсинг страницы действия id: <id> группы действий id: <id> Не найдены элементы по заданным параметрам,24,5
+средний,Subproject isLinkLoaded. Parsing the page action id: <id> action group id: <id> subproject path: C:\Users\gaabs\Documents\zennoPoster\refact,21,1
+средний,Running the Profile action id: <id> action group id: <id> Could not find matching profile. | System.Data.ObjectNotFoundException: Could not ,20,1
+средний,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> Поток находился в процессе прерывания. | System.Threading.ThreadAbortE,17,4
+средний,Run List action id: <id> action group id: <id> List is empty | System.Exception: List is empty,14,5
+средний,"Выполнение действия Touch HtmlElement id: <id> группы действий id: <id> Не найден HTML элемент либо вкладка, по условиям поиска",11,3
+средний,运行列表 动作id<id> 动作组id<id> 列表为空 | System.Exception: 列表为空,11,2
+средний,Server 500,10,5
+средний,Выполнение действия CSharp OwnCode: Get Messagge. id: <id> группы действий id: <id> Поток находился в процессе прерывания. | System.Threadin,10,1
+средний,Выполнение действия Http id: <id> группы действий id: <id> Ошибка запроса,9,4
+средний,Выполнение логического оператора If действия id: <id> группы действий id: <id> Результат,9,2
+средний,Timeout,8,3
+средний,Выполнение действия CSharp OwnCode: FARM. id: <id> группы действий id: <id> Поток находился в процессе прерывания. | System.Threading.Thread,8,1
+средний,Выполнение действия JavaScript OwnCode id: <id> группы действий id: <id> CdpDocument.EvaluateScript failed | System.Exception: CdpDocument.E,7,4
+средний,运行HTMLElement 动作id<id> 动作组id<id> 根据搜索条件未找到HTML元素,7,3
+средний,Выполнение действия List id: <id> группы действий id: <id> Ошибка при обработке списка,7,3
+средний,Running the WebBrowserSettings action id: <id> action group id: <id> Cookies for loading not found. | System.Exception: Cookies for loading ,7,2
+средний,Running HtmlElement action id: <id> action group id: <id> An HTML element matching the search criteria hasn't been found,7,2
+средний,Выполнение действия Emulation id: <id> группы действий id: <id> Ошибка при обработке,7,1
+средний,Argument error,6,4
+средний,Rate limit,6,4
+средний,Выполнение действия List id: <id> группы действий id: <id> Список пуст | System.Exception: Список пуст,5,4
+средний,Выполнение действия Emulation id: <id> группы действий id: <id> Выполнение прервано | System.Exception: Выполнение прервано,5,3
+средний,Выполнение действия HtmlElement id: <id> группы действий id: <id> Индекс находился вне границ массива. | System.IndexOutOfRangeException: Ин,5,2
+средний,Executing action Swipe HtmlElement id: <id> of action group id: <id> HTML element or tab was not found using search settings,5,1
+средний,Выполнение действия TextProcessing id: <id> группы действий id: <id> No such list: | ZennoLab.TemplateManipulator.V4.Helpers.InvalidVariable,5,1
+средний,Выполнение действия CSharp OwnCode: ПОЛУЧАЕМ НОВУЮ ССЫЛКУ НА ВИДЕО. id: <id> группы действий id: <id> No such list: youtube | ZennoLab.Templ,5,1
+средний,Выполнение действия ParsePage id: <id> группы действий id: <id> Ошибка получения данных из html документа | System.Exception: Ошибка получен,4,1
+средний,Выполнение действия VariableOperations id: <id> группы действий id: <id> Переменная не число | System.FormatException: Входная строка имела ,4,1
+средний,Выполнение действия WebBrowserTab id: <id> группы действий id: <id> Не нашли активную вкладку в инстансе. Инстанс 0: | System.Exception: Не ,3,3
+средний,Выполнение действия CSharp OwnCode: FARM. id: <id> группы действий id: <id> System.FormatException: Входная строка имела неверный формат.. |,3,1
+средний,Выполнение действия Db id: <id> группы действий id: <id> ERROR [IM014] [Microsoft][ODBC Driver Manager] The specified DSN contains an archit,3,1
+средний,Выполнение программы C:\Zenno\Metatags\Metatags.bat действия id: <id> группы действий id: <id> Результат: 1,3,1
+средний,"Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> [Строка: 15; Cтолбец: 0] Не удалось загрузить файл или сборку ""Renci.S",3,1
+средний,"Выполнение действия CSharp OwnCode: Get Messagge. id: <id> группы действий id: <id> Unterminated string. Expected delimiter: "". Path 'messag",3,1
+средний,Выполнение программы D:\0.<n> Программы\0.<n> jq\jq.exe действия id: <id> группы действий id: <id> Результат: 3,3,1
+средний,"Выполнение действия Table id: <id> группы действий id: <id> Column name must be one-, two- or three-letter name from A to XFD",3,1
+средний,运行IF-statmen逻辑 动作id<id> 动作组id<id> 结果：false,3,1
+средний,Not found,3,1
+средний,Выполнение действия File id: <id> группы действий id: <id> Ошибка при работе с файлом,2,2
+средний,"Выполнение действия Получить список профилей ZennoBrowser id: <id> группы действий id: <id> Status(StatusCode=""Unauthenticated"", Detail=""Bad",2,1
+средний,Выполнение действия CSharp OwnCode: считаю разницу кликов (в неделю). id: <id> группы действий id: <id> Входная строка имела неверный формат,2,1
+средний,Executing action WebBrowserExtensions id: <id> of action group id: <id> Error accessing Instance.InstallCrxExtension | System.Exception: Err,2,1
+средний,Подпроект drom_parse_osn_file. Выполнение действия File id: <id> группы действий id: <id> подпроект path: C:\Users\ceo\Documents\drom_parse_,2,1
+средний,Выполнение действия Db id: <id> группы действий id: <id> ERROR [IM002] [Microsoft][ODBC Driver Manager] Data source name not found and no de,2,1
+средний,"Выполнение действия Emulation id: <id> группы действий id: <id> Имитация просмотра страницы не поддерживается в Firefox52x64. Пожалуйста, ис",2,1
+средний,Выполнение действия List id: <id> группы действий id: <id> No such list: | ZennoLab.TemplateManipulator.V4.Helpers.InvalidVariableException:,2,1
+средний,"Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> [Строка: 23; Cтолбец: 0] Не удалось загрузить файл или сборку ""Renci.S",2,1
+средний,Subproject customPages. Executing the ProjectInProject action id: <id> action group id: <id> subproject path: C:\Users\gaabs\Documents\zenno,2,1
+средний,Subproject easycommissionfunnel. Running HtmlElement action id: <id> action group id: <id> subproject path: C:\Users\gaabs\Documents\zennoPo,2,1
+средний,Subproject vulcan21966. Parsing the page action id: <id> action group id: <id> subproject path: C:\Users\gaabs\Documents\zennoPoster\refacto,2,1
+средний,Subproject paulharvie. Parsing the page action id: <id> action group id: <id> subproject path: C:\Users\gaabs\Documents\zennoPoster\refactor,2,1
+средний,Subproject leadhero. Parsing the page action id: <id> action group id: <id> subproject path: C:\Users\gaabs\Documents\zennoPoster\refactor\l,2,1
+средний,Subproject copythepro. Parsing the page action id: <id> action group id: <id> subproject path: C:\Users\gaabs\Documents\zennoPoster\refactor,2,1
+средний,Subproject superAffiliate(goal). Running HtmlElement action id: <id> action group id: <id> subproject path: C:\Users\gaabs\Documents\zennoPo,2,1
+средний,Subproject FreedomBlueprint. Running HtmlElement action id: <id> action group id: <id> subproject path: C:\Users\gaabs\Documents\zennoPoster,2,1
+средний,Выполнение действия CSharp OwnCode: ждем пока файл CSV освободится. id: <id> группы действий id: <id> Поток находился в процессе прерывания.,2,1
+средний,Выполнение действия TextProcessing id: <id> группы действий id: <id> Входная строка имела неверный формат. | System.FormatException: Входная,2,1
+средний,Выполнение действия CSharp OwnCode: connectarb. id: <id> группы действий id: <id> Поток находился в процессе прерывания. | System.Threading.,2,1
+средний,Выполнение действия Table id: <id> группы действий id: <id> No such list: | ZennoLab.TemplateManipulator.V4.Helpers.InvalidVariableException,2,1
+средний,Выполнение действия ParsePage id: <id> группы действий id: <id> Unexpected token {Char} where {Ident} was expected. | System.FormatException,2,1
+средний,Executing action CSharp OwnCode: Parse Filler Lines.id: <id> action group id: <id> Thread was being aborted. | System.Threading.ThreadAbortE,2,1
+средний,File not found,2,1
+средний,Выполнение действия Создать профили ZennoBrowser id: <id> группы действий id: <id> Списка с указанным именем не существует,2,1
+средний,Выполнение действия WebBrowserTabManagement id: <id> группы действий id: <id> Не нашли вкладку TW в инстансе. Инстанс <n>:<n>.0.0.1 | System,2,1
+средний,"Executing action Parse Json/Xml id: <id> action group id: <id> Error reading JToken from JsonReader. Path '', line 0, position 0. | System.E",2,1
+средний,Выполнение действия Остановить инстанс id: <id> группы действий id: <id> Ошибка обращения к Instance.PrepareInstance | System.Exception: Оши,2,1
+средний,Выполнение действия Создать профили ZennoBrowser id: <id> группы действий id: <id> ZennoBrowser не установлен | System.Exception: ZennoBrows,2,1
+средний,"Выполнение действия Получить список профилей ZennoBrowser id: <id> группы действий id: <id> Status(StatusCode=""Cancelled"", Detail=""Call canc",1,1
+средний,Выполнение действия Получить список профилей ZennoBrowser id: <id> группы действий id: <id> Can't connect to ZennoBrowser | System.Exception,1,1
+средний,Выполнение действия Запустить инстанс ZennoBrowser id: <id> группы действий id: <id> Ошибка запуска профиля ZennoBrowser (<id>): Status(Stat,1,1
+средний,Running the VariableOperations action id: <id> action group id: <id> Variable is not a number | System.FormatException: Input string was not,1,1
+средний,Testing file C:\Users\tuhe\Dropbox\trustluna\ai pobieranie\outchat\7 existence action id: <id> action group id: <id> Result: file doesn't ex,1,1
+средний,Perform the Touch action id: <id> action group id: <id> HTML element or tab was not found using search settings,1,1
+средний,Running the WebBrowserSettings action id: <id> action group id: <id> Invalid format. | System.Exception: Invalid format,1,1
+средний,Выполнение действия CSharp OwnCode: считаю разницу кликов (в неделю). id: <id> группы действий id: <id> [Строка: 19; Cтолбец: 0] max_click н,1,1
+средний,Выполнение действия CSharp OwnCode: считаю разницу в рублях. id: <id> группы действий id: <id> Входная строка имела неверный формат. | Syste,1,1
+средний,Выполнение действия CSharp OwnCode: паршу данные. id: <id> группы действий id: <id> No such variable: total_clicks | ZennoLab.TemplateManipu,1,1
+средний,Executing action WebBrowserExtensions id: <id> of action group id: <id> Extension are supported only in Chromium browser engine | System.Inv,1,1
+средний,"Searching text on a page action id: <id>of action group id: <id> 未发现, Url: https://japantravel.navitime.com/zh-cn/booking/tourist-pass/osaka",1,1
+средний,Взятие строки из таблицы действия id: <id> группы действий id: <id> Строки с номером не существует в таблице,1,1
+средний,"Выполнение действия CSharp OwnCode: Беру проксю, меняю айпи, загружаю профиль. id: <id> группы действий id: <id> Поток находился в процессе ",1,1
+средний,Extension installer not found,1,1
+средний,"Выполнение действия Parse Json/Xml id: <id> группы действий id: <id> Error reading JToken from JsonReader. Path '', line 0, position 0. | Sy",1,1
+средний,Выполнение программы C:\Zenno\OpenAi-TTS\ffmpeg.exe действия id: <id> группы действий id: <id> Результат: -<n>,1,1
+средний,"Выполнение действия Profile id: <id> группы действий id: <id> Файла не существует по пути ""C:\Users\Administrator\Desktop\зенка Парсер\\1""",1,1
+средний,"Выполнение действия Profile id: <id> группы действий id: <id> Файла не существует по пути ""C:\Users\Administrator\Desktop\зенка Парсер\1""",1,1
+средний,Выполнение действия Http id: <id> группы действий id: <id> No such variable: ip_info | ZennoLab.TemplateManipulator.V4.Helpers.InvalidVariab,1,1
+средний,Выполнение действия CSharp OwnCode: Get Messagge. id: <id> группы действий id: <id> Поток находился в процессе прерывания,1,1
+средний,Subproject FreedomBlueprint. Run Emulation action id: <id> action group id: <id> subproject path: C:\Users\gaabs\Documents\zennoPoster\refac,1,1
+средний,Выполнение действия Emulation id: <id> группы действий id: <id> Ошибка обращения к Instance.SendText | System.Exception: Ошибка обращения к ,1,1
+средний,Подпроект 2_1_YT_load_ZP. Выполнение действия Directory id: <id> группы действий id: <id> подпроект path: D:\ZENNO\1_Youtube_Zennoposter\2_1,1,1
+средний,Выполнение действия LaunchProgram id: <id> группы действий id: <id> Отказано в доступе | System.ComponentModel.Win32Exception (0x80004005): ,1,1
+средний,Выполнение действия CSharp OwnCode: arbbridge. id: <id> группы действий id: <id> Поток находился в процессе прерывания. | System.Threading.T,1,1
+средний,Выполнение действия CSharp OwnCode: Auth.Metamask. id: <id> группы действий id: <id> Поток находился в процессе прерывания. | System.Threadi,1,1
+средний,Выполнение действия WebBrowserSettings id: <id> группы действий id: <id> Ошибка обращения к Instance.ClearCache | System.Exception: Ошибка о,1,1
+средний,"Выполнение действия Profile id: <id> группы действий id: <id> Файла не существует по пути ""C:\Users\MikeSor\Desktop\Zenno\Шаблоны\Fiverr\Mis",1,1
+средний,Выполнение действия Directory id: <id> группы действий id: <id> Индекс находился вне границ массива. | System.IndexOutOfRangeException: Инде,1,1
+средний,Выполнение действия Http id: <id> группы действий id: <id> No such variable: auth64 | ZennoLab.TemplateManipulator.V4.Helpers.InvalidVariabl,1,1
+средний,Выполнение действия ParsePage id: <id> группы действий id: <id> Invalid format of the collection numbers. ElementsInCollection: 16. Path: -1,1,1
+средний,Выполнение действия распознавания капчи id: <id> группы действий id: <id> Некорректная капча | System.Exception: Некорректная капча,1,1
+средний,"Поиск текста на странице действия id: <id> группы действий id: <id> Не найден, Url: https://b.dom-edinstva.ru/crm/lead/details/<n>/, Regex: ",1,1
+средний,"Выполнение действия CSharp OwnCode: KeyEvent(""down"",""press"",""""). id: <id> группы действий id: <id> Поток находился в процессе прерывания. | ",1,1
+средний,Access denied,1,1
+средний,Выполнение действия ParsePage id: <id> группы действий id: <id> Результатом выражения должен быть NodeSet. | System.Xml.XPath.XPathException,1,1
+средний,Выполнение действия List id: <id> группы действий id: <id> Искомый элемент отсутствует в списке | System.Exception: Искомый элемент отсутств,1,1
+средний,Выполнение действия WebBrowserSettings id: <id> группы действий id: <id> Ошибка обращения к Instance.ClearCookie | System.Exception: Ошибка ,1,1
+средний,Taking line from the table action id: <id> action group id: <id> Line No. does not exist in the table,1,1
+средний,Running the switch logic statement action id: <id> action group id: <id> Result: No matching values,1,1
+средний,Выполнение действия CSharp OwnCode: Поиск на dzen.ru. id: <id> группы действий id: <id> Поток находился в процессе прерывания. | System.Thre,1,1
+средний,Executing action CSharp OwnCode.id: <id> action group id: <id> [Row: <n>; Column: 0] Phone not found in record | System.Exception: Phone not,1,1
+средний,Executing action CSharp OwnCode.id: <id> action group id: <id> [Row: 12; Column: 0] No file or email | System.Exception: No file or email,1,1
+средний,Executing action CSharp OwnCode.id: <id> action group id: <id> No such variable: CurrentEmail | ZennoLab.TemplateManipulator.V4.Helpers.Inva,1,1
+средний,Executing action CSharp OwnCode.id: <id> action group id: <id> No such variable: FoundRecord | ZennoLab.TemplateManipulator.V4.Helpers.Inval,1,1
+средний,Выполнение действия ImageProcessing id: <id> группы действий id: <id> Ошибка при получении изображения,1,1
+средний,Выполнение действия WebBrowserSettings id: <id> группы действий id: <id> Некорректный формат. | System.Exception: Некорректный формат,1,1
+средний,Выполнение действия Swipe HtmlElement id: <id> группы действий id: <id> Please use CEF (Chrome) or Chromium engine for Touch component! | Sy,1,1
+продвинутый,"Выполнение действия HtmlElement id: <id> группы действий id: <id> Не найден HTML элемент, по условиям поиска",389,40
+продвинутый,运行HTMLElement 动作id<id> 动作组id<id> 根据搜索条件未找到HTML元素,165,5
+продвинутый,Выполнение действия List id: <id> группы действий id: <id> Искомый элемент отсутствует в списке | System.Exception: Искомый элемент отсутств,110,3
+продвинутый,Captcha/anti-bot,83,9
+продвинутый,Rate limit,65,7
+продвинутый,运行IF-statmen逻辑 动作id<id> 动作组id<id> 结果：false,61,3
+продвинутый,Выполнение действия List id: <id> группы действий id: <id> Список пуст | System.Exception: Список пуст,53,17
+продвинутый,Парсинг страницы действия id: <id> группы действий id: <id> Не найдены элементы по заданным параметрам,53,8
+продвинутый,Выполнение логического оператора If действия id: <id> группы действий id: <id> Результат: false,35,13
+продвинутый,Running HtmlElement action id: <id> action group id: <id> An HTML element matching the search criteria hasn't been found,27,6
+продвинутый,Выполнение действия VariableOperations id: <id> группы действий id: <id> Переменная не число | System.FormatException: Входная строка имела ,23,3
+продвинутый,Timeout,22,8
+продвинутый,Proxy issue,21,10
+продвинутый,"Searching text on a page action id: <id>of action group id: <id> 未发现, Url: https://www.paramountplus.com/account/signup/submitpayment, Regex",20,1
+продвинутый,Perform the JavaScript OwnCode action id: <id> action group id: <id> Error accessing Document.EvaluateScript | System.Exception: Error acces,19,1
+продвинутый,"Выполнение действия Создать профили ZennoBrowser id: <id> группы действий id: <id> Status(StatusCode=""Unauthenticated"", Detail=""Bad gRPC res",19,1
+продвинутый,Выполнение действия Http id: <id> группы действий id: <id> Ошибка запроса,17,3
+продвинутый,Argument error,16,5
+продвинутый,Null reference,14,6
+продвинутый,Выполнение действия ProjectInProject id: <id> группы действий id: <id> Ошибка при обработке,14,2
+продвинутый,Выполнение действия Запустить инстанс ZennoBrowser id: <id> группы действий id: <id> Ошибка запуска профиля ZennoBrowser (<id>): Status(Stat,14,1
+продвинутый,Taking line from the table action id: <id> action group id: <id> Line No. does not exist in the table,13,1
+продвинутый,Server unavailable,11,7
+продвинутый,Взятие строки из таблицы действия id: <id> группы действий id: <id> Строки с номером не существует в таблице,11,6
+продвинутый,Server 500,11,6
+продвинутый,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> [Строка: 60; Cтолбец: 0] Не нашли на странице поле для ввода кода 2FA ,11,1
+продвинутый,Выполнение действия Emulation id: <id> группы действий id: <id> Входная строка имела неверный формат. | System.FormatException: Входная стро,10,4
+продвинутый,Executing action CSharp OwnCode: zaytatanie czy mamy jeszcze cos do sprawdzenia.id: <id> action group id: <id> [Row: 18; Column: 1] Brak zad,10,1
+продвинутый,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> Что то пошло не так! | System.Exception: Что то пошло не так!,10,1
+продвинутый,Выполнение действия CSharp OwnCode: Заполнение аватарки. id: <id> группы действий id: <id> [Строка: <n>; Cтолбец: 0] Не смог выбрать фото из,10,1
+продвинутый,Executing the Get ZennoBrowser profiles action id: <id> action group id: <id> ZennoBrowser not installed | System.Exception: ZennoBrowser no,9,1
+продвинутый,Подпроект 48 Менеджер ЯК Для общего шаблона. Выполнение действия HtmlElement id: <id> группы действий id: <id> подпроект path: D:\ZP\02 На з,9,1
+продвинутый,Выполнение действия LaunchProgram id: <id> группы действий id: <id> Не удается найти указанный файл | System.ComponentModel.Win32Exception (,9,1
+продвинутый,Выполнение действия WebBrowserSettings id: <id> группы действий id: <id> Не найдены cookies для загрузки. | System.Exception: Не найдены coo,8,2
+продвинутый,运行列表 动作id<id> 动作组id<id> 处理列表失败,8,1
+продвинутый,Выполнение действия File id: <id> группы действий id: <id> Ошибка при работе с файлом,7,3
+продвинутый,Выполнение действия Запустить инстанс ZennoBrowser id: <id> группы действий id: <id> Идентификатор профиля ZennoBrowser пустой | ZennoLab.Ze,7,1
+продвинутый,从表格中获取行 动作id<id> 动作组id<id> 行数在表格中不存在,7,1
+продвинутый,"Поиск текста на странице действия id: <id> группы действий id: <id> Не найден, Url: https://www.tiktok.com/@hocnguyen_97/video/<n>?is_from_w",7,1
+продвинутый,Выполнение действия List id: <id> группы действий id: <id> Ошибка при обработке списка,6,4
+продвинутый,Выполнение действия Http id: <id> группы действий id: <id> Превышен таймаут ResourceDownloader.GetResult. | System.Exception: Превышен тайма,6,3
+продвинутый,Running the WebBrowserSettings action id: <id> action group id: <id> Object reference not set to an instance of an object,6,2
+продвинутый,"Выполнение действия Profile id: <id> группы действий id: <id> Файла не существует по пути ""C:\Users\gorch\OneDrive\Рабочий стол\ван вин\пиас",6,1
+продвинутый,运行TextProcessing 动作id<id> 动作组id<id> 处理文本不能为空,6,1
+продвинутый,Выполнение действия Plugin id: <id> группы действий id: <id> Ошибка при обработке плагина Cap.Guru.27.6_all Ошибка в действии: <id>,6,1
+продвинутый,Выполнение логического оператора If действия id: <id> группы действий id: <id> Результат,5,3
+продвинутый,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> Поток находился в процессе прерывания. | System.Threading.ThreadAbortE,5,3
+продвинутый,Running the logical IF-statement action id: <id> action group id: <id> Result: false,5,2
+продвинутый,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> [Строка: 14; Cтолбец: 0] Случайное падение (20%) | System.Exception: С,5,1
+продвинутый,"Выполнение действия Profile id: <id> группы действий id: <id> Файла не существует по пути ""C:\Users\Andre\Documents\""",5,1
+продвинутый,Выполнение действия ParsePage id: <id> группы действий id: <id> Индекс находился вне границ массива. | System.IndexOutOfRangeException: Инде,5,1
+продвинутый,"Выполнение действия Parse Json/Xml id: <id> группы действий id: <id> Error reading JToken from JsonReader. Path '', line 0, position 0. | Sy",4,2
+продвинутый,Выполнение действия VariableOperations id: <id> группы действий id: <id> Значение для увеличения не может быть приведено к числовому | Syste,4,2
+продвинутый,"Выполнение действия Profile id: <id> группы действий id: <id> Файла не существует по пути ""C:\Users\ооолод\Downloads\Telegram Desktop\профил",4,1
+продвинутый,Выполнение действия Logic id: <id> группы действий id: <id> No such variable: email_login | ZennoLab.TemplateManipulator.V4.Helpers.InvalidV,4,1
+продвинутый,执行动作 Db id: <id> 在动作组中: <id> No such variable: info | ZennoLab.TemplateManipulator.V4.Helpers.InvalidVariableException: No such variable: in,4,1
+продвинутый,Выполнение программы C:\Users\ilya.krabik\anaconda3\envs\pytools_envs\python.exe действия id: <id> группы действий id: <id> Результат: 1,4,1
+продвинутый,Выполнение действия Emulation id: <id> группы действий id: <id> Выполнение прервано | System.Exception: Выполнение прервано,3,3
+продвинутый,Выполнение действия Emulation id: <id> группы действий id: <id> Ошибка при обработке,3,2
+продвинутый,Выполнение логического оператора Switch действия id: <id> группы действий id: <id> Результат: Нет подходящего значения,3,2
+продвинутый,Executing the Start ZennoBrowser instance action id: <id> action group id: <id> ZennoBrowser product is not installed | ZennoLab.ZennoPoster,3,1
+продвинутый,"Выполнение действия Parse Json/Xml id: <id> группы действий id: <id> Unexpected character encountered while parsing value: (. Path '', line ",3,1
+продвинутый,"Поиск текста на странице действия id: <id> группы действий id: <id> Не найден, Url: https://vk.ru/club236207849/settings/requests, Regex: По",3,1
+продвинутый,Выполнение действия CSharp OwnCode: ПРОВЕРКА НА УСПЕШНОСТЬ РЕГИСТРАЦИИ. id: <id> группы действий id: <id> Поток находился в процессе прерыва,3,1
+продвинутый,"Searching text on a page action id: <id>of action group id: <id> 未发现, Url: https://ipinfo.io/json, Regex: What's your car's make?",3,1
+продвинутый,Выполнение действия CSharp OwnCode: Get email. id: <id> группы действий id: <id> Поток находился в процессе прерывания. | System.Threading.T,3,1
+продвинутый,Выполнение действия WebBrowserSettings id: <id> группы действий id: <id> Ошибка обращения к Instance.ClearCookie | System.Exception: Ошибка ,3,1
+продвинутый,Выполнение действия Db id: <id> группы действий id: <id> You have an error in your SQL syntax; check the manual that corresponds to your MyS,3,1
+продвинутый,执行动作 Db id: <id> 在动作组中: <id> Table 'zzbd330.ka_260222_dxz_000200' doesn't exist | MySql.Data.MySqlClient.MySqlException (0x80004005): Table ,3,1
+продвинутый,Выполнение действия VariableOperations id: <id> группы действий id: <id> Переменная не число | System.FormatException: Input string was not ,3,1
+продвинутый,Выполнение действия ImageProcessing id: <id> группы действий id: <id> Ошибка при получении изображения,2,2
+продвинутый,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> Поток находился в процессе прерывания,2,2
+продвинутый,работа с email не найдено письмо,2,2
+продвинутый,Выполнение действия Profile id: <id> группы действий id: <id> Не удалось найти подходящий профиль. | System.Data.ObjectNotFoundException: Не,2,2
+продвинутый,Выполнение действия Table id: <id> группы действий id: <id> Ошибка при обработке таблицы,2,2
+продвинутый,Взятие строки из таблицы действия id: <id> группы действий id: <id> Ошибка при обработке таблицы,2,2
+продвинутый,Выполнение действия Logic id: <id> группы действий id: <id> No such variable: attempts_count4 | ZennoLab.TemplateManipulator.V4.Helpers.Inva,2,1
+продвинутый,"Поиск текста на странице действия id: <id> группы действий id: <id> Не найден, Url: https://otzovik.com/profile/%D0%A0%D0%B8%D0%BD%D0%B0712,",2,1
+продвинутый,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> [Строка: 8; Cтолбец: 0] Ответ сервера не содержит HTTP/1.1 <n> OK | Sy,2,1
+продвинутый,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> No such variable: input_yandex_custom_size | ZennoLab.TemplateManipula,2,1
+продвинутый,"Выполнение действия ToTable Json/Xml id: <id> группы действий id: <id> No such name: {""result""",2,1
+продвинутый,Executing the Stop instance action id: <id> action group id: <id> Error accessing Instance.PrepareInstance | System.Exception: Error accessi,2,1
+продвинутый,"Executing action Parse Json/Xml id: <id> action group id: <id> Error reading JToken from JsonReader. Path '', line 0, position 0. | System.E",2,1
+продвинутый,Выполнение логического оператора If действия id: <id> группы действий id: <id> Результат: undefined,2,1
+продвинутый,执行动作C#自定义代码: FilterState2.id: <id> 动作组 id: <id> [行: 6; 列: 0] invalid state | System.Exception: invalid state,2,1
+продвинутый,Perform the JavaScript OwnCode action id: <id> action group id: <id> EvaluateScriptAsync: Uncaught SyntaxError: Unexpected token ':' | Syste,2,1
+продвинутый,Parsing the page action id: <id> action group id: <id> No elements matching the specified parameters,2,1
+продвинутый,"Поиск текста на странице действия id: <id> группы действий id: <id> Не найден, Url: https://x.com/RoundtableSpace/status/<n>?s=20, Regex: \{",2,1
+продвинутый,Выполнение действия Получить список профилей ZennoBrowser id: <id> группы действий id: <id> Can't connect to ZennoBrowser | System.Exception,2,1
+продвинутый,Выполнение действия Остановить инстанс id: <id> группы действий id: <id> Ошибка обращения к Instance.PrepareInstance | System.Exception: Оши,2,1
+продвинутый,Выполнение действия JavaScript OwnCode id: <id> группы действий id: <id> CdpDocument.EvaluateScript failed | System.Exception: CdpDocument.E,2,1
+продвинутый,Выполнение действия Emulation id: <id> группы действий id: <id> Ошибка обращения к Instance.SendText | System.Exception: Ошибка обращения к ,2,1
+продвинутый,"Выполнение действия Profile id: <id> группы действий id: <id> Файла не существует по пути ""C:\Users\Administrator\Desktop\zenno\orders\eugen",2,1
+продвинутый,执行动作 Db id: <id> 在动作组中: <id> Unknown column 'OID0' in 'where clause' | MySql.Data.MySqlClient.MySqlException (0x80004005): Unknown column 'O,2,1
+продвинутый,"运行 HTTP 动作id<id> 动作组id<id> 该代理格式不正确: ""<n>-b94c3421-US_Texas-session-vA1L26Ao-life-1h"" | System.Exception: 该代理格式不正确: ""<n>-b94c3421-US_Texas-s",2,1
+продвинутый,执行动作 Db id: <id> 在动作组中: <id> Table 'zzbd330.offersstate' doesn't exist | MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'zzbd330.,2,1
+продвинутый,"运行 HTTP 动作id<id> 动作组id<id> 该代理格式不正确: ""<n>-b94c3421-US_-session-6F3tqAbY-life-1h"" | System.Exception: 该代理格式不正确: ""<n>-b94c3421-US_-session-6F3",2,1
+продвинутый,"运行WebBrowserTabManagment 动作id<id> 动作组id<id> 在实例中标签2没有找到,实例50606:<n>.0.0.1 | System.Exception: 在实例中标签2没有找到,实例50606:<n>.0.0.1",2,1
+продвинутый,"Поиск текста на странице действия id: <id> группы действий id: <id> Не найден, Url: https://www.gayxnow.com/upload-video/, Regex: Thank\s+yo",2,1
+продвинутый,Выполнение действия HtmlElement id: <id> группы действий id: <id> No such variable: Tag | ZennoLab.TemplateManipulator.V4.Helpers.InvalidVar,2,1
+продвинутый,Выполнение программы C:\Users\ilya.krabik\zenno_poster\chat_gpt_for_images\\scripts\replace_images_key.bat действия id: <id> группы действий,2,1
+продвинутый,Выполнение программы C:\Users\ilya.krabik\Python313\python.exe действия id: <id> группы действий id: <id> Результат: 1,2,1
+продвинутый,Выполнение программы C:\Users\ilya.krabik\anaconda3\envs\pytools_envs\python.exe действия id: <id> группы действий id: <id> Результат: -1,2,1
+продвинутый,Выполнение действия CSharp OwnCode: Заполнение аватарки. id: <id> группы действий id: <id> Поток находился в процессе прерывания. | System.T,2,1
+продвинутый,执行触摸操作id:<id>操作组id:<id> 使用搜索设置找不到HTML元素或选项卡,2,1
+продвинутый,"执行解析Json/Xml动作 id: <id> 动作分组ID: <id> Unexpected character encountered while parsing value: ﻿. Path '', line 0, position 0. | System.Exceptio",2,1
+продвинутый,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> Thread was being aborted,1,1
+продвинутый,Выполнение действия CSharp OwnCode: Рандомный клик по любому отзыву на странице. id: <id> группы действий id: <id> [Строка: 15; Cтолбец: 0] ,1,1
+продвинутый,Выполнение действия CSharp OwnCode: Парсим отзывы и объекты. id: <id> группы действий id: <id> [Строка: 11; Cтолбец: 0] ❌ Не найдено ни одно,1,1
+продвинутый,Выполнение действия ProjectInProject id: <id> группы действий id: <id> Вложенный проект по пути C:\work\google\sing_in 0.01.zp не найден,1,1
+продвинутый,"Выполнение действия Profile id: <id> группы действий id: <id> Файла не существует по пути ""D:\Work\ZennoPoster\Instagram\/profile/collinseee",1,1
+продвинутый,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> No such variable: apiResponse | ZennoLab.TemplateManipulator.V4.Helper,1,1
+продвинутый,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> No such variable: input_google_custom_size_check | ZennoLab.TemplateMa,1,1
+продвинутый,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> No such variable: input_google_custom_size | ZennoLab.TemplateManipula,1,1
+продвинутый,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> No such variable: input_google_custom_sitecheck | ZennoLab.TemplateMan,1,1
+продвинутый,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> В GDI+ возникла ошибка общего вида. | System.Runtime.InteropServices.E,1,1
+продвинутый,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> No such variable: input_yandex_custom_size_check | ZennoLab.TemplateMa,1,1
+продвинутый,"Поиск текста на странице действия id: <id> группы действий id: <id> Не найден, Url: https://sketchfab.com/3d-models/apple-watch--series-10-c",1,1
+продвинутый,Выполнение действия Directory id: <id> группы действий id: <id> Ошибка при работе с директорией,1,1
+продвинутый,Выполнение действия ToTable Json/Xml id: <id> группы действий id: <id> Column name must be made from valid letters of English alphabet,1,1
+продвинутый,Выполнение действия Table id: <id> группы действий id: <id> No such variable: | ZennoLab.TemplateManipulator.V4.Helpers.InvalidVariableExcep,1,1
+продвинутый,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> No such variable: links | ZennoLab.TemplateManipulator.V4.Helpers.Inva,1,1
+продвинутый,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> No such variable: new_link | ZennoLab.TemplateManipulator.V4.Helpers.I,1,1
+продвинутый,Выполнение действия WebBrowserTabManagement id: <id> группы действий id: <id> Не нашли вкладку 2 в инстансе. Инстанс <n>:<n>.0.0.1 | System.,1,1
+продвинутый,Выполнение действия List id: <id> группы действий id: <id> No such variable: torrent_id | ZennoLab.TemplateManipulator.V4.Helpers.InvalidVar,1,1
+продвинутый,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> No such list: ListResult | ZennoLab.TemplateManipulator.V4.Helpers.Inv,1,1
+продвинутый,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> No such variable: path | ZennoLab.TemplateManipulator.V4.Helpers.Inval,1,1
+продвинутый,Выполнение действия CSharp OwnCode: ок. id: <id> группы действий id: <id> [Строка: 32; Cтолбец: 0] Кнопка OK не появилась за 3 секунды | Sys,1,1
+продвинутый,Running the WebBrowserTab action id: <id> action group id: <id> Error accessing Instance.ActiveTab | System.Exception: Error accessing Insta,1,1
+продвинутый,Выполнение действия CSharp OwnCode: PRO Video + Text SEND (gemini). id: <id> группы действий id: <id> [Строка: 32; Cтолбец: 0] Поле чата не ,1,1
+продвинутый,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> No such variable: emag_url | ZennoLab.TemplateManipulator.V4.Helpers.I,1,1
+продвинутый,Выполнение действия CSharp OwnCode: Если не найден. id: <id> группы действий id: <id> [Строка: 1; Cтолбец: 0] Отзыв не найден | System.Excep,1,1
+продвинутый,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> [Строка: 6; Cтолбец: 0] Секретный ключ (itog) пуст! | System.Exception,1,1
+продвинутый,Executing the Start ZennoBrowser instance action id: <id> action group id: <id> Error launching ZennoBrowser profile (<id>): Can't connect t,1,1
+продвинутый,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> [Строка: 17; Cтолбец: 0] Кнопка для контакта <n> не найдена на страниц,1,1
+продвинутый,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> [Строка: 27; Cтолбец: 0] Не удалось найти даже родительский div для ID,1,1
+продвинутый,Выполнение действия Db id: <id> группы действий id: <id> Fatal error encountered during command execution. | MySql.Data.MySqlClient.MySqlExc,1,1
+продвинутый,Выполнение действия Db id: <id> группы действий id: <id> Table 'clientasay_vk.my_table' doesn't exist | MySql.Data.MySqlClient.MySqlExceptio,1,1
+продвинутый,Выполнение действия Создать профили ZennoBrowser id: <id> группы действий id: <id> PublicAPIHost is not available from RemoteAgent | System.,1,1
+продвинутый,Подпроект Капча классик. Выполнение действия HtmlElement id: <id> группы действий id: <id> подпроект path: C:\Dropbox\Xterium\Капча классик.,1,1
+продвинутый,"Выполнение действия TextProcessing id: <id> группы действий id: <id> выполняется разбор ""\Микрофинансовая.*?"" - Нераспознанная esc-последова",1,1
+продвинутый,"Поиск текста на странице действия id: <id> группы действий id: <id> Не найден, Url: https://m.fotostrana.ru/unifeed/rating/?service=chat&dat",1,1
+продвинутый,Выполнение действия CSharp OwnCode: Разделение текстовых данных на переменные с использованием разделителя и нормализацией символов новой ст,1,1
+продвинутый,Выполнение действия Запустить инстанс ZennoBrowser id: <id> группы действий id: <id> Ошибка запуска профиля ZennoBrowser (<id>): Can't conne,1,1
+продвинутый,Выполнение действия Запустить инстанс ZennoBrowser id: <id> группы действий id: <id> Ошибка обращения к Instance.PrepareInstance | System.Ex,1,1
+продвинутый,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> Удаленный сервер возвратил ошибку: (<n>) Не найден. | System.Net.WebEx,1,1
+продвинутый,Выполнение действия TextProcessing id: <id> группы действий id: <id> No such list: | ZennoLab.TemplateManipulator.V4.Helpers.InvalidVariable,1,1
+продвинутый,Executing action CSharp OwnCode: zaytatania do bazy.id: <id> action group id: <id> Thread was being aborted,1,1
+продвинутый,Extension installer not found,1,1
+продвинутый,Выполнение действия Touch HtmlElement id: <id> группы действий id: <id> Входная строка имела неверный формат. | System.FormatException: Вход,1,1
+продвинутый,Выполнение действия CSharp OwnCode: load main page. id: <id> группы действий id: <id> No such variable: session_id | ZennoLab.TemplateManipu,1,1
+продвинутый,Выполнение действия CSharp OwnCode: get signup_hash. id: <id> группы действий id: <id> Значение StartIndex не может быть меньше нуля,1,1
+продвинутый,Выполнение действия Profile id: <id> группы действий id: <id> Входная строка имела неверный формат. | System.FormatException: Входная строка,1,1
+продвинутый,"Поиск текста на странице действия id: <id> группы действий id: <id> Не найден, Url: https://wise.com/cards/types, Regex: Postcode",1,1
+продвинутый,Подпроект Общий шаблон. Выполнение действия ProjectInProject id: <id> группы действий id: <id> подпроект path: D:\ZP\02 На заказ\Регистрация,1,1
+продвинутый,"Выполнение действия Emulation id: <id> группы действий id: <id> Имитация просмотра страницы не поддерживается в Firefox52x64. Пожалуйста, ис",1,1
+продвинутый,Выполнение действия Table id: <id> группы действий id: <id> Индекс находился вне границ массива. | System.IndexOutOfRangeException: Индекс н,1,1
+продвинутый,Выполнение действия List id: <id> группы действий id: <id> No such list: | ZennoLab.TemplateManipulator.V4.Helpers.InvalidVariableException:,1,1
+продвинутый,Выполнение действия Db id: <id> группы действий id: <id> Incorrect date value: '' for column 'datePublic' at row 1 | MySql.Data.MySqlClient.,1,1
+продвинутый,执行动作 Db id: <id> 在动作组中: <id> Unknown column 'ID' in 'where clause' | MySql.Data.MySqlClient.MySqlException (0x80004005): Unknown column 'ID',1,1
+продвинутый,执行动作C#自定义代码: Join Today.id: <id> 动作组 id: <id> Server Error (ExecuteJS): TypeError: Cannot read properties of null (reading 'click'),1,1
+продвинутый,执行动作 Db id: <id> 在动作组中: <id> Unknown column 'CCID' in 'where clause' | MySql.Data.MySqlClient.MySqlException (0x80004005): Unknown column 'C,1,1
+продвинутый,执行动作 Db id: <id> 在动作组中: <id> Unknown column 'info' in 'field list' | MySql.Data.MySqlClient.MySqlException (0x80004005): Unknown column 'inf,1,1
+продвинутый,执行动作C#自定义代码: 检查元素.id: <id> 动作组 id: <id> Server Error (ElementIsExists): element not exists | System.Exception: Server Error (ElementIsExists,1,1
+продвинутый,"执行动作C#自定义代码: 按名称激活Aarp.id: <id> 动作组 id: <id> Server Error (ActivatePageByName): Page by name: ""aarp"" is not found | System.Exception: Server",1,1
+продвинутый,执行动作C#自定义代码: 连接到浏览器.id: <id> 动作组 id: <id> 'ZennoLab.JXParser.JsonDynamic' does not contain a definition for 'data' | Microsoft.CSharp.Runtim,1,1
+продвинутый,"运行 HTTP 动作id<id> 动作组id<id> 该代理格式不正确: ""<n>-b94c3421-US_-session-vA1L26Ao-life-1h"" | System.Exception: 该代理格式不正确: ""<n>-b94c3421-US_-session-vA1",1,1
+продвинутый,Выполнение действия WebBrowserExtensions id: <id> группы действий id: <id> Incorrect extension parsing type! | System.InvalidOperationExcept,1,1
+продвинутый,Executing action ImageProcessing id: <id> Action Group id: <id> Error loading image,1,1
+продвинутый,"Поиск текста на странице действия id: <id> группы действий id: <id> Не найден, Url: https://www.gayxnow.com/upload-video/, Regex: 73",1,1
+продвинутый,"Поиск текста на странице действия id: <id> группы действий id: <id> Не найден, Url: https://www.gayxnow.com/upload-video/, Regex: fgfgfg",1,1
+продвинутый,Access denied,1,1
+продвинутый,Выполнение программы C:\Users\ilya.krabik\zenno_poster\chat_gpt_for_images\scripts\replace_images_key.bat действия id: <id> группы действий ,1,1
+продвинутый,"Выполнение действия Получить список профилей ZennoBrowser id: <id> группы действий id: <id> Status(StatusCode=""Unauthenticated"", Detail=""Bad",1,1
+продвинутый,Выполнение действия CSharp OwnCode: Загрузим на сервер. id: <id> группы действий id: <id> [Строка: 9; Cтолбец: 0] Файл не найден: Скриншоты\,1,1
+продвинутый,Подпроект humanEmulation. Выполнение действия Emulation id: <id> группы действий id: <id> подпроект path: C:\soft\ZennoPoster\Accounts\human,1,1
+продвинутый,"Поиск текста на странице действия id: <id> группы действий id: <id> Не найден, Url: https://yandex.ru/search/?text=1win+вакансии&clid=<n>&lr",1,1
+продвинутый,Выполнение действия Random id: <id> группы действий id: <id> No such variable: t | ZennoLab.TemplateManipulator.V4.Helpers.InvalidVariableEx,1,1
+продвинутый,Выполнение действия CSharp OwnCode: Заполнение аватарки. id: <id> группы действий id: <id> [Строка: <n>; Cтолбец: 0] Не нашел аватар | Syste,1,1
+продвинутый,Выполнение действия CSharp OwnCode: Восстановление из БЕКАПА. id: <id> группы действий id: <id> [Строка: 19; Cтолбец: 0] ❌ Бэкап не найден: ,1,1
+продвинутый,Выполнение действия CSharp OwnCode: Skip. id: <id> группы действий id: <id> [Строка: 82; Cтолбец: 4] Ошибка клика по Skip | System.Exception,1,1
+продвинутый,Выполнение действия TextProcessing id: <id> группы действий id: <id> No such variable: https:\/\/account | ZennoLab.TemplateManipulator.V4.H,1,1
+продвинутый,运行列表 动作id<id> 动作组id<id> 列表为空 | System.Exception: 列表为空,1,1
+продвинутый,执行动作C#自定义代码.id: <id> 动作组 id: <id> Thread was being aborted. | System.Threading.ThreadAbortException: Thread was being aborted,1,1
+профессионал,"Выполнение действия HtmlElement id: <id> группы действий id: <id> Не найден HTML элемент, по условиям поиска",451,21
+профессионал,运行HTMLElement 动作id<id> 动作组id<id> 根据搜索条件未找到HTML元素,105,3
+профессионал,Running HtmlElement action id: <id> action group id: <id> An HTML element matching the search criteria hasn't been found,83,3
+профессионал,Argument error,36,5
+профессионал,Выполнение логического оператора Switch действия id: <id> группы действий id: <id> Результат: Нет подходящего значения,28,4
+профессионал,Proxy issue,27,9
+профессионал,Выполнение логического оператора If действия id: <id> группы действий id: <id> Результат: false,23,9
+профессионал,Null reference,22,10
+профессионал,Выполнение действия List id: <id> группы действий id: <id> Список пуст | System.Exception: Список пуст,22,9
+профессионал,Выполнение действия Emulation id: <id> группы действий id: <id> Выполнение прервано | System.Exception: Выполнение прервано,21,5
+профессионал,Выполнение действия File id: <id> группы действий id: <id> Ошибка при работе с файлом,20,5
+профессионал,Выполнение действия JavaScript OwnCode id: <id> группы действий id: <id> No such variable: mexc_ask_fixed,20,1
+профессионал,Взятие строки из таблицы действия id: <id> группы действий id: <id> Строки с номером не существует в таблице,18,3
+профессионал,Server 500,17,7
+профессионал,Выполнение действия Plugin id: <id> группы действий id: <id> Ошибка при обработке плагина Cap.Guru.26.7_all Ошибка в действии: <id>,17,1
+профессионал,Rate limit,16,6
+профессионал,Парсинг страницы действия id: <id> группы действий id: <id> Не найдены элементы по заданным параметрам,16,4
+профессионал,Running the logical IF-statement action id: <id> action group id: <id> Result: false,16,1
+профессионал,Выполнение действия Emulation id: <id> группы действий id: <id> Ошибка при обработке,15,4
+профессионал,Выполнение действия ProjectInProject id: <id> группы действий id: <id> Ошибка при обработке,14,5
+профессионал,Timeout,13,4
+профессионал,Выполнение действия VariableOperations id: <id> группы действий id: <id> Переменная не число | System.FormatException: Входная строка имела ,12,5
+профессионал,Подпроект readability. Выполнение действия CSharp OwnCode: check required vars. id: <id> группы действий id: <id> подпроект path: C:\Users\А,12,1
+профессионал,"Выполнение действия Parse Json/Xml id: <id> группы действий id: <id> Error reading JToken from JsonReader. Path '', line 0, position 0. | Sy",11,2
+профессионал,Captcha/anti-bot,10,4
+профессионал,Server unavailable,9,3
+профессионал,"Выполнение действия Parse Json/Xml id: <id> группы действий id: <id> Unexpected character encountered while parsing value: H. Path '', line ",9,1
+профессионал,Выполнение действия WebBrowserTab id: <id> группы действий id: <id> Ошибка обращения к Instance.ActiveTab | System.Exception: Ошибка обращен,8,3
+профессионал,Running the logical IF-statement action id: <id> action group id: <id> Result,8,2
+профессионал,Running the Table action id: <id> action group id: <id> Failed to process the table,8,1
+профессионал,Running the Table action id: <id> action group id: <id> Input string was not in a correct format. | System.FormatException: Input string was,8,1
+профессионал,Выполнение действия Table id: <id> группы действий id: <id> Ошибка при обработке таблицы,7,4
+профессионал,Выполнение действия JavaScript OwnCode id: <id> группы действий id: <id> EvaluateScriptAsync: Uncaught SyntaxError: Invalid or unexpected to,7,2
+профессионал,Выполнение действия Запустить инстанс ZennoBrowser id: <id> группы действий id: <id> Ошибка запуска профиля ZennoBrowser (<id>): Status(Stat,7,2
+профессионал,Проверка существования файла {-Project.task_path-} действия id: <id> группы действий id: <id> Результат: файл не существует,7,1
+профессионал,"Выполнение действия Db id: <id> группы действий id: <id> ERROR [<n>] ОШИБКА: ошибка синтаксиса (примерное положение: "","")",7,1
+профессионал,运行TextProcessing 动作id<id> 动作组id<id> No such list,7,1
+профессионал,Подпроект readability_example. Выполнение действия CSharp OwnCode: Exc. id: <id> группы действий id: <id> подпроект path: C:\Users\Администр,7,1
+профессионал,Выполнение действия Directory id: <id> группы действий id: <id> Ошибка при работе с директорией,6,3
+профессионал,"Выполнение действия ToTable Json/Xml id: <id> группы действий id: <id> Column name must be one-, two- or three-letter name from A to XFD",6,1
+профессионал,Run List action id: <id> action group id: <id> The desired item is not in the list | System.Exception: The desired item is not in the list,6,1
+профессионал,Выполнение действия Table id: <id> группы действий id: <id> Индекс находился вне границ массива. | System.IndexOutOfRangeException: Индекс н,6,1
+профессионал,Выполнение действия CSharp OwnCode: Get Code. id: <id> группы действий id: <id> [Строка: 93; Cтолбец: 4] Таймаут 65с ожидания СМС для <n> | ,5,1
+профессионал,Running the VariableOperations action id: <id> action group id: <id> Variable is not a number | System.FormatException: Input string was not,5,1
+профессионал,Running the switch logic statement action id: <id> action group id: <id> Result: No matching values,5,1
+профессионал,解析该页面动作id: <id> 动作组id: <id> 没有元素匹配所定义的参数,5,1
+профессионал,运行IF-statmen逻辑 动作id<id> 动作组id<id> 结果：false,4,2
+профессионал,Выполнение действия List id: <id> группы действий id: <id> Ошибка при обработке списка,4,2
+профессионал,Выполнение действия Запустить инстанс ZennoBrowser id: <id> группы действий id: <id> Идентификатор профиля ZennoBrowser пустой | ZennoLab.Ze,4,2
+профессионал,Выполнение действия Plugin id: <id> группы действий id: <id> Ошибка при обработке плагина ApprooveMM Ошибка в действии: <id>,4,1
+профессионал,运行人物信息 动作id<id> 动作组id<id> 未发现匹配的配置文件 | System.Data.ObjectNotFoundException: 未发现匹配的配置文件,4,1
+профессионал,执行项目中的动作id:<id> 动作组id<id> 从指定路径中为发现嵌套项目C:\Users\Administrator\Desktop\zp\auto\,4,1
+профессионал,运行TextProcessing 动作id<id> 动作组id<id> 处理文本不能为空,4,1
+профессионал,Выполнение действия CSharp OwnCode: API: Заливка header. id: <id> группы действий id: <id> [Строка: 67; Cтолбец: 4] Header upload: Удаленный,4,1
+профессионал,Выполнение действия VariableOperations id: <id> группы действий id: <id> No such variable: images | ZennoLab.TemplateManipulator.V4.Helpers.,4,1
+профессионал,Подпроект newAccs. Выполнение действия Table id: <id> группы действий id: <id> подпроект path: C:\Users\chyzh\OneDrive\Робочий стіл\Нова пап,4,1
+профессионал,Выполнение логического оператора If действия id: <id> группы действий id: <id> Результат,3,2
+профессионал,Выполнение действия HtmlElement id: <id> группы действий id: <id> Ошибка обращения к Instance.ActiveTab | System.Exception: Ошибка обращения,3,2
+профессионал,Выполнение действия HtmlElement id: <id> группы действий id: <id> Индекс находился вне границ массива. | System.IndexOutOfRangeException: Ин,3,2
+профессионал,Perform the JavaScript OwnCode action id: <id> action group id: <id> CdpDocument.EvaluateScript failed | System.Exception: CdpDocument.Evalu,3,1
+профессионал,Подпроект Сериалы - создание заданий на анимирование. Выполнение действия ProjectInProject id: <id> группы действий id: <id> подпроект path:,3,1
+профессионал,Подпроект Сериалы - создание заданий на анимирование. Выполнение логического оператора If действия id: <id> группы действий id: <id> подпрое,3,1
+профессионал,Выполнение действия Db id: <id> группы действий id: <id> ERROR [22P02] ОШИБКА: неверный синтаксис для типа json,3,1
+профессионал,Выполнение действия JavaScript OwnCode id: <id> группы действий id: <id> No such variable: entry_price_fixed,3,1
+профессионал,执行动作C#自定义代码.id: <id> 动作组 id: <id> startIndex cannot be larger than length of string,3,1
+профессионал,运行TextProcessing 动作id<id> 动作组id<id> No such list: | ZennoLab.TemplateManipulator.V4.Helpers.InvalidVariableException: No such list: ---> Sys,3,1
+профессионал,Running the WebBrowserSettings action id: <id> action group id: <id> Object reference not set to an instance of an object,3,1
+профессионал,Subproject aircheck_latest_001. Running HtmlElement action id: <id> action group id: <id> subproject path: C:\Users\jack\Desktop\aircheck_la,3,1
+профессионал,Running the Profile action id: <id> action group id: <id> Could not find matching profile. | System.Data.ObjectNotFoundException: Could not ,3,1
+профессионал,Подпроект newAccs. Выполнение действия HtmlElement id: <id> группы действий id: <id> подпроект path: C:\Users\chyzh\OneDrive\Робочий стіл\Но,3,1
+профессионал,Выполнение действия WebBrowserSettings id: <id> группы действий id: <id> Идентификатор профиля ZennoBrowser пустой | ZennoLab.ZennoPoster.Co,3,1
+профессионал,Выполнение действия Profile id: <id> группы действий id: <id> Ошибка при работе с профилем: Загружаемый профиль (Chrome) не соответствует те,3,1
+профессионал,Выполнение действия распознавания капчи id: <id> группы действий id: <id> Некорректная капча | System.Exception: Некорректная капча,3,1
+профессионал,Выполнение действия List id: <id> группы действий id: <id> Искомый элемент отсутствует в списке | System.Exception: Искомый элемент отсутств,2,2
+профессионал,Выполнение действия Profile id: <id> группы действий id: <id> Не удалось найти подходящий профиль. | System.Data.ObjectNotFoundException: Не,2,2
+профессионал,Выполнение действия Http id: <id> группы действий id: <id> Ошибка запроса,2,2
+профессионал,Выполнение действия TextProcessing id: <id> группы действий id: <id> Ошибка при обработке текста,2,2
+профессионал,Perform the Touch action id: <id> action group id: <id> Please use CEF (Chrome) or Chromium engine for Touch component! | System.Exception: ,2,1
+профессионал,Taking line from the table action id: <id> action group id: <id> Line No. does not exist in the table,2,1
+профессионал,Выполнение действия JavaScript OwnCode id: <id> группы действий id: <id> EvaluateScriptAsync: Uncaught SyntaxError: Unexpected token,2,1
+профессионал,Выполнение действия JavaScript OwnCode id: <id> группы действий id: <id> EvaluateScriptAsync: Uncaught ReferenceError: html is not defined |,2,1
+профессионал,Выполнение действия CSharp OwnCode: Get Code. id: <id> группы действий id: <id> [Строка: <n>; Cтолбец: 4] Пустой activation_id. Сначала зака,2,1
+профессионал,Выполнение действия CSharp OwnCode: выбор страны + get phone. id: <id> группы действий id: <id> [Строка: <n>; Cтолбец: 4] Пустые входные дан,2,1
+профессионал,Выполнение действия CSharp OwnCode: Get Code. id: <id> группы действий id: <id> [Строка: <n>; Cтолбец: 4] Активация была отменена (STATUS_CA,2,1
+профессионал,Выполнение действия CSharp OwnCode: выбор страны + get phone. id: <id> группы действий id: <id> Поток находился в процессе прерывания. | Sys,2,1
+профессионал,"Выполнение действия CSharp OwnCode: Anymessage get. id: <id> группы действий id: <id> [Строка: 25; Cтолбец: 4] Ошибка API: {""status"":""error""",2,1
+профессионал,Running the VariableOperations action id: <id> action group id: <id> Value for increasing the counter could not be converted to a number | S,2,1
+профессионал,Подпроект Сериалы - создание заданий на анимирование. Выполнение действия List id: <id> группы действий id: <id> подпроект path: C:\OpenClou,2,1
+профессионал,Подпроект GROK - генерация видео. Выполнение действия ProjectInProject id: <id> группы действий id: <id> подпроект path: C:\OpenCloud\Youtub,2,1
+профессионал,Подпроект Сериалы - создание заданий на анимирование. Выполнение действия File id: <id> группы действий id: <id> подпроект path: C:\OpenClou,2,1
+профессионал,Подпроект _grok - работа с чатом. Выполнение логического оператора If действия id: <id> группы действий id: <id> подпроект path: C:\OpenClou,2,1
+профессионал,运行WebBrowserSettings 动作id<id> 动作组id<id> 访问实例错误.SetGeoposition | System.Exception: 访问实例错误.SetGeoposition,2,1
+профессионал,Выполнение действия Db id: <id> группы действий id: <id> ERROR [<n>] ОШИБКА: повторяющееся значение ключа нарушает ограничение уникальности ,2,1
+профессионал,"Выполнение действия Db id: <id> группы действий id: <id> ERROR [<n>] ОШИБКА: новая строка в отношении ""cell_coverages"" нарушает ограничение-",2,1
+профессионал,Выполнение действия Table id: <id> группы действий id: <id> No such spreadsheet: | ZennoLab.TemplateManipulator.V4.Helpers.InvalidVariableEx,2,1
+профессионал,执行项目中的动作id:<id> 动作组id<id> 插件位置：C:\Users\Administrator\Documents\ZennoLab\Plugins\Local\插件_plugin.zpg 未找到 | System.IO.FileLoadException: 插件位置,2,1
+профессионал,执行插件动作 id: <id> 分组id: <id> 处理插件失败浏览器设置操作错误：<id>,2,1
+профессионал,运行列表 动作id<id> 动作组id<id> 处理列表失败,2,1
+профессионал,Выполнение действия CSharp OwnCode: API: Проверка наличие компонентов. id: <id> группы действий id: <id> [Строка: 74; Cтолбец: 4] Ошибка: Si,2,1
+профессионал,Выполнение действия CSharp OwnCode: POST к Claude API. id: <id> группы действий id: <id> Поток находился в процессе прерывания. | System.Thr,2,1
+профессионал,Выполнение действия CSharp OwnCode: Извлечение. id: <id> группы действий id: <id> No such variable: css | ZennoLab.TemplateManipulator.V4.He,2,1
+профессионал,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> Поток находился в процессе прерывания. | System.Threading.ThreadAbortE,2,1
+профессионал,"Выполнение действия Profile id: <id> группы действий id: <id> Файла не существует по пути ""C:\Users\user\Documents\Zenno\youtube_\profiles\a",2,1
+профессионал,Подпроект yandex_search_get_content. Выполнение действия HtmlElement id: <id> группы действий id: <id> подпроект path: C:\Users\Администрато,2,1
+профессионал,Выполнение действия Directory id: <id> группы действий id: <id> Данный формат пути не поддерживается. | System.NotSupportedException: Данный,2,1
+профессионал,Выполнение действия Touch HtmlElement id: <id> группы действий id: <id> Please use CEF (Chrome) or Chromium engine for Touch component! | Sy,2,1
+профессионал,Выполнение действия Table id: <id> группы действий id: <id> Входная строка имела неверный формат. | System.FormatException: Входная строка и,2,1
+профессионал,Выполнение действия VariableOperations id: <id> группы действий id: <id> Ошибка при работе с переменными,2,1
+профессионал,"Выполнение действия Parse Json/Xml id: <id> группы действий id: <id> Открывающий тег ""link"" в позиции 2 строки 21 не соответствует закрывающ",1,1
+профессионал,"Поиск текста на странице действия id: <id> группы действий id: <id> Не найден, Url: https://potok.tattelecom.ru/service/orders, Regex: Управ",1,1
+профессионал,Выполнение действия CSharp OwnCode: выбор страны + get phone. id: <id> группы действий id: <id> [Строка: <n>; Cтолбец: 4] Критическая ошибка,1,1
+профессионал,Выполнение действия CSharp OwnCode: Anymessage get. id: <id> группы действий id: <id> Поток находился в процессе прерывания. | System.Thread,1,1
+профессионал,Выполнение действия CSharp OwnCode: Anymessage get. id: <id> группы действий id: <id> [Строка: 43; Cтолбец: 0] Время ожидания истекло. | Sys,1,1
+профессионал,Выполнение действия Запустить инстанс ZennoBrowser id: <id> группы действий id: <id> Ошибка запуска профиля ZennoBrowser (<id>): Can't conne,1,1
+профессионал,"Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> [Строка: 25; Cтолбец: 4] Ошибка API: {""status"":""error"",""value"":""id""} |",1,1
+профессионал,Running the WebBrowserTab action id: <id> action group id: <id> Error accessing Instance.ActiveTab | System.Exception: Error accessing Insta,1,1
+профессионал,Running the WebBrowserSettings action id: <id> action group id: <id> Input string was not in a correct format. | System.FormatException: Inp,1,1
+профессионал,Running the WebBrowserSettings action id: <id> action group id: <id> Value was either too large or too small for an Int32. | System.Overflow,1,1
+профессионал,Executing action CSharp OwnCode.id: <id> action group id: <id> No such table: Table1 | ZennoLab.TemplateManipulator.V4.Helpers.InvalidVariab,1,1
+профессионал,работа с email не найдено письмо,1,1
+профессионал,Выполнение действия WebBrowserTabManagement id: <id> группы действий id: <id> Не нашли вкладку Почта в инстансе. Инстанс <n>:<n>.0.0.1 | Sys,1,1
+профессионал,"Поиск текста на странице действия id: <id> группы действий id: <id> Не найден, Url: https://www.upgrade.com/funnel/pcl/pi1?utm_content=rcwb2",1,1
+профессионал,Выполнение действия CSharp OwnCode: сравниваем с кривыми штатами. id: <id> группы действий id: <id> [Строка: 83; Cтолбец: 11] Попытка делени,1,1
+профессионал,Подпроект _grok - работа с чатом. Выполнение действия CSharp OwnCode: Ctrl + V. id: <id> группы действий id: <id> подпроект path: C:\OpenClo,1,1
+профессионал,Подпроект _grok - работа с чатом. Выполнение действия WebBrowserTab id: <id> группы действий id: <id> подпроект path: C:\OpenCloud\Youtube\_,1,1
+профессионал,Подпроект _grok - регистрация. Выполнение действия Touch HtmlElement id: <id> группы действий id: <id> подпроект path: C:\OpenCloud\Youtube\,1,1
+профессионал,Выполнение действия ProjectInProject id: <id> группы действий id: <id> Вложенный проект по пути C:\projects\zenno\youtube\_grok - регистраци,1,1
+профессионал,Подпроект GROK - генерация видео - деление заданий на микрозадания. Выполнение действия Directory id: <id> группы действий id: <id> подпроек,1,1
+профессионал,Подпроект _grok - регистрация. Выполнение действия HtmlElement id: <id> группы действий id: <id> подпроект path: C:\OpenCloud\Youtube\_zenno,1,1
+профессионал,Выполнение действия Db id: <id> группы действий id: <id> ERROR [IM002] [Microsoft][Диспетчер драйверов ODBC] Источник данных не найден и не ,1,1
+профессионал,"Выполнение действия Db id: <id> группы действий id: <id> ERROR [<n>] ОШИБКА: ошибка синтаксиса (примерное положение: ""["")",1,1
+профессионал,Выполнение действия CSharp OwnCode: Конвертация даты take_last_seen_at. id: <id> группы действий id: <id> Входная строка имела неверный форм,1,1
+профессионал,"Выполнение действия Db id: <id> группы действий id: <id> ERROR [<n>] ОШИБКА: INSERT содержит больше выражений, чем целевых столбцов",1,1
+профессионал,Выполнение действия WebBrowserTabManagement id: <id> группы действий id: <id> Не нашли вкладку 1 в инстансе. Инстанс <n>:<n>.0.0.1 | System.,1,1
+профессионал,Выполнение действия List id: <id> группы действий id: <id> Invalid format of the collection numbers. ElementsInCollection: <n>. Path: 0-<n> ,1,1
+профессионал,Выполнение действия Plugin id: <id> группы действий id: <id> Ошибка при обработке плагина BluebuttonMM Ошибка в действии: <id>,1,1
+профессионал,Выполнение действия Plugin id: <id> группы действий id: <id> Ошибка при обработке плагина SelectnetworkMM Ошибка в действии: <id>,1,1
+профессионал,Executing action WebBrowserExtensions id: <id> of action group id: <id> Error accessing Instance.ActivateExtension | System.Exception: Error,1,1
+профессионал,Run List action id: <id> action group id: <id> List is empty | System.Exception: List is empty,1,1
+профессионал,Running the TextProcessing action id: <id> action group id: <id> Failed to process text,1,1
+профессионал,Выполнение действия JavaScript OwnCode id: <id> группы действий id: <id> No such variable: entry_price_fixed | System.InvalidOperationExcept,1,1
+профессионал,Выполнение действия JavaScript OwnCode id: <id> группы действий id: <id> No such variable: mexc_ask_fixed | System.InvalidOperationException,1,1
+профессионал,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> No such variable: entry_price_fixed | ZennoLab.TemplateManipulator.V4.,1,1
+профессионал,Выполнение действия Logic id: <id> группы действий id: <id> Входная строка имела неверный формат. | System.FormatException: Входная строка и,1,1
+профессионал,Выполнение действия ToTable Json/Xml id: <id> группы действий id: <id> Column name must be made from valid letters of English alphabet,1,1
+профессионал,Выполнение действия Parse Json/Xml id: <id> группы действий id: <id> No such variable: responseJSON | ZennoLab.TemplateManipulator.V4.Helper,1,1
+профессионал,Выполнение действия WebBrowserSettings id: <id> группы действий id: <id> Ошибка проверки совместимости профиль-папки: Профиль-папка несовмес,1,1
+профессионал,"Выполнение действия Profile id: <id> группы действий id: <id> Файла не существует по пути ""C:\Users\askeroff\Desktop\zenno\/profiles.zppprof",1,1
+профессионал,"Выполнение действия Profile id: <id> группы действий id: <id> Файла не существует по пути ""C:\Users\askeroff\Desktop\zenno\\profiles.zppprof",1,1
+профессионал,"Выполнение действия Profile id: <id> группы действий id: <id> Файла не существует по пути ""C:\Users\askeroff\Desktop\zenno\profiles.zppprofi",1,1
+профессионал,"Выполнение действия Profile id: <id> группы действий id: <id> Файла не существует по пути ""C:\Users\askeroff\Desktop\zenno\profiles.zpprofil",1,1
+профессионал,"Выполнение действия Profile id: <id> группы действий id: <id> Файла не существует по пути ""C:\Users\askeroff\Desktop\zenno\profiles\user1""",1,1
+профессионал,Выполнение действия WebBrowserSettings id: <id> группы действий id: <id> Браузер не может быть запущен в указанной папке ( C:/Users/askeroff,1,1
+профессионал,Выполнение действия JavaScript OwnCode id: <id> группы действий id: <id> No such variable: myVariable | System.InvalidOperationException: По,1,1
+профессионал,Выполнение действия VariableOperations id: <id> группы действий id: <id> Переменная не число | ZennoLab.TemplateManipulator.V4.Helpers.Inval,1,1
+профессионал,"Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> Не удалось найти часть пути ""C:\Users\Administrator\Desktop\ZennoPoste",1,1
+профессионал,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> No such list: Profile_all | ZennoLab.TemplateManipulator.V4.Helpers.In,1,1
+профессионал,Not found,1,1
+профессионал,"Searching text on a page action id: <id>of action group id: <id> 未发现, Url: https://tipmeglobalservices.com/topup/, Regex: https://tipmegloba",1,1
+профессионал,"Searching text on a page action id: <id>of action group id: <id> 未发现, Url: https://checkout-v2.paymongo.com/a7ac5aba63268dd37161c2ef, Regex:",1,1
+профессионал,执行动作C#自定义代码: 获取卡片.id: <id> 动作组 id: <id> Thread was being aborted,1,1
+профессионал,执行项目中的动作id:<id> 动作组id<id> 无法处理,1,1
+профессионал,执行动作C#自定义代码: 获取卡片.id: <id> 动作组 id: <id> The given key was not present in the dictionary. | System.Collections.Generic.KeyNotFoundException: ,1,1
+профессионал,运行列表 动作id<id> 动作组id<id> 列表为空 | System.Exception: 列表为空,1,1
+профессионал,运行文件 动作id<id> 动作组id<id> 无法处理文件,1,1
+профессионал,"Searching text on a page action id: <id>of action group id: <id> 未发现, Url: https://www.sportybet.com/gh/m/my_accounts/deposit?activeTab=card",1,1
+профессионал,"运行人物信息 动作id<id> 动作组id<id> 文件不存在于路径""C:\Users\Administrator\Desktop\zp\auto\""",1,1
+профессионал,运行WebBrowserSettings 动作id<id> 动作组id<id> 无效的格式 | System.Exception: 无效的格式,1,1
+профессионал,子项目 sakeng支付. 运行HTMLElement 动作id<id> 动作组id<id> 子项目 path: C:\Users\Administrator\Desktop\zp\auto\sakeng支付.zp 根据搜索条件未找到HTML元素,1,1
+профессионал,执行动作C#自定义代码.id: <id> 动作组 id: <id> No such variable: cardpath | ZennoLab.TemplateManipulator.V4.Helpers.InvalidVariableException: No such var,1,1
+профессионал,执行动作C#自定义代码.id: <id> 动作组 id: <id> Thread was being aborted. | System.Threading.ThreadAbortException: Thread was being aborted,1,1
+профессионал,运行TextProcessing 动作id<id> 动作组id<id> 处理文本失败,1,1
+профессионал,运行TextProcessing 动作id<id> 动作组id<id> Index was outside the bounds of the array. | System.IndexOutOfRangeException: Index was outside the boun,1,1
+профессионал,Выполнение действия CSharp OwnCode: POST к Claude API . id: <id> группы действий id: <id> Поток находился в процессе прерывания,1,1
+профессионал,Выполнение действия CSharp OwnCode: Проверка наличия изображений. id: <id> группы действий id: <id> [Строка: 65; Cтолбец: 4] Images: Пустые ,1,1
+профессионал,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> [Строка: 66; Cтолбец: 4] CSS upload: Удаленный сервер возвратил ошибку,1,1
+профессионал,Выполнение действия CSharp OwnCode: Генерация баннера игр. id: <id> группы действий id: <id> Поток находился в процессе прерывания,1,1
+профессионал,Выполнение действия CSharp OwnCode: POST к Claude API . id: <id> группы действий id: <id> Поток находился в процессе прерывания. | System.Th,1,1
+профессионал,Выполнение действия CSharp OwnCode: API: Заливка header. id: <id> группы действий id: <id> [Строка: 67; Cтолбец: 4] Header upload: Базовое с,1,1
+профессионал,Выполнение действия CSharp OwnCode: Отправка токенов в панель. id: <id> группы действий id: <id> No such variable: ai_log_status | ZennoLab.,1,1
+профессионал,Выполнение действия CSharp OwnCode: POST к Claude API. id: <id> группы действий id: <id> Поток находился в процессе прерывания,1,1
+профессионал,Выполнение действия VariableOperations id: <id> группы действий id: <id> No such variable: url_sub | ZennoLab.TemplateManipulator.V4.Helpers,1,1
+профессионал,File not found,1,1
+профессионал,Выполнение действия List id: <id> группы действий id: <id> No such list: | ZennoLab.TemplateManipulator.V4.Helpers.InvalidVariableException:,1,1
+профессионал,Выполнение действия WebBrowserSettings id: <id> группы действий id: <id> Некорректный формат. | System.Exception: Некорректный формат,1,1
+профессионал,"Выполнение действия Profile id: <id> группы действий id: <id> Файла не существует по пути ""C:\Users\OOO\Desktop\zen1\Test\FB\FB_CommunityVov",1,1
+профессионал,Выполнение действия Swipe HtmlElement id: <id> группы действий id: <id> Please use CEF (Chrome) or Chromium engine for Touch component! | Sy,1,1
+профессионал,"Поиск текста на странице действия id: <id> группы действий id: <id> Не найден, Url: https://www.tiktok.com/en/, Regex: Drag\s+the\s+slider\s",1,1
+профессионал,Выполнение действия TextProcessing id: <id> группы действий id: <id> Обрабатываемый текст не может быть пустым,1,1
+профессионал,Выполнение действия Остановить инстанс id: <id> группы действий id: <id> Ошибка обращения к Instance.PrepareInstance | System.Exception: Оши,1,1
+профессионал,"Выполнение действия Удалить профили ZennoBrowser id: <id> группы действий id: <id> Status(StatusCode=""Unknown"", Detail=""Exception was thrown",1,1
+профессионал,"Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> Не удалось найти часть пути ""C:\MyVideos"". | System.IO.DirectoryNotFou",1,1
+профессионал,Выполнение действия Создать профили ZennoBrowser id: <id> группы действий id: <id> Не указано Максимальное количество профилей на один прокс,1,1
+профессионал,Выполнение действия Запустить инстанс ZennoBrowser id: <id> группы действий id: <id> Все профили указанной папки заняты | ZennoLab.ZennoPost,1,1
+профессионал,Выполнение действия ParsePage id: <id> группы действий id: <id> Значение не может быть неопределенным,1,1
+профессионал,Executing the ProjectInProject action id: <id> action group id: <id> Failed to process,1,1
+профессионал,Executing the Start ZennoBrowser instance action id: <id> action group id: <id> Error launching ZennoBrowser profile (<id>): Can't connect t,1,1
+профессионал,Executing action CSharp OwnCode.id: <id> action group id: <id> Value cannot be null,1,1
+профессионал,Running the WebBrowserTabManagment action id: <id> action group id: <id> Tab popup is not found in instance. Instance <n>:<n>.0.0.1 | System,1,1
+профессионал,Executing action WebBrowserExtensions id: <id> of action group id: <id> Extension are supported only in Chromium browser engine | System.Inv,1,1
+профессионал,Подпроект gg. Выполнение логического оператора If действия id: <id> группы действий id: <id> подпроект path: C:\Users\chyzh\OneDrive\Робочий,1,1
+профессионал,Подпроект newAccs. Выполнение логического оператора If действия id: <id> группы действий id: <id> подпроект path: C:\Users\chyzh\OneDrive\Ро,1,1
+профессионал,Подпроект newAccs. Выполнение действия HtmlElement id: <id> группы действий id: <id> подпроект path: G:\Інші комп’ютери\Мій ноутбук\Нова пап,1,1
+профессионал,Выполнение действия WebBrowserTabManagement id: <id> группы действий id: <id> Ошибка обращения к Instance.NewTab | System.Exception: Ошибка ,1,1
+профессионал,Взятие строки из таблицы действия id: <id> группы действий id: <id> Ошибка при обработке таблицы,1,1
+профессионал,"Выполнение действия Profile id: <id> группы действий id: <id> Файла не существует по пути ""C:\Users\user\Documents\Zenno\youtube_\profiles\z",1,1
+профессионал,Выполнение действия Directory id: <id> группы действий id: <id> No such list: | ZennoLab.TemplateManipulator.V4.Helpers.InvalidVariableExcep,1,1
+профессионал,Выполнение действия HtmlElement id: <id> группы действий id: <id> Перед Drop должен быть Drag | System.Exception: Перед Drop должен быть Dra,1,1
+профессионал,Подпроект reg_yandex. Выполнение действия List id: <id> группы действий id: <id> подпроект path: C:\Users\Администратор\Documents\Zennoposte,1,1
+профессионал,Подпроект readability_example. Выполнение действия List id: <id> группы действий id: <id> подпроект path: C:\Users\Администратор\Documents\Z,1,1
+профессионал,Подпроект yandex_search_get_content. Парсинг страницы действия id: <id> группы действий id: <id> подпроект path: C:\Users\Администратор\Docu,1,1
+профессионал,Выполнение действия CSharp OwnCode: Exc. id: <id> группы действий id: <id> [Строка: 1; Cтолбец: 0] Кончились ссылки | System.Exception: Конч,1,1
+профессионал,"Поиск текста на странице действия id: <id> группы действий id: <id> Не найден, Url: https://grok.com/imagine, Regex: Type\s+to\s+imagine",1,1
+профессионал,Выполнение действия List id: <id> группы действий id: <id> Индекс находился вне границ массива. | System.IndexOutOfRangeException: Индекс на,1,1
+профессионал,Выполнение действия Touch HtmlElement id: <id> группы действий id: <id> Индекс находился вне границ массива. | System.IndexOutOfRangeExcepti,1,1
+профессионал,Выполнение действия Table id: <id> группы действий id: <id> No such variable: | ZennoLab.TemplateManipulator.V4.Helpers.InvalidVariableExcep,1,1

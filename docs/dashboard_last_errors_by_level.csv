@@ -1,0 +1,158 @@
+level,last_error_category,users_count
+новичок,"Выполнение действия HtmlElement id: <id> группы действий id: <id> Не найден HTML элемент, по условиям поиска",10
+новичок,Null reference,4
+новичок,Выполнение действия List id: <id> группы действий id: <id> Список пуст | System.Exception: Список пуст,2
+новичок,Timeout,2
+новичок,Argument error,1
+новичок,File not found,1
+новичок,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> [Строка: 22; Cтолбец: 0] <n>.. Нет xpath элемента: //h1[contains(@clas,1
+новичок,Server 500,1
+новичок,Выполнение действия WebBrowserExtensions id: <id> группы действий id: <id> Can't uninstall extension pabjfbciaedomjjfelfafejkppknjleh | Syst,1
+новичок,"Выполнение действия FTPDirectory id: <id> группы действий id: <id> Прокси имеет неверный формат: ""94.<n>.<n>.60"" | System.Exception: Прокси ",1
+новичок,"Выполнение действия Получить список профилей ZennoBrowser id: <id> группы действий id: <id> Status(StatusCode=""Unauthenticated"", Detail=""Bad",1
+новичок,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> Недостаточно памяти. | System.OutOfMemoryException: Недостаточно памят,1
+новичок,Выполнение программы C:\mobirise-automation\mobirise.bat действия id: <id> группы действий id: <id> Результат: <n>,1
+новичок,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> No such variable: xe_rates_usd | ZennoLab.TemplateManipulator.V4.Helpe,1
+новичок,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> Поток находился в процессе прерывания. | System.Threading.ThreadAbortE,1
+новичок,Executing action ImageProcessing id: <id> Action Group id: <id> Error loading image,1
+новичок,"Running the WebBrowserSettings action id: <id> action group id: <id> Error reading the file, it probably has wrong format or corrupted",1
+новичок,Running HtmlElement action id: <id> action group id: <id> An HTML element matching the search criteria hasn't been found,1
+новичок,"Поиск текста на странице действия id: <id> группы действий id: <id> Не найден, Url: http://wlb-promo.local/5x-product-check, Regex: Все\s+то",1
+новичок,Выполнение действия Emulation id: <id> группы действий id: <id> Входная строка имела неверный формат. | System.FormatException: Входная стро,1
+новичок,Выполнение действия Http id: <id> группы действий id: <id> Ошибка запроса,1
+новичок,Выполнение логического оператора If действия id: <id> группы действий id: <id> Результат: false,1
+новичок,Выполнение действия Запустить инстанс ZennoBrowser id: <id> группы действий id: <id> Ошибка запуска профиля ZennoBrowser (<id>): Can't conne,1
+новичок,运行HTMLElement 动作id<id> 动作组id<id> 根据搜索条件未找到HTML元素,1
+новичок,Выполнение действия ImageProcessing id: <id> группы действий id: <id> Ошибка при получении изображения,1
+новичок,Выполнение действия CSharp OwnCode: Parser-get. id: <id> группы действий id: <id> Поток находился в процессе прерывания. | System.Threading.,1
+новичок,Server unavailable,1
+новичок,Выполнение действия LaunchProgram id: <id> группы действий id: <id> Указанный исполняемый файл не является действительным приложением для эт,1
+новичок,Выполнение действия Table id: <id> группы действий id: <id> Ошибка при обработке таблицы,1
+новичок,执行动作C#自定义代码.id: <id> 动作组 id: <id> Thread was being aborted. | System.Threading.ThreadAbortException: Thread was being aborted,1
+средний,"Выполнение действия HtmlElement id: <id> группы действий id: <id> Не найден HTML элемент, по условиям поиска",13
+средний,Proxy issue,3
+средний,Run List action id: <id> action group id: <id> List is empty | System.Exception: List is empty,3
+средний,Выполнение логического оператора If действия id: <id> группы действий id: <id> Результат: false,3
+средний,Argument error,2
+средний,Парсинг страницы действия id: <id> группы действий id: <id> Не найдены элементы по заданным параметрам,2
+средний,Captcha/anti-bot,2
+средний,Null reference,2
+средний,Выполнение действия List id: <id> группы действий id: <id> Список пуст | System.Exception: Список пуст,2
+средний,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> Поток находился в процессе прерывания. | System.Threading.ThreadAbortE,2
+средний,Running HtmlElement action id: <id> action group id: <id> An HTML element matching the search criteria hasn't been found,2
+средний,Выполнение действия JavaScript OwnCode id: <id> группы действий id: <id> CdpDocument.EvaluateScript failed | System.Exception: CdpDocument.E,2
+средний,Testing file C:\Users\tuhe\Dropbox\trustluna\ai pobieranie\outchat\7 existence action id: <id> action group id: <id> Result: file doesn't ex,1
+средний,Running the Profile action id: <id> action group id: <id> Could not find matching profile. | System.Data.ObjectNotFoundException: Could not ,1
+средний,Выполнение действия CSharp OwnCode: считаю разницу в рублях. id: <id> группы действий id: <id> Входная строка имела неверный формат. | Syste,1
+средний,Executing action WebBrowserExtensions id: <id> of action group id: <id> Error accessing Instance.InstallCrxExtension | System.Exception: Err,1
+средний,运行列表 动作id<id> 动作组id<id> 列表为空 | System.Exception: 列表为空,1
+средний,运行HTMLElement 动作id<id> 动作组id<id> 根据搜索条件未找到HTML元素,1
+средний,Подпроект drom_parse_osn_file. Выполнение действия File id: <id> группы действий id: <id> подпроект path: C:\Users\ceo\Documents\drom_parse_,1
+средний,Выполнение действия List id: <id> группы действий id: <id> Ошибка при обработке списка,1
+средний,Выполнение действия CSharp OwnCode: FARM. id: <id> группы действий id: <id> Поток находился в процессе прерывания. | System.Threading.Thread,1
+средний,Extension installer not found,1
+средний,"Выполнение действия Parse Json/Xml id: <id> группы действий id: <id> Error reading JToken from JsonReader. Path '', line 0, position 0. | Sy",1
+средний,Выполнение программы C:\Zenno\OpenAi-TTS\ffmpeg.exe действия id: <id> группы действий id: <id> Результат: -<n>,1
+средний,"Выполнение действия Profile id: <id> группы действий id: <id> Файла не существует по пути ""C:\Users\Administrator\Desktop\зенка Парсер\1""",1
+средний,"Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> [Строка: 23; Cтолбец: 0] Не удалось загрузить файл или сборку ""Renci.S",1
+средний,Выполнение действия CSharp OwnCode: Get Messagge. id: <id> группы действий id: <id> Поток находился в процессе прерывания. | System.Threadin,1
+средний,Subproject FreedomBlueprint. Running HtmlElement action id: <id> action group id: <id> subproject path: C:\Users\gaabs\Documents\zennoPoster,1
+средний,Выполнение действия CSharp OwnCode: ждем пока файл CSV освободится. id: <id> группы действий id: <id> Поток находился в процессе прерывания.,1
+средний,Выполнение действия Emulation id: <id> группы действий id: <id> Ошибка обращения к Instance.SendText | System.Exception: Ошибка обращения к ,1
+средний,Подпроект 2_1_YT_load_ZP. Выполнение действия Directory id: <id> группы действий id: <id> подпроект path: D:\ZENNO\1_Youtube_Zennoposter\2_1,1
+средний,Выполнение действия CSharp OwnCode: arbbridge. id: <id> группы действий id: <id> Поток находился в процессе прерывания. | System.Threading.T,1
+средний,Выполнение действия WebBrowserSettings id: <id> группы действий id: <id> Ошибка обращения к Instance.ClearCache | System.Exception: Ошибка о,1
+средний,"Выполнение действия Table id: <id> группы действий id: <id> Column name must be one-, two- or three-letter name from A to XFD",1
+средний,Выполнение действия ParsePage id: <id> группы действий id: <id> Invalid format of the collection numbers. ElementsInCollection: 16. Path: -1,1
+средний,Выполнение логического оператора If действия id: <id> группы действий id: <id> Результат,1
+средний,运行IF-statmen逻辑 动作id<id> 动作组id<id> 结果：false,1
+средний,"Поиск текста на странице действия id: <id> группы действий id: <id> Не найден, Url: https://b.dom-edinstva.ru/crm/lead/details/<n>/, Regex: ",1
+средний,Rate limit,1
+средний,Access denied,1
+средний,Not found,1
+средний,Выполнение действия ParsePage id: <id> группы действий id: <id> Ошибка получения данных из html документа | System.Exception: Ошибка получен,1
+средний,Выполнение действия List id: <id> группы действий id: <id> Искомый элемент отсутствует в списке | System.Exception: Искомый элемент отсутств,1
+средний,Выполнение действия Emulation id: <id> группы действий id: <id> Ошибка при обработке,1
+средний,Taking line from the table action id: <id> action group id: <id> Line No. does not exist in the table,1
+средний,Выполнение действия WebBrowserTab id: <id> группы действий id: <id> Не нашли активную вкладку в инстансе. Инстанс 0: | System.Exception: Не ,1
+средний,Timeout,1
+средний,Выполнение действия CSharp OwnCode: Поиск на dzen.ru. id: <id> группы действий id: <id> Поток находился в процессе прерывания. | System.Thre,1
+средний,Server 500,1
+средний,Выполнение действия Создать профили ZennoBrowser id: <id> группы действий id: <id> Списка с указанным именем не существует,1
+средний,Выполнение действия WebBrowserTabManagement id: <id> группы действий id: <id> Не нашли вкладку TW в инстансе. Инстанс <n>:<n>.0.0.1 | System,1
+средний,"Executing action Parse Json/Xml id: <id> action group id: <id> Error reading JToken from JsonReader. Path '', line 0, position 0. | System.E",1
+средний,Выполнение действия Emulation id: <id> группы действий id: <id> Выполнение прервано | System.Exception: Выполнение прервано,1
+средний,Выполнение действия File id: <id> группы действий id: <id> Ошибка при работе с файлом,1
+средний,Выполнение действия Остановить инстанс id: <id> группы действий id: <id> Ошибка обращения к Instance.PrepareInstance | System.Exception: Оши,1
+средний,Выполнение действия Создать профили ZennoBrowser id: <id> группы действий id: <id> ZennoBrowser не установлен | System.Exception: ZennoBrows,1
+средний,Выполнение действия VariableOperations id: <id> группы действий id: <id> Переменная не число | System.FormatException: Входная строка имела ,1
+продвинутый,"Выполнение действия HtmlElement id: <id> группы действий id: <id> Не найден HTML элемент, по условиям поиска",25
+продвинутый,Выполнение действия List id: <id> группы действий id: <id> Список пуст | System.Exception: Список пуст,8
+продвинутый,Proxy issue,3
+продвинутый,Выполнение логического оператора If действия id: <id> группы действий id: <id> Результат: false,3
+продвинутый,Взятие строки из таблицы действия id: <id> группы действий id: <id> Строки с номером не существует в таблице,3
+продвинутый,Argument error,3
+продвинутый,Server unavailable,2
+продвинутый,Rate limit,2
+продвинутый,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> Поток находился в процессе прерывания. | System.Threading.ThreadAbortE,2
+продвинутый,Running the WebBrowserSettings action id: <id> action group id: <id> Object reference not set to an instance of an object,2
+продвинутый,Выполнение действия Http id: <id> группы действий id: <id> Превышен таймаут ResourceDownloader.GetResult. | System.Exception: Превышен тайма,2
+продвинутый,Null reference,2
+продвинутый,Running HtmlElement action id: <id> action group id: <id> An HTML element matching the search criteria hasn't been found,2
+продвинутый,Captcha/anti-bot,2
+продвинутый,Executing the Get ZennoBrowser profiles action id: <id> action group id: <id> ZennoBrowser not installed | System.Exception: ZennoBrowser no,1
+продвинутый,Выполнение логического оператора Switch действия id: <id> группы действий id: <id> Результат: Нет подходящего значения,1
+продвинутый,Выполнение действия ImageProcessing id: <id> группы действий id: <id> Ошибка при получении изображения,1
+продвинутый,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> [Строка: 8; Cтолбец: 0] Ответ сервера не содержит HTTP/1.1 <n> OK | Sy,1
+продвинутый,Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> Поток находился в процессе прерывания,1
+продвинутый,Выполнение действия CSharp OwnCode: ок. id: <id> группы действий id: <id> [Строка: 32; Cтолбец: 0] Кнопка OK не появилась за 3 секунды | Sys,1
+продвинутый,Парсинг страницы действия id: <id> группы действий id: <id> Не найдены элементы по заданным параметрам,1
+продвинутый,执行动作C#自定义代码: FilterState2.id: <id> 动作组 id: <id> [行: 6; 列: 0] invalid state | System.Exception: invalid state,1
+продвинутый,Executing the Start ZennoBrowser instance action id: <id> action group id: <id> Error launching ZennoBrowser profile (<id>): Can't connect t,1
+продвинутый,Выполнение действия Db id: <id> группы действий id: <id> Table 'clientasay_vk.my_table' doesn't exist | MySql.Data.MySqlClient.MySqlExceptio,1
+продвинутый,Parsing the page action id: <id> action group id: <id> No elements matching the specified parameters,1
+продвинутый,"Выполнение действия Создать профили ZennoBrowser id: <id> группы действий id: <id> Status(StatusCode=""Unauthenticated"", Detail=""Bad gRPC res",1
+продвинутый,Подпроект Капча классик. Выполнение действия HtmlElement id: <id> группы действий id: <id> подпроект path: C:\Dropbox\Xterium\Капча классик.,1
+продвинутый,Выполнение действия CSharp OwnCode: Разделение текстовых данных на переменные с использованием разделителя и нормализацией символов новой ст,1
+продвинутый,Timeout,1
+продвинутый,"Searching text on a page action id: <id>of action group id: <id> 未发现, Url: https://ipinfo.io/json, Regex: What's your car's make?",1
+продвинутый,Выполнение действия VariableOperations id: <id> группы действий id: <id> Переменная не число | System.FormatException: Входная строка имела ,1
+продвинутый,Выполнение действия Emulation id: <id> группы действий id: <id> Ошибка обращения к Instance.SendText | System.Exception: Ошибка обращения к ,1
+продвинутый,"Выполнение действия Profile id: <id> группы действий id: <id> Файла не существует по пути ""C:\Users\Administrator\Desktop\zenno\orders\eugen",1
+продвинутый,Выполнение действия WebBrowserSettings id: <id> группы действий id: <id> Ошибка обращения к Instance.ClearCookie | System.Exception: Ошибка ,1
+продвинутый,运行HTMLElement 动作id<id> 动作组id<id> 根据搜索条件未找到HTML元素,1
+продвинутый,Подпроект 48 Менеджер ЯК Для общего шаблона. Выполнение действия HtmlElement id: <id> группы действий id: <id> подпроект path: D:\ZP\02 На з,1
+продвинутый,Выполнение действия List id: <id> группы действий id: <id> Искомый элемент отсутствует в списке | System.Exception: Искомый элемент отсутств,1
+продвинутый,Выполнение действия VariableOperations id: <id> группы действий id: <id> Значение для увеличения не может быть приведено к числовому | Syste,1
+продвинутый,Выполнение действия Db id: <id> группы действий id: <id> You have an error in your SQL syntax; check the manual that corresponds to your MyS,1
+продвинутый,执行动作 Db id: <id> 在动作组中: <id> Unknown column 'info' in 'field list' | MySql.Data.MySqlClient.MySqlException (0x80004005): Unknown column 'inf,1
+продвинутый,运行IF-statmen逻辑 动作id<id> 动作组id<id> 结果：false,1
+продвинутый,Выполнение действия Emulation id: <id> группы действий id: <id> Выполнение прервано | System.Exception: Выполнение прервано,1
+продвинутый,Выполнение действия ProjectInProject id: <id> группы действий id: <id> Ошибка при обработке,1
+продвинутый,Выполнение действия WebBrowserSettings id: <id> группы действий id: <id> Не найдены cookies для загрузки. | System.Exception: Не найдены coo,1
+продвинутый,Running the logical IF-statement action id: <id> action group id: <id> Result: false,1
+продвинутый,"执行解析Json/Xml动作 id: <id> 动作分组ID: <id> Unexpected character encountered while parsing value: ﻿. Path '', line 0, position 0. | System.Exceptio",1
+профессионал,"Выполнение действия HtmlElement id: <id> группы действий id: <id> Не найден HTML элемент, по условиям поиска",6
+профессионал,运行HTMLElement 动作id<id> 动作组id<id> 根据搜索条件未找到HTML元素,3
+профессионал,Null reference,2
+профессионал,Taking line from the table action id: <id> action group id: <id> Line No. does not exist in the table,1
+профессионал,Выполнение логического оператора If действия id: <id> группы действий id: <id> Результат,1
+профессионал,"Выполнение действия CSharp OwnCode: Anymessage get. id: <id> группы действий id: <id> [Строка: 25; Cтолбец: 4] Ошибка API: {""status"":""error""",1
+профессионал,Executing action CSharp OwnCode.id: <id> action group id: <id> No such table: Table1 | ZennoLab.TemplateManipulator.V4.Helpers.InvalidVariab,1
+профессионал,Подпроект Сериалы - создание заданий на анимирование. Выполнение действия List id: <id> группы действий id: <id> подпроект path: C:\OpenClou,1
+профессионал,Proxy issue,1
+профессионал,"Выполнение действия Db id: <id> группы действий id: <id> ERROR [<n>] ОШИБКА: новая строка в отношении ""cell_coverages"" нарушает ограничение-",1
+профессионал,Выполнение действия Запустить инстанс ZennoBrowser id: <id> группы действий id: <id> Идентификатор профиля ZennoBrowser пустой | ZennoLab.Ze,1
+профессионал,Выполнение действия Plugin id: <id> группы действий id: <id> Ошибка при обработке плагина ApprooveMM Ошибка в действии: <id>,1
+профессионал,Running HtmlElement action id: <id> action group id: <id> An HTML element matching the search criteria hasn't been found,1
+профессионал,Выполнение действия WebBrowserSettings id: <id> группы действий id: <id> Ошибка проверки совместимости профиль-папки: Профиль-папка несовмес,1
+профессионал,Not found,1
+профессионал,Взятие строки из таблицы действия id: <id> группы действий id: <id> Строки с номером не существует в таблице,1
+профессионал,Выполнение действия Запустить инстанс ZennoBrowser id: <id> группы действий id: <id> Ошибка запуска профиля ZennoBrowser (<id>): Status(Stat,1
+профессионал,Executing action CSharp OwnCode.id: <id> action group id: <id> Value cannot be null,1
+профессионал,Выполнение действия File id: <id> группы действий id: <id> Ошибка при работе с файлом,1
+профессионал,Парсинг страницы действия id: <id> группы действий id: <id> Не найдены элементы по заданным параметрам,1
+профессионал,Подпроект readability_example. Выполнение действия CSharp OwnCode: Exc. id: <id> группы действий id: <id> подпроект path: C:\Users\Администр,1
+профессионал,Выполнение действия Table id: <id> группы действий id: <id> Ошибка при обработке таблицы,1
+профессионал,Выполнение логического оператора If действия id: <id> группы действий id: <id> Результат: false,1
+профессионал,Argument error,1
