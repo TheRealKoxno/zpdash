@@ -413,6 +413,20 @@ def top_counter_items(counter: Counter, limit: int = 3) -> List[str]:
     return [item for item, _ in counter.most_common(limit)]
 
 
+def mean_and_median(values: List[int]) -> Tuple[float, float]:
+    if not values:
+        return 0.0, 0.0
+    vals = sorted(values)
+    n = len(vals)
+    mean = sum(vals) / n
+    mid = n // 2
+    if n % 2:
+        median = float(vals[mid])
+    else:
+        median = (vals[mid - 1] + vals[mid]) / 2.0
+    return mean, median
+
+
 def summarize_user(
     user: UserStats,
     projects_count: int,
@@ -995,6 +1009,12 @@ def analyze() -> None:
     # Markdown dashboard.
     users_count = len(per_user_rows)
     projects_count = len(per_project_rows)
+    all_project_counts = [int(r["projects_count"]) for r in per_user_rows]
+    lite_project_counts = [int(r["projects_count"]) for r in per_user_rows if r.get("lite_or_pro") == "lite"]
+    pro_project_counts = [int(r["projects_count"]) for r in per_user_rows if r.get("lite_or_pro") == "pro"]
+    avg_projects_all, median_projects_all = mean_and_median(all_project_counts)
+    avg_projects_lite, median_projects_lite = mean_and_median(lite_project_counts)
+    avg_projects_pro, median_projects_pro = mean_and_median(pro_project_counts)
     active_users = churn_counter["активен_<=1д"]
     left_users = churn_counter["ушел_>1д"]
     lines = []
@@ -1003,6 +1023,15 @@ def analyze() -> None:
     lines.append("## Кратко")
     lines.append(f"- Пользователей (по GUID): **{users_count}**")
     lines.append(f"- Проектов: **{projects_count}**")
+    lines.append(
+        f"- Проектов на пользователя: **avg {avg_projects_all:.2f} / median {median_projects_all:.2f}**"
+    )
+    lines.append(
+        f"- Lite: users **{len(lite_project_counts)}**, projects/user **avg {avg_projects_lite:.2f} / median {median_projects_lite:.2f}**"
+    )
+    lines.append(
+        f"- Pro: users **{len(pro_project_counts)}**, projects/user **avg {avg_projects_pro:.2f} / median {median_projects_pro:.2f}**"
+    )
     lines.append(f"- Разобранных zip-файлов: **{len(project_records)}**")
     lines.append(f"- Ошибок парсинга zip/history: **{parse_failures}**")
     lines.append(f"- Ушли (>1 дня неактивности к 2026-02-24 23:59): **{left_users}**")

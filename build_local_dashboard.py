@@ -629,12 +629,41 @@ HTML_TEMPLATE = """<!doctype html>
       const active = totalUsers - left;
       const pro = users.filter(u => (u.lite_or_pro || "").toLowerCase() === "pro").length;
       const lite = users.filter(u => (u.lite_or_pro || "").toLowerCase() === "lite").length;
-      const avgProjects = totalUsers ? (totalProjects / totalUsers).toFixed(1) : "0";
+      const allCounts = users.map(u => asInt(u.projects_count)).filter(v => v > 0);
+      const liteCounts = users
+        .filter(u => (u.lite_or_pro || "").toLowerCase() === "lite")
+        .map(u => asInt(u.projects_count))
+        .filter(v => v > 0);
+      const proCounts = users
+        .filter(u => (u.lite_or_pro || "").toLowerCase() === "pro")
+        .map(u => asInt(u.projects_count))
+        .filter(v => v > 0);
+
+      const avg = arr => arr.length ? arr.reduce((a, b) => a + b, 0) / arr.length : 0;
+      const median = arr => {
+        if (!arr.length) return 0;
+        const s = [...arr].sort((a, b) => a - b);
+        const m = Math.floor(s.length / 2);
+        return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+      };
+      const fmt = n => Number.isInteger(n) ? String(n) : n.toFixed(1);
+
+      const avgProjects = fmt(avg(allCounts));
+      const medianProjects = fmt(median(allCounts));
+      const avgLite = fmt(avg(liteCounts));
+      const medianLite = fmt(median(liteCounts));
+      const avgPro = fmt(avg(proCounts));
+      const medianPro = fmt(median(proCounts));
 
       const cards = [
         ["GUID пользователей", totalUsers],
         ["Проектов", totalProjects],
         ["Среднее проектов/польз.", avgProjects],
+        ["Медиана проектов/польз.", medianProjects],
+        ["Lite: среднее", avgLite],
+        ["Lite: медиана", medianLite],
+        ["Pro: среднее", avgPro],
+        ["Pro: медиана", medianPro],
         ["Lite", lite],
         ["Pro", pro],
         ["Ушли >1 дня", left],
