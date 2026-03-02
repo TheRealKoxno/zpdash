@@ -112,6 +112,9 @@ class ProjectRecord:
     action_pairs: Set[str]
     table_names: List[str]
     error_events: List[ErrorEvent]
+    last_edit_time: Optional[datetime]
+    last_error_time: Optional[datetime]
+    ended_on_error: bool
 
 
 @dataclass
@@ -546,6 +549,7 @@ def analyze() -> None:
                 meta_time = None
                 record_times: List[datetime] = []
                 error_events: List[ErrorEvent] = []
+                last_edit_time: Optional[datetime] = None
 
                 try:
                     with zipfile.ZipFile(file_path) as zf:
@@ -599,6 +603,8 @@ def analyze() -> None:
                     if not state:
                         continue
                     e_time = parse_iso_dt(edit.get("Time"))
+                    if e_time and (last_edit_time is None or e_time > last_edit_time):
+                        last_edit_time = e_time
                     if latest_state_time is None or (e_time and e_time >= latest_state_time):
                         latest_state_time = e_time
                         latest_state = state
@@ -638,6 +644,10 @@ def analyze() -> None:
                 if session_time:
                     record_times.append(session_time)
                 project_time = max(record_times) if record_times else None
+                last_error_time = max((e.time for e in error_events if e.time), default=None)
+                ended_on_error = bool(
+                    last_error_time and (last_edit_time is None or last_error_time >= last_edit_time)
+                )
 
                 project_record = ProjectRecord(
                     guid=guid,
@@ -659,6 +669,9 @@ def analyze() -> None:
                     action_pairs=action_pairs,
                     table_names=table_names,
                     error_events=error_events,
+                    last_edit_time=last_edit_time,
+                    last_error_time=last_error_time,
+                    ended_on_error=ended_on_error,
                 )
                 project_records.append(project_record)
 
@@ -703,6 +716,7 @@ def analyze() -> None:
     last_errors_by_plan = defaultdict(Counter)
     per_user_rows = []
     per_project_rows = []
+    user_meta_by_guid: Dict[str, Dict[str, str]] = {}
     last_error_counter = Counter()
     level_distribution = Counter()
     churn_counter = Counter()
@@ -744,6 +758,8 @@ def analyze() -> None:
                 "last_error_category": project_last_error.category if project_last_error else "",
                 "last_error_time": project_last_error.time.isoformat(sep=" ") if project_last_error and project_last_error.time else "",
                 "last_error_message": project_last_error.message[:500] if project_last_error else "",
+                "last_edit_time": project.last_edit_time.isoformat(sep=" ") if project.last_edit_time else "",
+                "ended_on_error": "yes" if project.ended_on_error else "no",
             }
         )
 
@@ -861,6 +877,13 @@ def analyze() -> None:
                 "characteristic": characteristic,
             }
         )
+        user_meta_by_guid[guid] = {
+            "lite_or_pro": user_variant,
+            "level": level,
+            "left_more_than_1_day": "yes" if left_flag else "no",
+            "inactive_hours_till_2026_02_24_end": f"{inactive_hours:.1f}" if inactive_hours is not None else "",
+            "projects_count": str(projects_count),
+        }
 
         for e in user.errors:
             item = global_errors[e.category]
@@ -982,6 +1005,63 @@ def analyze() -> None:
                 }
             )
 
+    terminal_error_churned_rows = []
+    terminal_error_stats = defaultdict(lambda: {"projects": 0, "users": set()})
+    for project in project_records:
+        if not project.ended_on_error or not project.error_events:
+            continue
+        user_meta = user_meta_by_guid.get(project.guid)
+        if not user_meta or user_meta.get("left_more_than_1_day") != "yes":
+            continue
+        last_error = max(project.error_events, key=lambda e: e.time or datetime.min)
+        terminal_error_churned_rows.append(
+            {
+                "guid": project.guid,
+                "lite_or_pro": user_meta.get("lite_or_pro", ""),
+                "level": user_meta.get("level", ""),
+                "left_more_than_1_day": "yes",
+                "inactive_hours_till_2026_02_24_end": user_meta.get("inactive_hours_till_2026_02_24_end", ""),
+                "user_projects_count": user_meta.get("projects_count", ""),
+                "session": project.session,
+                "project_file": project.project_file,
+                "project_number": project.project_number if project.project_number is not None else "",
+                "project_time": project.project_time.isoformat(sep=" ") if project.project_time else "",
+                "last_edit_time": project.last_edit_time.isoformat(sep=" ") if project.last_edit_time else "",
+                "last_error_time": last_error.time.isoformat(sep=" ") if last_error.time else "",
+                "last_error_category": last_error.category,
+                "last_error_message": last_error.message[:500],
+                "theme": project.theme,
+                "domains": ", ".join(sorted(project.domains)[:8]),
+                "operations": ", ".join(project.operations[:6]),
+                "no_changes_after_error": "yes",
+            }
+        )
+        stat = terminal_error_stats[last_error.category]
+        stat["projects"] += 1
+        stat["users"].add(project.guid)
+
+    terminal_error_churned_rows.sort(
+        key=lambda r: (
+            float(r["inactive_hours_till_2026_02_24_end"] or "0"),
+            r["last_error_time"] or "",
+        ),
+        reverse=True,
+    )
+
+    terminal_error_summary_rows = []
+    for category, stat in sorted(
+        terminal_error_stats.items(),
+        key=lambda kv: (kv[1]["projects"], len(kv[1]["users"])),
+        reverse=True,
+    ):
+        terminal_error_summary_rows.append(
+            {
+                "error_category": category,
+                "projects_count": stat["projects"],
+                "users_count": len(stat["users"]),
+            }
+        )
+
     per_user_rows.sort(key=lambda r: int(r["projects_count"]), reverse=True)
     per_project_rows.sort(key=lambda r: (r["guid"], int(r["project_number"]) if str(r["project_number"]).isdigit() else -1))
 
@@ -1003,6 +1083,8 @@ def analyze() -> None:
     write_csv(OUT_DIR / "dashboard_last_errors_by_level.csv", last_errors_by_level_rows)
     write_csv(OUT_DIR / "dashboard_errors_by_plan.csv", errors_by_plan_rows)
     write_csv(OUT_DIR / "dashboard_last_errors_by_plan.csv", last_errors_by_plan_rows)
+    write_csv(OUT_DIR / "dashboard_terminal_error_churned_projects.csv", terminal_error_churned_rows)
+    write_csv(OUT_DIR / "dashboard_terminal_error_churned_summary.csv", terminal_error_summary_rows)
     write_csv(OUT_DIR / "users_profile_dashboard.csv", per_user_rows)
     write_csv(OUT_DIR / "projects_detailed_dashboard.csv", per_project_rows)
 
@@ -1108,6 +1190,20 @@ def analyze() -> None:
             )
         lines.append("")
 
+    lines.append("## Проекты: финал на ошибке + пользователь ушел")
+    lines.append("")
+    lines.append(
+        f"- Проектов, где последняя активность = ошибка и после ошибки не было изменений (у ушедших пользователей): **{len(terminal_error_churned_rows)}**"
+    )
+    lines.append("")
+    lines.append("| Ошибка | Проекты | Пользователи |")
+    lines.append("|---|---:|---:|")
+    for row in terminal_error_summary_rows[:20]:
+        lines.append(
+            f"| {row['error_category']} | {row['projects_count']} | {row['users_count']} |"
+        )
+    lines.append("")
+
     lines.append("## Сегменты пользователей")
     lines.append("")
     for level, count in level_distribution.most_common():
@@ -1124,6 +1220,8 @@ def analyze() -> None:
     lines.append(f"- `{OUT_DIR / 'dashboard_last_errors_by_level.csv'}`")
     lines.append(f"- `{OUT_DIR / 'dashboard_errors_by_plan.csv'}`")
     lines.append(f"- `{OUT_DIR / 'dashboard_last_errors_by_plan.csv'}`")
+    lines.append(f"- `{OUT_DIR / 'dashboard_terminal_error_churned_projects.csv'}`")
+    lines.append(f"- `{OUT_DIR / 'dashboard_terminal_error_churned_summary.csv'}`")
     lines.append(f"- `{OUT_DIR / 'users_profile_dashboard.csv'}`")
     lines.append(f"- `{OUT_DIR / 'projects_detailed_dashboard.csv'}`")
     lines.append(f"- `{OUT_DIR / 'dashboard_report.md'}`")

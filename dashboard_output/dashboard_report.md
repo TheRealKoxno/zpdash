@@ -32,8 +32,8 @@
 | lessons.zennolab.com | 10 | 46 | Навигация по сайтам, Формы/клики/DOM, Прокси/профили/эмуляция |
 | api.anymessage.shop | 9 | 223 | Логика/ретраи, Прокси/профили/эмуляция, Навигация по сайтам |
 | chatgpt.com | 9 | 209 | Формы/клики/DOM, Навигация по сайтам, Логика/ретраи |
-| api.sypexgeo.net | 8 | 231 | Формы/клики/DOM, Логика/ретраи, Навигация по сайтам |
 | zennoclub.com | 8 | 231 | Формы/клики/DOM, Логика/ретраи, Навигация по сайтам |
+| api.sypexgeo.net | 8 | 231 | Формы/клики/DOM, Логика/ретраи, Навигация по сайтам |
 | api.openai.com | 8 | 142 | HTTP/API запросы, Логика/ретраи, Прокси/профили/эмуляция |
 | accounts.google.com | 8 | 111 | Формы/клики/DOM, Навигация по сайтам, Прокси/профили/эмуляция |
 | whoer.net | 8 | 72 | Навигация по сайтам, Логика/ретраи, Формы/клики/DOM |
@@ -184,6 +184,33 @@
 | 运行IF-statmen逻辑 动作id<id> 动作组id<id> 结果：false | 68 | 6 |
 | Running HtmlElement action id: <id> action group id: <id> An HTML element matching the search criteria hasn't been found | 56 | 8 |
 
+## Проекты: финал на ошибке + пользователь ушел
+
+- Проектов, где последняя активность = ошибка и после ошибки не было изменений (у ушедших пользователей): **111**
+
+| Ошибка | Проекты | Пользователи |
+|---|---:|---:|
+| Выполнение действия HtmlElement id: <id> группы действий id: <id> Не найден HTML элемент, по условиям поиска | 17 | 12 |
+| Выполнение логического оператора If действия id: <id> группы действий id: <id> Результат: false | 15 | 5 |
+| Proxy issue | 5 | 3 |
+| Парсинг страницы действия id: <id> группы действий id: <id> Не найдены элементы по заданным параметрам | 4 | 4 |
+| Argument error | 3 | 3 |
+| Взятие строки из таблицы действия id: <id> группы действий id: <id> Строки с номером не существует в таблице | 3 | 3 |
+| Server 500 | 3 | 3 |
+| Rate limit | 3 | 3 |
+| Captcha/anti-bot | 3 | 2 |
+| Выполнение действия ProjectInProject id: <id> группы действий id: <id> Ошибка при обработке | 3 | 2 |
+| Выполнение действия Создать профили ZennoBrowser id: <id> группы действий id: <id> Status(StatusCode="Unauthenticated", Detail="Bad gRPC res | 3 | 1 |
+| Searching text on a page action id: <id>of action group id: <id> 未发现, Url: https://www.paramountplus.com/account/signup/submitpayment, Regex | 3 | 1 |
+| Executing the Start ZennoBrowser instance action id: <id> action group id: <id> ZennoBrowser product is not installed | ZennoLab.ZennoPoster | 2 | 1 |
+| Выполнение действия Plugin id: <id> группы действий id: <id> Ошибка при обработке плагина Cap.Guru.26.7_all Ошибка в действии: <id> | 2 | 1 |
+| Выполнение действия Plugin id: <id> группы действий id: <id> Ошибка при обработке плагина Cap.Guru.27.6_all Ошибка в действии: <id> | 2 | 1 |
+| Executing the Get ZennoBrowser profiles action id: <id> action group id: <id> ZennoBrowser not installed | System.Exception: ZennoBrowser no | 1 | 1 |
+| Выполнение действия CSharp OwnCode: считаю разницу кликов (в неделю). id: <id> группы действий id: <id> Входная строка имела неверный формат | 1 | 1 |
+| 运行列表 动作id<id> 动作组id<id> 列表为空 | System.Exception: 列表为空 | 1 | 1 |
+| Extension installer not found | 1 | 1 |
+| Выполнение действия List id: <id> группы действий id: <id> Список пуст | System.Exception: Список пуст | 1 | 1 |
+
 ## Сегменты пользователей
 
 - средний: **130**
@@ -201,6 +228,8 @@
 - `/Users/ilyazenno/Desktop/zp_dumper/dashboard_output/dashboard_last_errors_by_level.csv`
 - `/Users/ilyazenno/Desktop/zp_dumper/dashboard_output/dashboard_errors_by_plan.csv`
 - `/Users/ilyazenno/Desktop/zp_dumper/dashboard_output/dashboard_last_errors_by_plan.csv`
+- `/Users/ilyazenno/Desktop/zp_dumper/dashboard_output/dashboard_terminal_error_churned_projects.csv`
+- `/Users/ilyazenno/Desktop/zp_dumper/dashboard_output/dashboard_terminal_error_churned_summary.csv`
 - `/Users/ilyazenno/Desktop/zp_dumper/dashboard_output/users_profile_dashboard.csv`
 - `/Users/ilyazenno/Desktop/zp_dumper/dashboard_output/projects_detailed_dashboard.csv`
 - `/Users/ilyazenno/Desktop/zp_dumper/dashboard_output/dashboard_report.md`

@@ -46,6 +46,29 @@
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       margin-bottom: 14px;
     }
+    .summary-sections {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(3, minmax(260px, 1fr));
+      margin-bottom: 14px;
+    }
+    .summary-section {
+      background: linear-gradient(180deg, var(--panel) 0%, #0f1730 100%);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 10px;
+    }
+    .summary-title {
+      margin: 0 0 8px 0;
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+    .summary-section .card-grid {
+      margin-bottom: 0;
+      grid-template-columns: repeat(2, minmax(120px, 1fr));
+    }
     .card {
       background: linear-gradient(180deg, var(--panel) 0%, #0f1730 100%);
       border: 1px solid var(--line);
@@ -55,6 +78,7 @@
     }
     .card .k { color: var(--muted); font-size: 12px; }
     .card .v { font-size: 24px; font-weight: 700; margin-top: 6px; }
+    .summary-section .card .v { font-size: 18px; }
     .tabs {
       display: flex;
       gap: 6px;
@@ -104,6 +128,7 @@
     .col-12 { grid-column: span 12; }
     @media (max-width: 980px) {
       .col-6, .col-4 { grid-column: span 12; }
+      .summary-sections { grid-template-columns: 1fr; }
     }
     .filter-grid {
       display: grid;
@@ -217,7 +242,7 @@
   <div class="container">
     <div class="sticky-actions">
       <h1>ZennoPoster Local Dashboard</h1>
-      <div class="subtitle">Интерактивный просмотр выгрузки 16-24 Feb 2026 • Сгенерировано: 2026-03-02 10:47:05</div>
+      <div class="subtitle">Интерактивный просмотр выгрузки 16-24 Feb 2026 • Сгенерировано: 2026-03-02 10:55:09</div>
       <div class="top-links">
         <a href="dashboard_report.md" target="_blank">dashboard_report.md</a>
         <a href="users_profile_dashboard.csv" target="_blank">users_profile_dashboard.csv</a>
@@ -225,7 +250,7 @@
       </div>
     </div>
 
-    <div class="card-grid" id="summaryCards"></div>
+    <div id="summaryCards"></div>
 
     <div class="tabs">
       <button class="tab-btn active" data-tab="overview">Обзор</button>
@@ -401,6 +426,31 @@
             <table id="errorsTable"></table>
           </div>
         </div>
+        <div class="col-12 panel">
+          <h2>Проекты: финал на ошибке + пользователь ушел</h2>
+          <div class="filter-grid">
+            <div>
+              <label for="teSearch">GUID / ошибка / проект</label>
+              <input id="teSearch" placeholder="поиск..." />
+            </div>
+            <div>
+              <label for="teLevel">Уровень</label>
+              <select id="teLevel"></select>
+            </div>
+            <div>
+              <label for="tePlan">Lite/Pro</label>
+              <select id="tePlan"></select>
+            </div>
+            <div>
+              <label for="teLimit">Показать строк</label>
+              <input id="teLimit" type="number" min="30" max="2000" value="300" />
+            </div>
+          </div>
+          <div class="mini" id="terminalErrInfo"></div>
+          <div class="table-wrap">
+            <table id="terminalErrTable"></table>
+          </div>
+        </div>
       </div>
     </section>
   </div>
@@ -415,6 +465,7 @@
       lastErrorsByLevel: "dashboard_last_errors_by_level.csv",
       errorsByPlan: "dashboard_errors_by_plan.csv",
       lastErrorsByPlan: "dashboard_last_errors_by_plan.csv",
+      terminalErrors: "dashboard_terminal_error_churned_projects.csv",
       users: "users_profile_dashboard.csv",
       projects: "projects_detailed_dashboard.csv"
     };
@@ -618,17 +669,19 @@
       const totalProjects = projects.length;
       const left = users.filter(u => (u.left_more_than_1_day || "").toLowerCase() === "yes").length;
       const active = totalUsers - left;
-      const pro = users.filter(u => (u.lite_or_pro || "").toLowerCase() === "pro").length;
-      const lite = users.filter(u => (u.lite_or_pro || "").toLowerCase() === "lite").length;
+      const proRows = users.filter(u => (u.lite_or_pro || "").toLowerCase() === "pro");
+      const liteRows = users.filter(u => (u.lite_or_pro || "").toLowerCase() === "lite");
+      const pro = proRows.length;
+      const lite = liteRows.length;
       const allCounts = users.map(u => asInt(u.projects_count)).filter(v => v > 0);
-      const liteCounts = users
-        .filter(u => (u.lite_or_pro || "").toLowerCase() === "lite")
+      const liteCounts = liteRows
         .map(u => asInt(u.projects_count))
         .filter(v => v > 0);
-      const proCounts = users
-        .filter(u => (u.lite_or_pro || "").toLowerCase() === "pro")
+      const proCounts = proRows
         .map(u => asInt(u.projects_count))
         .filter(v => v > 0);
+      const liteProjectsTotal = liteCounts.reduce((a, b) => a + b, 0);
+      const proProjectsTotal = proCounts.reduce((a, b) => a + b, 0);
 
       const avg = arr => arr.length ? arr.reduce((a, b) => a + b, 0) / arr.length : 0;
       const median = arr => {
@@ -646,22 +699,49 @@
       const avgPro = fmt(avg(proCounts));
       const medianPro = fmt(median(proCounts));
 
-      const cards = [
-        ["GUID пользователей", totalUsers],
-        ["Проектов", totalProjects],
-        ["Среднее проектов/польз.", avgProjects],
-        ["Медиана проектов/польз.", medianProjects],
-        ["Lite: среднее", avgLite],
-        ["Lite: медиана", medianLite],
-        ["Pro: среднее", avgPro],
-        ["Pro: медиана", medianPro],
-        ["Lite", lite],
-        ["Pro", pro],
-        ["Ушли >1 дня", left],
-        ["Активны <=1 дня", active],
-      ];
       const root = document.getElementById("summaryCards");
-      root.innerHTML = cards.map(([k, v]) => `<div class="card"><div class="k">${k}</div><div class="v">${v}</div></div>`).join("");
+      const makeCards = cards => cards
+        .map(([k, v]) => `<div class="card"><div class="k">${k}</div><div class="v">${v}</div></div>`)
+        .join("");
+      root.innerHTML = `
+        <div class="summary-sections">
+          <section class="summary-section">
+            <h3 class="summary-title">Total</h3>
+            <div class="card-grid">
+              ${makeCards([
+                ["GUID пользователей", totalUsers],
+                ["Проектов", totalProjects],
+                ["Среднее проектов/польз.", avgProjects],
+                ["Медиана проектов/польз.", medianProjects],
+                ["Ушли >1 дня", left],
+                ["Активны <=1 дня", active],
+              ])}
+            </div>
+          </section>
+          <section class="summary-section">
+            <h3 class="summary-title">Pro</h3>
+            <div class="card-grid">
+              ${makeCards([
+                ["Пользователи Pro", pro],
+                ["Проекты Pro", proProjectsTotal],
+                ["Pro: среднее", avgPro],
+                ["Pro: медиана", medianPro],
+              ])}
+            </div>
+          </section>
+          <section class="summary-section">
+            <h3 class="summary-title">Lite</h3>
+            <div class="card-grid">
+              ${makeCards([
+                ["Пользователи Lite", lite],
+                ["Проекты Lite", liteProjectsTotal],
+                ["Lite: среднее", avgLite],
+                ["Lite: медиана", medianLite],
+              ])}
+            </div>
+          </section>
+        </div>
+      `;
     }
 
     function initTabs() {
@@ -879,6 +959,54 @@
       renderByLevel();
     }
 
+    function wireTerminalErrors(rows) {
+      fillSelect("teLevel", uniqueValues(rows, "level"));
+      fillSelect("tePlan", uniqueValues(rows, "lite_or_pro"));
+      const controls = ["teSearch", "teLevel", "tePlan", "teLimit"];
+      controls.forEach(id => document.getElementById(id).addEventListener("input", render));
+      controls.forEach(id => document.getElementById(id).addEventListener("change", render));
+
+      function render() {
+        const q = (document.getElementById("teSearch").value || "").toLowerCase().trim();
+        const level = document.getElementById("teLevel").value;
+        const plan = document.getElementById("tePlan").value;
+        const limit = Math.max(30, asInt(document.getElementById("teLimit").value || "300"));
+
+        let filtered = rows.filter(r => {
+          if (level !== "all" && (r.level || "") !== level) return false;
+          if (plan !== "all" && (r.lite_or_pro || "") !== plan) return false;
+          if (q) {
+            const hay = [
+              r.guid, r.project_file, r.session, r.last_error_category, r.last_error_message, r.theme, r.domains
+            ].join(" ").toLowerCase();
+            if (!hay.includes(q)) return false;
+          }
+          return true;
+        });
+
+        filtered.sort((a, b) => asFloat(b.inactive_hours_till_2026_02_24_end) - asFloat(a.inactive_hours_till_2026_02_24_end));
+        const total = filtered.length;
+        filtered = filtered.slice(0, limit);
+        document.getElementById("terminalErrInfo").innerHTML =
+          `Найдено: <b>${total}</b> • Показано: <b>${filtered.length}</b> • Условие: проект завершился ошибкой, после нее не редактировали, пользователь ушел`;
+
+        renderTable("terminalErrTable", filtered, [
+          { key: "guid", label: "GUID" },
+          { key: "lite_or_pro", label: "Lite/Pro" },
+          { key: "level", label: "Уровень" },
+          { key: "project_file", label: "Проект" },
+          { key: "session", label: "Сессия" },
+          { key: "last_error_category", label: "Последняя ошибка проекта" },
+          { key: "last_error_time", label: "Время ошибки" },
+          { key: "last_edit_time", label: "Последнее изменение проекта" },
+          { key: "inactive_hours_till_2026_02_24_end", label: "Неактивность (часы)" },
+          { key: "theme", label: "Тема" }
+        ]);
+      }
+
+      render();
+    }
+
     async function init() {
       initTabs();
       try {
@@ -895,6 +1023,7 @@
           data.errorsByPlan,
           data.lastErrorsByPlan
         );
+        wireTerminalErrors(data.terminalErrors);
       } catch (err) {
         document.body.innerHTML = `<div class="container"><div class="panel"><h2>Ошибка загрузки</h2><div class="danger">${escapeHtml(err.message || String(err))}</div><p class="mini">Запустите локальный сервер в папке dashboard_output и откройте dashboard.html через http://127.0.0.1:PORT/dashboard.html</p></div></div>`;
       }
