@@ -224,39 +224,38 @@ HTML_TEMPLATE = """<!doctype html>
       color: var(--muted);
       font-size: 12px;
     }
-    .dayhist {
+    .stackhist {
       margin-top: 8px;
     }
-    .dayhist-row {
+    .stack-row {
       display: flex;
       align-items: center;
       gap: 8px;
       margin-bottom: 6px;
     }
-    .dayhist-date {
+    .stack-date {
       width: 96px;
       font-size: 11px;
       color: var(--muted);
       white-space: nowrap;
     }
-    .dayhist-track {
+    .stack-track {
       flex: 1;
+      height: 16px;
       background: #0d1631;
       border: 1px solid var(--line);
       border-radius: 8px;
-      padding: 1px;
+      overflow: hidden;
+      display: flex;
     }
-    .dayhist-bar {
-      height: 14px;
-      border-radius: 7px;
-      background: linear-gradient(90deg, var(--accent), #84e0ff);
-      min-width: 2px;
+    .stack-seg {
+      height: 100%;
+      min-width: 1px;
+      display: block;
+      cursor: pointer;
     }
-    .dayhist-bar.green {
-      background: linear-gradient(90deg, var(--accent-2), #8ef8b8);
-    }
-    .dayhist-count {
-      width: 34px;
+    .stack-total {
+      width: 44px;
       text-align: right;
       color: var(--muted);
       font-size: 11px;
@@ -329,26 +328,14 @@ HTML_TEMPLATE = """<!doctype html>
           <div id="topThemesBars"></div>
         </div>
         <div class="col-6 panel">
-          <h2>Гистограмма по дням: сайты</h2>
-          <div class="filter-grid">
-            <div>
-              <label for="ovSiteHist">Сайт</label>
-              <select id="ovSiteHist"></select>
-            </div>
-          </div>
-          <div class="mini" id="ovSiteHistInfo"></div>
-          <div class="dayhist" id="siteDayHistogram"></div>
+          <h2>Топ-10 сайтов по дням</h2>
+          <div class="mini">Каждая строка: день. Наведи на сегмент, чтобы увидеть сайт и количество.</div>
+          <div class="stackhist" id="siteDayHistogram"></div>
         </div>
         <div class="col-6 panel">
-          <h2>Гистограмма по дням: темы</h2>
-          <div class="filter-grid">
-            <div>
-              <label for="ovThemeHist">Тема</label>
-              <select id="ovThemeHist"></select>
-            </div>
-          </div>
-          <div class="mini" id="ovThemeHistInfo"></div>
-          <div class="dayhist" id="themeDayHistogram"></div>
+          <h2>Топ-10 тем по дням</h2>
+          <div class="mini">Каждая строка: день. Наведи на сегмент, чтобы увидеть тему и количество.</div>
+          <div class="stackhist" id="themeDayHistogram"></div>
         </div>
         <div class="col-12 panel">
           <h2>Сайты: users vs projects</h2>
@@ -752,20 +739,60 @@ HTML_TEMPLATE = """<!doctype html>
       }).join("");
     }
 
-    function renderDayHistogram(containerId, series, green = false) {
+    function colorForLabel(label) {
+      const palette = [
+        "#4ad2ff", "#69f0ae", "#ffd166", "#ff6b6b", "#a78bfa",
+        "#22d3ee", "#f97316", "#84cc16", "#e879f9", "#f43f5e",
+        "#60a5fa", "#34d399", "#facc15", "#fb7185", "#38bdf8"
+      ];
+      let h = 0;
+      const text = String(label || "");
+      for (let i = 0; i < text.length; i += 1) h = (h * 31 + text.charCodeAt(i)) >>> 0;
+      return palette[h % palette.length];
+    }
+
+    function renderTop10DailyStack(containerId, dates, categoryDailyCounts) {
       const root = document.getElementById(containerId);
       if (!root) return;
-      const max = Math.max(1, ...series.map(r => asInt(r.count)));
-      root.innerHTML = series.map(r => {
-        const v = asInt(r.count);
-        const width = Math.max(2, Math.round((v / max) * 100));
+      const rows = [];
+      dates.forEach(date => {
+        const items = [];
+        for (const [category, dayMap] of categoryDailyCounts.entries()) {
+          const count = dayMap.get(date) || 0;
+          if (count > 0) items.push({ category, count });
+        }
+        items.sort((a, b) => b.count - a.count);
+        const top = items.slice(0, 10);
+        const other = items.slice(10).reduce((acc, it) => acc + it.count, 0);
+        const total = top.reduce((acc, it) => acc + it.count, 0) + other;
+        if (total > 0) rows.push({ date, top, other, total });
+      });
+      if (!rows.length) {
+        root.innerHTML = `<div class="mini">Нет данных</div>`;
+        return;
+      }
+
+      root.innerHTML = rows.map(row => {
+        const parts = [];
+        row.top.forEach(it => {
+          const width = Math.max(1, (it.count / row.total) * 100);
+          parts.push(
+            `<span class="stack-seg" style="width:${width}%;background:${colorForLabel(it.category)}" ` +
+            `title="${escapeHtml(it.category)} — ${it.count}"></span>`
+          );
+        });
+        if (row.other > 0) {
+          const width = Math.max(1, (row.other / row.total) * 100);
+          parts.push(
+            `<span class="stack-seg" style="width:${width}%;background:#64748b" ` +
+            `title="other — ${row.other}"></span>`
+          );
+        }
         return `
-          <div class="dayhist-row">
-            <div class="dayhist-date">${escapeHtml(r.date)}</div>
-            <div class="dayhist-track">
-              <div class="dayhist-bar ${green ? "green" : ""}" style="width:${width}%"></div>
-            </div>
-            <div class="dayhist-count">${v}</div>
+          <div class="stack-row">
+            <div class="stack-date">${escapeHtml(row.date)}</div>
+            <div class="stack-track">${parts.join("")}</div>
+            <div class="stack-total">${row.total}</div>
           </div>
         `;
       }).join("");
@@ -982,8 +1009,6 @@ HTML_TEMPLATE = """<!doctype html>
 
     function renderOverview(sites, themes, projects) {
       const planEl = document.getElementById("ovPlan");
-      const siteEl = document.getElementById("ovSiteHist");
-      const themeEl = document.getElementById("ovThemeHist");
       const render = () => {
         const plan = planEl.value || "all";
         const agg = computeOverviewFromProjects(projects, plan);
@@ -998,48 +1023,11 @@ HTML_TEMPLATE = """<!doctype html>
           { key: "what_users_do", label: "Что делают" },
           { key: "top_themes", label: "Топ темы" }
         ]);
-
-        const prevSite = siteEl.value || "all";
-        const prevTheme = themeEl.value || "all";
-        const siteOptions = ["all", ...topSites.slice(0, 25).map(r => r.domain)];
-        const themeOptions = ["all", ...topThemes.slice(0, 25).map(r => r.theme)];
-        siteEl.innerHTML = siteOptions
-          .map(v => `<option value="${escapeHtml(v)}">${escapeHtml(v)}</option>`)
-          .join("");
-        themeEl.innerHTML = themeOptions
-          .map(v => `<option value="${escapeHtml(v)}">${escapeHtml(v)}</option>`)
-          .join("");
-        siteEl.value = siteOptions.includes(prevSite) ? prevSite : "all";
-        themeEl.value = themeOptions.includes(prevTheme) ? prevTheme : "all";
-
-        const siteChoice = siteEl.value || "all";
-        const themeChoice = themeEl.value || "all";
-        const dates = agg.dates || [];
-        const siteSeries = dates.map(d => ({
-          date: d,
-          count: siteChoice === "all"
-            ? (agg.dailyTotal.get(d) || 0)
-            : ((agg.dailySiteCounts.get(siteChoice) || new Map()).get(d) || 0),
-        }));
-        const themeSeries = dates.map(d => ({
-          date: d,
-          count: themeChoice === "all"
-            ? (agg.dailyTotal.get(d) || 0)
-            : ((agg.dailyThemeCounts.get(themeChoice) || new Map()).get(d) || 0),
-        }));
-        renderDayHistogram("siteDayHistogram", siteSeries, false);
-        renderDayHistogram("themeDayHistogram", themeSeries, true);
-        document.getElementById("ovSiteHistInfo").innerHTML =
-          `Серия: <b>${escapeHtml(siteChoice === "all" ? "all projects" : siteChoice)}</b> • дней: <b>${dates.length}</b>`;
-        document.getElementById("ovThemeHistInfo").innerHTML =
-          `Серия: <b>${escapeHtml(themeChoice === "all" ? "all projects" : themeChoice)}</b> • дней: <b>${dates.length}</b>`;
+        renderTop10DailyStack("siteDayHistogram", agg.dates || [], agg.dailySiteCounts);
+        renderTop10DailyStack("themeDayHistogram", agg.dates || [], agg.dailyThemeCounts);
       };
       planEl.addEventListener("input", render);
       planEl.addEventListener("change", render);
-      siteEl.addEventListener("input", render);
-      siteEl.addEventListener("change", render);
-      themeEl.addEventListener("input", render);
-      themeEl.addEventListener("change", render);
       render();
     }
 
