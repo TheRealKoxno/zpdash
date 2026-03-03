@@ -242,7 +242,7 @@
   <div class="container">
     <div class="sticky-actions">
       <h1>ZennoPoster Local Dashboard</h1>
-      <div class="subtitle">Интерактивный просмотр выгрузки 16-24 Feb 2026 • Сгенерировано: 2026-03-02 10:55:09</div>
+      <div class="subtitle">Интерактивный просмотр выгрузки 16-24 Feb 2026 • Сгенерировано: 2026-03-03 12:17:23</div>
       <div class="top-links">
         <a href="dashboard_report.md" target="_blank">dashboard_report.md</a>
         <a href="users_profile_dashboard.csv" target="_blank">users_profile_dashboard.csv</a>
@@ -856,8 +856,10 @@
 
         renderTable("projectsTable", filtered, [
           { key: "guid", label: "GUID" },
+          { key: "project_id", label: "ProjectId" },
           { key: "session", label: "Сессия" },
           { key: "project_file", label: "Проект" },
+          { key: "snapshots_count", label: "Zip версий" },
           { key: "project_time", label: "Время" },
           { key: "theme", label: "Тема" },
           { key: "domains", label: "Домены" },

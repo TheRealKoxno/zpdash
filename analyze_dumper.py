@@ -103,6 +103,7 @@ class ProjectRecord:
     variant: str
     meta_time: Optional[datetime]
     project_time: Optional[datetime]
+    snapshots_count: int
     edit_versions: int
     domains: Set[str]
     operations: List[str]
@@ -430,6 +431,106 @@ def mean_and_median(values: List[int]) -> Tuple[float, float]:
     return mean, median
 
 
+def collapse_snapshots_by_project_id(snapshot_records: List[ProjectRecord]) -> List[ProjectRecord]:
+    grouped: Dict[str, Dict] = {}
+    for snap in snapshot_records:
+        if snap.project_id:
+            key = f"{snap.guid}::{snap.project_id}"
+        else:
+            key = f"{snap.guid}::zip::{snap.user_dir}::{snap.session}::{snap.project_file}"
+
+        bucket = grouped.get(key)
+        if bucket is None:
+            bucket = {
+                "latest": snap,
+                "snapshots_count": 0,
+                "domains": set(),
+                "operations": Counter(),
+                "themes": Counter(),
+                "theme_tags": Counter(),
+                "action_pairs": set(),
+                "table_names": set(),
+                "variants": Counter(),
+                "max_edit_versions": 0,
+            }
+            grouped[key] = bucket
+
+        bucket["snapshots_count"] += 1
+        bucket["domains"].update(snap.domains)
+        for op in snap.operations:
+            bucket["operations"][op] += 1
+        if snap.theme:
+            bucket["themes"][snap.theme] += 1
+        for tag in snap.theme_tags:
+            bucket["theme_tags"][tag] += 1
+        bucket["action_pairs"].update(snap.action_pairs)
+        bucket["table_names"].update(snap.table_names)
+        bucket["variants"][snap.variant] += 1
+        bucket["max_edit_versions"] = max(bucket["max_edit_versions"], snap.edit_versions)
+
+        cur_latest: ProjectRecord = bucket["latest"]
+        cur_time = cur_latest.project_time or datetime.min
+        new_time = snap.project_time or datetime.min
+        if new_time >= cur_time:
+            bucket["latest"] = snap
+
+    collapsed: List[ProjectRecord] = []
+    for bucket in grouped.values():
+        latest: ProjectRecord = bucket["latest"]
+        theme = latest.theme
+        if bucket["themes"]:
+            theme = bucket["themes"].most_common(1)[0][0]
+        theme_tags = (
+            [k for k, _ in bucket["theme_tags"].most_common()]
+            if bucket["theme_tags"]
+            else latest.theme_tags
+        )
+        operations = (
+            [k for k, _ in bucket["operations"].most_common()]
+            if bucket["operations"]
+            else latest.operations
+        )
+        variant = pick_variant(bucket["variants"]) if bucket["variants"] else latest.variant
+
+        collapsed.append(
+            ProjectRecord(
+                guid=latest.guid,
+                user_dir=latest.user_dir,
+                session=latest.session,
+                session_time=latest.session_time,
+                project_file=latest.project_file,
+                project_number=latest.project_number,
+                project_id=latest.project_id,
+                variant=variant,
+                meta_time=latest.meta_time,
+                project_time=latest.project_time,
+                snapshots_count=bucket["snapshots_count"],
+                edit_versions=bucket["max_edit_versions"],
+                domains=set(bucket["domains"]),
+                operations=operations,
+                theme=theme,
+                theme_tags=theme_tags,
+                unique_actions=len(bucket["action_pairs"]),
+                action_pairs=set(bucket["action_pairs"]),
+                table_names=sorted(bucket["table_names"]),
+                # Use latest snapshot errors to avoid multiplying repeated history across zips.
+                error_events=latest.error_events,
+                last_edit_time=latest.last_edit_time,
+                last_error_time=latest.last_error_time,
+                ended_on_error=latest.ended_on_error,
+            )
+        )
+
+    collapsed.sort(
+        key=lambda p: (
+            p.guid,
+            p.project_time or datetime.min,
+            p.project_number if p.project_number is not None else -1,
+        )
+    )
+    return collapsed
+
+
 def summarize_user(
     user: UserStats,
     projects_count: int,
@@ -660,6 +761,7 @@ def analyze() -> None:
                     variant=variant,
                     meta_time=meta_time,
                     project_time=project_time,
+                    snapshots_count=1,
                     edit_versions=len(edit_records),
                     domains=domains,
                     operations=operations,
@@ -706,6 +808,33 @@ def analyze() -> None:
         user.url_domains.update(ctx["url_domains"])
         user.url_events += ctx["url_events"]
 
+    # Collapse multiple Project *.zip snapshots into logical projects by ProjectId.
+    snapshot_records = project_records
+    project_records = collapse_snapshots_by_project_id(snapshot_records)
+
+    # Rebuild per-user project-derived stats from collapsed project list.
+    for user in users.values():
+        user.project_records = []
+        user.errors = []
+        user.action_pairs = Counter()
+        user.themes = Counter()
+        user.operations = Counter()
+        user.variants = Counter()
+
+    for project in project_records:
+        user = users.setdefault(project.guid, UserStats(guid=project.guid))
+        user.project_records.append(project)
+        user.variants[project.variant] += 1
+        user.errors.extend(project.error_events)
+        for pair in project.action_pairs:
+            user.action_pairs[pair] += 1
+        user.themes[project.theme] += 1
+        for op in project.operations:
+            user.operations[op] += 1
+        if project.project_time:
+            user.activity_times.append(project.project_time)
+            user.active_days.add(project.project_time.strftime("%Y-%m-%d"))
+
     # Build aggregates.
     domain_stats = defaultdict(lambda: {"users": set(), "projects": 0, "ops": Counter(), "themes": Counter()})
     theme_stats = defaultdict(lambda: {"users": set(), "projects": 0, "ops": Counter()})
@@ -747,6 +876,7 @@ def analyze() -> None:
                 "project_id": project.project_id,
                 "variant": project.variant,
                 "project_time": project.project_time.isoformat(sep=" ") if project.project_time else "",
+                "snapshots_count": project.snapshots_count,
                 "edit_versions": project.edit_versions,
                 "theme": project.theme,
                 "theme_tags": ", ".join(project.theme_tags),
@@ -1114,7 +1244,8 @@ def analyze() -> None:
     lines.append(
         f"- Pro: users **{len(pro_project_counts)}**, projects/user **avg {avg_projects_pro:.2f} / median {median_projects_pro:.2f}**"
     )
-    lines.append(f"- Разобранных zip-файлов: **{len(project_records)}**")
+    lines.append(f"- Логических проектов (по ProjectId): **{len(project_records)}**")
+    lines.append(f"- Разобранных zip-снапшотов: **{len(snapshot_records)}**")
     lines.append(f"- Ошибок парсинга zip/history: **{parse_failures}**")
     lines.append(f"- Ушли (>1 дня неактивности к 2026-02-24 23:59): **{left_users}**")
     lines.append(f"- Активны в последние 24ч окна: **{active_users}**")
@@ -1230,7 +1361,10 @@ def analyze() -> None:
     (OUT_DIR / "dashboard_report.md").write_text("\n".join(lines), encoding="utf-8")
 
     print(f"Done. Output dir: {OUT_DIR}")
-    print(f"Users: {users_count}, Projects: {projects_count}, Domains: {len(top_sites_rows)}")
+    print(
+        f"Users: {users_count}, Projects(ProjectId): {projects_count}, "
+        f"ZipSnapshots: {len(snapshot_records)}, Domains: {len(top_sites_rows)}"
+    )
 
 
 if __name__ == "__main__":

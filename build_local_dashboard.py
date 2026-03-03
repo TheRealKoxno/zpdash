@@ -865,8 +865,10 @@ HTML_TEMPLATE = """<!doctype html>
 
         renderTable("projectsTable", filtered, [
           { key: "guid", label: "GUID" },
+          { key: "project_id", label: "ProjectId" },
           { key: "session", label: "Сессия" },
           { key: "project_file", label: "Проект" },
+          { key: "snapshots_count", label: "Zip версий" },
           { key: "project_time", label: "Время" },
           { key: "theme", label: "Тема" },
           { key: "domains", label: "Домены" },

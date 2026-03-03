@@ -1,56 +1,20 @@
 error_category,projects_count,users_count
-"Выполнение действия HtmlElement id: <id> группы действий id: <id> Не найден HTML элемент, по условиям поиска",17,12
-Выполнение логического оператора If действия id: <id> группы действий id: <id> Результат: false,15,5
-Proxy issue,5,3
-Парсинг страницы действия id: <id> группы действий id: <id> Не найдены элементы по заданным параметрам,4,4
-Argument error,3,3
-Взятие строки из таблицы действия id: <id> группы действий id: <id> Строки с номером не существует в таблице,3,3
-Server 500,3,3
-Rate limit,3,3
-Captcha/anti-bot,3,2
-Выполнение действия ProjectInProject id: <id> группы действий id: <id> Ошибка при обработке,3,2
-"Выполнение действия Создать профили ZennoBrowser id: <id> группы действий id: <id> Status(StatusCode=""Unauthenticated"", Detail=""Bad gRPC res",3,1
-"Searching text on a page action id: <id>of action group id: <id> 未发现, Url: https://www.paramountplus.com/account/signup/submitpayment, Regex",3,1
-Executing the Start ZennoBrowser instance action id: <id> action group id: <id> ZennoBrowser product is not installed | ZennoLab.ZennoPoster,2,1
-Выполнение действия Plugin id: <id> группы действий id: <id> Ошибка при обработке плагина Cap.Guru.26.7_all Ошибка в действии: <id>,2,1
-Выполнение действия Plugin id: <id> группы действий id: <id> Ошибка при обработке плагина Cap.Guru.27.6_all Ошибка в действии: <id>,2,1
-Executing the Get ZennoBrowser profiles action id: <id> action group id: <id> ZennoBrowser not installed | System.Exception: ZennoBrowser no,1,1
-Выполнение действия CSharp OwnCode: считаю разницу кликов (в неделю). id: <id> группы действий id: <id> Входная строка имела неверный формат,1,1
-运行列表 动作id<id> 动作组id<id> 列表为空 | System.Exception: 列表为空,1,1
-Extension installer not found,1,1
-Выполнение действия List id: <id> группы действий id: <id> Список пуст | System.Exception: Список пуст,1,1
-Выполнение действия Db id: <id> группы действий id: <id> ERROR [IM014] [Microsoft][ODBC Driver Manager] The specified DSN contains an archit,1,1
-Выполнение действия WebBrowserTab id: <id> группы действий id: <id> Ошибка обращения к Instance.ActiveTab | System.Exception: Ошибка обращен,1,1
-Выполнение программы C:\Zenno\Metatags\Metatags.bat действия id: <id> группы действий id: <id> Результат: 1,1,1
-"Выполнение действия Emulation id: <id> группы действий id: <id> Имитация просмотра страницы не поддерживается в Firefox52x64. Пожалуйста, ис",1,1
-"Выполнение действия CSharp OwnCode: Get Messagge. id: <id> группы действий id: <id> Unterminated string. Expected delimiter: "". Path 'messag",1,1
-Выполнение действия CSharp OwnCode: ждем пока файл CSV освободится. id: <id> группы действий id: <id> Поток находился в процессе прерывания.,1,1
-Выполнение действия WebBrowserTabManagement id: <id> группы действий id: <id> Не нашли вкладку popup-1 в инстансе. Инстанс <n>:<n>.0.0.1 | S,1,1
-Выполнение действия TextProcessing id: <id> группы действий id: <id> No such list: | ZennoLab.TemplateManipulator.V4.Helpers.InvalidVariable,1,1
-Выполнение действия WebBrowserSettings id: <id> группы действий id: <id> Не найдены cookies для загрузки. | System.Exception: Не найдены coo,1,1
-"Running the WebBrowserSettings action id: <id> action group id: <id> Error reading the file, it probably has wrong format or corrupted",1,1
-Выполнение действия JavaScript OwnCode id: <id> группы действий id: <id> No such variable: mexc_ask_fixed,1,1
-"Выполнение действия Parse Json/Xml id: <id> группы действий id: <id> Error reading JToken from JsonReader. Path '', line 0, position 0. | Sy",1,1
-Выполнение действия LaunchProgram id: <id> группы действий id: <id> Переполнение TimeSpan из-за превышения длительности. | System.OverflowEx,1,1
-Выполнение действия VariableOperations id: <id> группы действий id: <id> No such variable: images | ZennoLab.TemplateManipulator.V4.Helpers.,1,1
-Выполнение действия Запустить инстанс ZennoBrowser id: <id> группы действий id: <id> Ошибка запуска профиля ZennoBrowser (<id>): Status(Stat,1,1
-"Поиск текста на странице действия id: <id> группы действий id: <id> Не найден, Url: https://b.dom-edinstva.ru/crm/lead/details/<n>/, Regex: ",1,1
-Выполнение действия Emulation id: <id> группы действий id: <id> Выполнение прервано | System.Exception: Выполнение прервано,1,1
-Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> Поток находился в процессе прерывания. | System.Threading.ThreadAbortE,1,1
-Access denied,1,1
-Выполнение действия WebBrowserSettings id: <id> группы действий id: <id> Ошибка обращения к Instance.ClearCookie | System.Exception: Ошибка ,1,1
-Выполнение действия Emulation id: <id> группы действий id: <id> Входная строка имела неверный формат. | System.FormatException: Входная стро,1,1
+"Выполнение действия HtmlElement id: <id> группы действий id: <id> Не найден HTML элемент, по условиям поиска",4,4
+Выполнение логического оператора If действия id: <id> группы действий id: <id> Результат: false,3,3
 "Выполнение действия CSharp OwnCode: Парсим мемы, постим на сервак. id: <id> группы действий id: <id> [Строка: <n>; Cтолбец: 1] Индекс находи",1,1
+"Running the WebBrowserSettings action id: <id> action group id: <id> Error reading the file, it probably has wrong format or corrupted",1,1
+"Поиск текста на странице действия id: <id> группы действий id: <id> Не найден, Url: https://b.dom-edinstva.ru/crm/lead/details/<n>/, Regex: ",1,1
+Выполнение действия Db id: <id> группы действий id: <id> ERROR [IM014] [Microsoft][ODBC Driver Manager] The specified DSN contains an archit,1,1
 Выполнение действия Запустить инстанс ZennoBrowser id: <id> группы действий id: <id> Ошибка запуска профиля ZennoBrowser (<id>): Can't conne,1,1
-Null reference,1,1
-Подпроект gg. Выполнение логического оператора If действия id: <id> группы действий id: <id> подпроект path: C:\Users\chyzh\OneDrive\Робочий,1,1
-Подпроект newAccs. Выполнение действия HtmlElement id: <id> группы действий id: <id> подпроект path: C:\Users\chyzh\OneDrive\Робочий стіл\Но,1,1
-Run List action id: <id> action group id: <id> List is empty | System.Exception: List is empty,1,1
 Подпроект humanEmulation. Выполнение действия Emulation id: <id> группы действий id: <id> подпроект path: C:\soft\ZennoPoster\Accounts\human,1,1
-Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> Что то пошло не так! | System.Exception: Что то пошло не так!,1,1
-Выполнение действия WebBrowserTabManagement id: <id> группы действий id: <id> Не нашли вкладку TW в инстансе. Инстанс <n>:<n>.0.0.1 | System,1,1
-Выполнение действия HtmlElement id: <id> группы действий id: <id> Индекс находился вне границ массива. | System.IndexOutOfRangeException: Ин,1,1
-Подпроект readability_example. Выполнение действия CSharp OwnCode: Exc. id: <id> группы действий id: <id> подпроект path: C:\Users\Администр,1,1
+Access denied,1,1
+Server 500,1,1
+"Выполнение действия Создать профили ZennoBrowser id: <id> группы действий id: <id> Status(StatusCode=""Unauthenticated"", Detail=""Bad gRPC res",1,1
+Argument error,1,1
+Extension installer not found,1,1
+Выполнение действия Emulation id: <id> группы действий id: <id> Входная строка имела неверный формат. | System.FormatException: Входная стро,1,1
+Выполнение действия CSharp OwnCode. id: <id> группы действий id: <id> Поток находился в процессе прерывания. | System.Threading.ThreadAbortE,1,1
 Подпроект readability. Выполнение действия CSharp OwnCode: check required vars. id: <id> группы действий id: <id> подпроект path: C:\Users\А,1,1
-Подпроект yandex_search_get_content. Выполнение действия HtmlElement id: <id> группы действий id: <id> подпроект path: C:\Users\Администрато,1,1
-Подпроект readability_example. Выполнение действия List id: <id> группы действий id: <id> подпроект path: C:\Users\Администратор\Documents\Z,1,1
+Подпроект readability_example. Выполнение действия CSharp OwnCode: Exc. id: <id> группы действий id: <id> подпроект path: C:\Users\Администр,1,1
+Выполнение действия WebBrowserTab id: <id> группы действий id: <id> Ошибка обращения к Instance.ActiveTab | System.Exception: Ошибка обращен,1,1
+Выполнение действия Запустить инстанс ZennoBrowser id: <id> группы действий id: <id> Ошибка запуска профиля ZennoBrowser (<id>): Status(Stat,1,1
