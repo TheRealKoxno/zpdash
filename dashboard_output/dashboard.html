@@ -215,6 +215,43 @@
       color: var(--muted);
       font-size: 12px;
     }
+    .dayhist {
+      margin-top: 8px;
+    }
+    .dayhist-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .dayhist-date {
+      width: 96px;
+      font-size: 11px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .dayhist-track {
+      flex: 1;
+      background: #0d1631;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 1px;
+    }
+    .dayhist-bar {
+      height: 14px;
+      border-radius: 7px;
+      background: linear-gradient(90deg, var(--accent), #84e0ff);
+      min-width: 2px;
+    }
+    .dayhist-bar.green {
+      background: linear-gradient(90deg, var(--accent-2), #8ef8b8);
+    }
+    .dayhist-count {
+      width: 34px;
+      text-align: right;
+      color: var(--muted);
+      font-size: 11px;
+    }
     .muted { color: var(--muted); }
     .danger { color: var(--danger); }
     .warn { color: var(--warn); }
@@ -242,7 +279,7 @@
   <div class="container">
     <div class="sticky-actions">
       <h1>ZennoPoster Local Dashboard</h1>
-      <div class="subtitle">Интерактивный просмотр выгрузки 16-24 Feb 2026 • Сгенерировано: 2026-03-03 12:17:23</div>
+      <div class="subtitle">Интерактивный просмотр выгрузки 16-24 Feb 2026 • Сгенерировано: 2026-03-03 12:38:25</div>
       <div class="top-links">
         <a href="dashboard_report.md" target="_blank">dashboard_report.md</a>
         <a href="users_profile_dashboard.csv" target="_blank">users_profile_dashboard.csv</a>
@@ -281,6 +318,28 @@
         <div class="col-6 panel">
           <h2>Топ тем (по пользователям)</h2>
           <div id="topThemesBars"></div>
+        </div>
+        <div class="col-6 panel">
+          <h2>Гистограмма по дням: сайты</h2>
+          <div class="filter-grid">
+            <div>
+              <label for="ovSiteHist">Сайт</label>
+              <select id="ovSiteHist"></select>
+            </div>
+          </div>
+          <div class="mini" id="ovSiteHistInfo"></div>
+          <div class="dayhist" id="siteDayHistogram"></div>
+        </div>
+        <div class="col-6 panel">
+          <h2>Гистограмма по дням: темы</h2>
+          <div class="filter-grid">
+            <div>
+              <label for="ovThemeHist">Тема</label>
+              <select id="ovThemeHist"></select>
+            </div>
+          </div>
+          <div class="mini" id="ovThemeHistInfo"></div>
+          <div class="dayhist" id="themeDayHistogram"></div>
         </div>
         <div class="col-12 panel">
           <h2>Сайты: users vs projects</h2>
@@ -581,6 +640,9 @@
     function computeOverviewFromProjects(projects, plan) {
       const domainMap = new Map();
       const themeMap = new Map();
+      const dailyTotal = new Map();
+      const dailySiteCounts = new Map();
+      const dailyThemeCounts = new Map();
       const filtered = projects.filter(p => {
         if (plan === "all") return true;
         return (p.variant || "").toLowerCase() === plan;
@@ -588,9 +650,14 @@
 
       filtered.forEach(p => {
         const guid = p.guid || "";
-        const domains = splitList(p.domains);
+        const date = String(p.project_time || "").slice(0, 10);
+        const domains = Array.from(new Set(splitList(p.domains)));
         const ops = splitList(p.operations);
         const theme = p.theme || "";
+
+        if (date) {
+          dailyTotal.set(date, (dailyTotal.get(date) || 0) + 1);
+        }
 
         domains.forEach(domain => {
           if (!domainMap.has(domain)) {
@@ -601,6 +668,12 @@
           item.projects += 1;
           ops.forEach(op => item.ops.set(op, (item.ops.get(op) || 0) + 1));
           if (theme) item.themes.set(theme, (item.themes.get(theme) || 0) + 1);
+
+          if (date) {
+            if (!dailySiteCounts.has(domain)) dailySiteCounts.set(domain, new Map());
+            const siteMap = dailySiteCounts.get(domain);
+            siteMap.set(date, (siteMap.get(date) || 0) + 1);
+          }
         });
 
         if (theme) {
@@ -611,6 +684,11 @@
           t.users.add(guid);
           t.projects += 1;
           ops.forEach(op => t.ops.set(op, (t.ops.get(op) || 0) + 1));
+          if (date) {
+            if (!dailyThemeCounts.has(theme)) dailyThemeCounts.set(theme, new Map());
+            const tm = dailyThemeCounts.get(theme);
+            tm.set(date, (tm.get(date) || 0) + 1);
+          }
         }
       });
 
@@ -641,7 +719,8 @@
         return asInt(b.projects_count) - asInt(a.projects_count);
       });
 
-      return { siteRows, themeRows };
+      const dates = Array.from(dailyTotal.keys()).sort();
+      return { siteRows, themeRows, dates, dailyTotal, dailySiteCounts, dailyThemeCounts };
     }
 
     function renderBars(containerId, rows, labelKey, valueKey, limit = 15, colorClass = "") {
@@ -659,6 +738,25 @@
               <div class="bar ${colorClass}" style="width:${width}%"></div>
             </div>
             <div class="bar-value">${v}</div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function renderDayHistogram(containerId, series, green = false) {
+      const root = document.getElementById(containerId);
+      if (!root) return;
+      const max = Math.max(1, ...series.map(r => asInt(r.count)));
+      root.innerHTML = series.map(r => {
+        const v = asInt(r.count);
+        const width = Math.max(2, Math.round((v / max) * 100));
+        return `
+          <div class="dayhist-row">
+            <div class="dayhist-date">${escapeHtml(r.date)}</div>
+            <div class="dayhist-track">
+              <div class="dayhist-bar ${green ? "green" : ""}" style="width:${width}%"></div>
+            </div>
+            <div class="dayhist-count">${v}</div>
           </div>
         `;
       }).join("");
@@ -875,18 +973,13 @@
 
     function renderOverview(sites, themes, projects) {
       const planEl = document.getElementById("ovPlan");
+      const siteEl = document.getElementById("ovSiteHist");
+      const themeEl = document.getElementById("ovThemeHist");
       const render = () => {
         const plan = planEl.value || "all";
-        let topSites;
-        let topThemes;
-        if (plan === "all") {
-          topSites = [...sites].sort((a, b) => asInt(b.users_count) - asInt(a.users_count));
-          topThemes = [...themes].sort((a, b) => asInt(b.users_count) - asInt(a.users_count));
-        } else {
-          const agg = computeOverviewFromProjects(projects, plan);
-          topSites = agg.siteRows;
-          topThemes = agg.themeRows;
-        }
+        const agg = computeOverviewFromProjects(projects, plan);
+        const topSites = agg.siteRows;
+        const topThemes = agg.themeRows;
         renderBars("topSitesBars", topSites, "domain", "users_count", 16);
         renderBars("topThemesBars", topThemes, "theme", "users_count", 16, "bar2");
         renderTable("topSitesTable", topSites.slice(0, 120), [
@@ -896,9 +989,48 @@
           { key: "what_users_do", label: "Что делают" },
           { key: "top_themes", label: "Топ темы" }
         ]);
+
+        const prevSite = siteEl.value || "all";
+        const prevTheme = themeEl.value || "all";
+        const siteOptions = ["all", ...topSites.slice(0, 25).map(r => r.domain)];
+        const themeOptions = ["all", ...topThemes.slice(0, 25).map(r => r.theme)];
+        siteEl.innerHTML = siteOptions
+          .map(v => `<option value="${escapeHtml(v)}">${escapeHtml(v)}</option>`)
+          .join("");
+        themeEl.innerHTML = themeOptions
+          .map(v => `<option value="${escapeHtml(v)}">${escapeHtml(v)}</option>`)
+          .join("");
+        siteEl.value = siteOptions.includes(prevSite) ? prevSite : "all";
+        themeEl.value = themeOptions.includes(prevTheme) ? prevTheme : "all";
+
+        const siteChoice = siteEl.value || "all";
+        const themeChoice = themeEl.value || "all";
+        const dates = agg.dates || [];
+        const siteSeries = dates.map(d => ({
+          date: d,
+          count: siteChoice === "all"
+            ? (agg.dailyTotal.get(d) || 0)
+            : ((agg.dailySiteCounts.get(siteChoice) || new Map()).get(d) || 0),
+        }));
+        const themeSeries = dates.map(d => ({
+          date: d,
+          count: themeChoice === "all"
+            ? (agg.dailyTotal.get(d) || 0)
+            : ((agg.dailyThemeCounts.get(themeChoice) || new Map()).get(d) || 0),
+        }));
+        renderDayHistogram("siteDayHistogram", siteSeries, false);
+        renderDayHistogram("themeDayHistogram", themeSeries, true);
+        document.getElementById("ovSiteHistInfo").innerHTML =
+          `Серия: <b>${escapeHtml(siteChoice === "all" ? "all projects" : siteChoice)}</b> • дней: <b>${dates.length}</b>`;
+        document.getElementById("ovThemeHistInfo").innerHTML =
+          `Серия: <b>${escapeHtml(themeChoice === "all" ? "all projects" : themeChoice)}</b> • дней: <b>${dates.length}</b>`;
       };
       planEl.addEventListener("input", render);
       planEl.addEventListener("change", render);
+      siteEl.addEventListener("input", render);
+      siteEl.addEventListener("change", render);
+      themeEl.addEventListener("input", render);
+      themeEl.addEventListener("change", render);
       render();
     }
 
