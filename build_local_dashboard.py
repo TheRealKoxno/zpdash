@@ -260,6 +260,22 @@ HTML_TEMPLATE = """<!doctype html>
       color: var(--muted);
       font-size: 11px;
     }
+    .hover-tip {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      max-width: 320px;
+      padding: 6px 8px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(9, 14, 28, 0.96);
+      color: var(--text);
+      font-size: 12px;
+      line-height: 1.25;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+      transform: translate(10px, 10px);
+      display: none;
+    }
     .muted { color: var(--muted); }
     .danger { color: var(--danger); }
     .warn { color: var(--warn); }
@@ -509,6 +525,7 @@ HTML_TEMPLATE = """<!doctype html>
       </div>
     </section>
   </div>
+  <div class="hover-tip" id="hoverTip"></div>
 
   <script>
     const DATA_FILES = {
@@ -612,7 +629,35 @@ HTML_TEMPLATE = """<!doctype html>
       return String(raw ?? "")
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;");
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function escapeAttr(raw) {
+      return escapeHtml(raw);
+    }
+
+    function showHoverTip(text, x, y) {
+      const tip = document.getElementById("hoverTip");
+      if (!tip) return;
+      tip.textContent = String(text || "");
+      tip.style.left = `${x}px`;
+      tip.style.top = `${y}px`;
+      tip.style.display = "block";
+    }
+
+    function moveHoverTip(x, y) {
+      const tip = document.getElementById("hoverTip");
+      if (!tip || tip.style.display !== "block") return;
+      tip.style.left = `${x}px`;
+      tip.style.top = `${y}px`;
+    }
+
+    function hideHoverTip() {
+      const tip = document.getElementById("hoverTip");
+      if (!tip) return;
+      tip.style.display = "none";
     }
 
     function uniqueValues(rows, key) {
@@ -776,16 +821,18 @@ HTML_TEMPLATE = """<!doctype html>
         const parts = [];
         row.top.forEach(it => {
           const width = Math.max(1, (it.count / row.total) * 100);
+          const tip = `${it.category} — ${it.count} (${row.date})`;
           parts.push(
             `<span class="stack-seg" style="width:${width}%;background:${colorForLabel(it.category)}" ` +
-            `title="${escapeHtml(it.category)} — ${it.count}"></span>`
+            `data-tip="${escapeAttr(tip)}"></span>`
           );
         });
         if (row.other > 0) {
           const width = Math.max(1, (row.other / row.total) * 100);
+          const tip = `other — ${row.other} (${row.date})`;
           parts.push(
             `<span class="stack-seg" style="width:${width}%;background:#64748b" ` +
-            `title="other — ${row.other}"></span>`
+            `data-tip="${escapeAttr(tip)}"></span>`
           );
         }
         return `
@@ -796,6 +843,18 @@ HTML_TEMPLATE = """<!doctype html>
           </div>
         `;
       }).join("");
+
+      root.querySelectorAll(".stack-seg").forEach(el => {
+        el.addEventListener("mouseenter", evt => {
+          showHoverTip(el.getAttribute("data-tip") || "", evt.clientX, evt.clientY);
+        });
+        el.addEventListener("mousemove", evt => {
+          moveHoverTip(evt.clientX, evt.clientY);
+        });
+        el.addEventListener("mouseleave", () => {
+          hideHoverTip();
+        });
+      });
     }
 
     function statCards(users, projects) {
