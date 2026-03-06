@@ -303,7 +303,7 @@ HTML_TEMPLATE = """<!doctype html>
   <div class="container">
     <div class="sticky-actions">
       <h1>ZennoPoster Local Dashboard</h1>
-      <div class="subtitle">Интерактивный просмотр выгрузки 16-24 Feb 2026 • Сгенерировано: __GENERATED_AT__</div>
+      <div class="subtitle">Интерактивный просмотр выгрузки 16-28 Feb 2026 • Сгенерировано: __GENERATED_AT__</div>
       <div class="top-links">
         <a href="dashboard_report.md" target="_blank">dashboard_report.md</a>
         <a href="users_profile_dashboard.csv" target="_blank">users_profile_dashboard.csv</a>
@@ -1174,7 +1174,7 @@ HTML_TEMPLATE = """<!doctype html>
           return true;
         });
 
-        filtered.sort((a, b) => asFloat(b.inactive_hours_till_2026_02_24_end) - asFloat(a.inactive_hours_till_2026_02_24_end));
+        filtered.sort((a, b) => asFloat(b.inactive_hours_till_window_end) - asFloat(a.inactive_hours_till_window_end));
         const total = filtered.length;
         filtered = filtered.slice(0, limit);
         document.getElementById("terminalErrInfo").innerHTML =
@@ -1189,7 +1189,7 @@ HTML_TEMPLATE = """<!doctype html>
           { key: "last_error_category", label: "Последняя ошибка проекта" },
           { key: "last_error_time", label: "Время ошибки" },
           { key: "last_edit_time", label: "Последнее изменение проекта" },
-          { key: "inactive_hours_till_2026_02_24_end", label: "Неактивность (часы)" },
+          { key: "inactive_hours_till_window_end", label: "Неактивность (часы)" },
           { key: "theme", label: "Тема" }
         ]);
       }

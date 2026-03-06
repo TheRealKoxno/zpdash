@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 import csv
 import html
+import io
 import ipaddress
 import json
-import os
 import re
 import zipfile
 from collections import Counter, defaultdict
@@ -14,9 +14,13 @@ from typing import Dict, Iterable, List, Optional, Set, Tuple
 from urllib.parse import urlparse
 
 
-BASE_DIR = Path("/Users/ilyazenno/Downloads/Dumper (16feb-24feb)")
+DEFAULT_DATA_SOURCES = [
+    Path("/Users/ilyazenno/Downloads/Dumper (16feb-24feb)"),
+    Path("/Users/ilyazenno/Downloads/24feb-28feb-20260305T203619Z-1-001.zip"),
+]
 OUT_DIR = Path("/Users/ilyazenno/Desktop/zp_dumper/dashboard_output")
-WINDOW_END = datetime(2026, 2, 24, 23, 59, 59)
+WINDOW_END = datetime(2026, 2, 28, 23, 59, 59)
+WINDOW_LABEL = "16 Feb - 28 Feb 2026"
 
 
 URL_RE = re.compile(r"https?://[^\s\"'<>]+", re.IGNORECASE)
@@ -431,6 +435,154 @@ def mean_and_median(values: List[int]) -> Tuple[float, float]:
     return mean, median
 
 
+def _project_file_sort_key(name: str) -> Tuple[int, str]:
+    match = PROJECT_ZIP_RE.match(name or "")
+    if match:
+        return int(match.group(1)), name
+    return 10**9, name
+
+
+def _iter_sessions_from_directory(
+    source_dir: Path,
+) -> Iterable[Tuple[str, str, Optional[datetime], List[str], List[Tuple[str, bytes]]]]:
+    user_dirs = sorted([p for p in source_dir.iterdir() if p.is_dir() and USER_DIR_RE.match(p.name)])
+    for user_dir in user_dirs:
+        user_key = user_dir.name
+        sessions = sorted([p for p in user_dir.iterdir() if p.is_dir() and p.name.startswith("Session ")])
+        for session_dir in sessions:
+            session_name = session_dir.name
+            session_time = parse_session_dt(session_name)
+            url_lines: List[str] = []
+            url_stats_file = session_dir / "urlStatistics.txt"
+            if url_stats_file.exists():
+                try:
+                    with url_stats_file.open("r", encoding="utf-8", errors="ignore") as f:
+                        for line in f:
+                            line = line.strip()
+                            if line:
+                                url_lines.append(line)
+                except Exception:
+                    pass
+            project_blobs: List[Tuple[str, bytes]] = []
+            for file_path in sorted(session_dir.iterdir(), key=lambda p: _project_file_sort_key(p.name)):
+                if not file_path.is_file():
+                    continue
+                if not PROJECT_ZIP_RE.match(file_path.name):
+                    continue
+                try:
+                    project_blobs.append((file_path.name, file_path.read_bytes()))
+                except Exception:
+                    continue
+            yield user_key, session_name, session_time, url_lines, project_blobs
+
+
+def _extract_zip_user_session_file(name: str) -> Optional[Tuple[str, str, str]]:
+    parts = Path(name).parts
+    for idx, part in enumerate(parts):
+        if not USER_DIR_RE.match(part):
+            continue
+        if idx + 2 >= len(parts):
+            return None
+        user_key = part
+        session_name = parts[idx + 1]
+        filename = parts[idx + 2]
+        if not session_name.startswith("Session "):
+            return None
+        # We only consume files directly under Session folder.
+        if idx + 3 != len(parts):
+            return None
+        return user_key, session_name, filename
+    return None
+
+
+def _iter_sessions_from_zip(
+    source_zip: Path,
+) -> Iterable[Tuple[str, str, Optional[datetime], List[str], List[Tuple[str, bytes]]]]:
+    with zipfile.ZipFile(source_zip) as zf:
+        grouped: Dict[Tuple[str, str], Dict[str, List]] = defaultdict(
+            lambda: {"url_entries": [], "project_entries": []}
+        )
+        for name in zf.namelist():
+            if name.endswith("/"):
+                continue
+            parsed = _extract_zip_user_session_file(name)
+            if not parsed:
+                continue
+            user_key, session_name, filename = parsed
+            key = (user_key, session_name)
+            if filename == "urlStatistics.txt":
+                grouped[key]["url_entries"].append(name)
+            elif PROJECT_ZIP_RE.match(filename):
+                grouped[key]["project_entries"].append((filename, name))
+
+        for user_key, session_name in sorted(
+            grouped.keys(),
+            key=lambda v: (v[0], parse_session_dt(v[1]) or datetime.min, v[1]),
+        ):
+            ctx = grouped[(user_key, session_name)]
+            url_lines: List[str] = []
+            for entry in sorted(ctx["url_entries"]):
+                try:
+                    text = zf.read(entry).decode("utf-8", errors="ignore")
+                except Exception:
+                    continue
+                for line in text.splitlines():
+                    line = line.strip()
+                    if line:
+                        url_lines.append(line)
+
+            project_blobs: List[Tuple[str, bytes]] = []
+            for filename, entry in sorted(
+                ctx["project_entries"], key=lambda p: _project_file_sort_key(p[0])
+            ):
+                try:
+                    project_blobs.append((filename, zf.read(entry)))
+                except Exception:
+                    continue
+
+            yield user_key, session_name, parse_session_dt(session_name), url_lines, project_blobs
+
+
+def _iter_sessions_from_source(
+    source: Path,
+) -> Iterable[Tuple[str, str, Optional[datetime], List[str], List[Tuple[str, bytes]]]]:
+    if source.is_dir():
+        yield from _iter_sessions_from_directory(source)
+        return
+    if source.is_file() and source.suffix.lower() == ".zip":
+        yield from _iter_sessions_from_zip(source)
+        return
+
+
+def _dt_key(dt: Optional[datetime]) -> str:
+    return dt.isoformat(sep=" ") if dt else ""
+
+
+def snapshot_dedupe_signature(snap: ProjectRecord) -> Tuple:
+    error_sig = tuple(
+        sorted(
+            (
+                _dt_key(e.time),
+                e.category or "",
+                (e.message or "")[:200],
+            )
+            for e in snap.error_events
+        )
+    )
+    return (
+        snap.project_id or "",
+        _dt_key(snap.project_time),
+        snap.edit_versions,
+        tuple(sorted(snap.domains)),
+        tuple(sorted(snap.action_pairs)),
+        tuple(sorted(snap.table_names)),
+        snap.theme or "",
+        _dt_key(snap.last_edit_time),
+        _dt_key(snap.last_error_time),
+        error_sig,
+    )
+
+
 def collapse_snapshots_by_project_id(snapshot_records: List[ProjectRecord]) -> List[ProjectRecord]:
     grouped: Dict[str, Dict] = {}
     for snap in snapshot_records:
@@ -452,8 +604,14 @@ def collapse_snapshots_by_project_id(snapshot_records: List[ProjectRecord]) -> L
                 "table_names": set(),
                 "variants": Counter(),
                 "max_edit_versions": 0,
+                "seen_signatures": set(),
             }
             grouped[key] = bucket
+
+        signature = snapshot_dedupe_signature(snap)
+        if signature in bucket["seen_signatures"]:
+            continue
+        bucket["seen_signatures"].add(signature)
 
         bucket["snapshots_count"] += 1
         bucket["domains"].update(snap.domains)
@@ -579,10 +737,25 @@ def summarize_user(
     return occupation_full, success_text, failure_text, characteristic
 
 
-def analyze() -> None:
-    if not BASE_DIR.exists():
-        raise SystemExit(f"Data directory not found: {BASE_DIR}")
-    OUT_DIR.mkdir(parents=True, exist_ok=True)
+def analyze(
+    data_sources: Optional[List[Path]] = None,
+    out_dir: Optional[Path] = None,
+    window_end: Optional[datetime] = None,
+    window_label: str = WINDOW_LABEL,
+) -> None:
+    sources = [Path(p) for p in (data_sources or DEFAULT_DATA_SOURCES)]
+    resolved_sources: List[Path] = []
+    for source in sources:
+        if source.exists():
+            resolved_sources.append(source)
+        else:
+            print(f"Warning: data source not found, skipped: {source}")
+    if not resolved_sources:
+        raise SystemExit("No existing data sources found")
+
+    out_dir = out_dir or OUT_DIR
+    window_end = window_end or WINDOW_END
+    out_dir.mkdir(parents=True, exist_ok=True)
 
     userdir_context: Dict[str, Dict] = defaultdict(
         lambda: {
@@ -591,6 +764,7 @@ def analyze() -> None:
             "url_domains": Counter(),
             "url_events": 0,
             "url_times": [],
+            "url_seen_keys": set(),
         }
     )
     userdir_guid_counter: Dict[str, Counter] = defaultdict(Counter)
@@ -599,43 +773,34 @@ def analyze() -> None:
     users: Dict[str, UserStats] = {}
     parse_failures = 0
 
-    user_dirs = sorted([p for p in BASE_DIR.iterdir() if p.is_dir() and USER_DIR_RE.match(p.name)])
-
-    for user_dir in user_dirs:
-        user_key = user_dir.name
-        sessions = sorted([p for p in user_dir.iterdir() if p.is_dir() and p.name.startswith("Session ")])
-        for session_dir in sessions:
-            session_name = session_dir.name
-            session_time = parse_session_dt(session_name)
+    for source in resolved_sources:
+        for user_key, session_name, session_time, url_lines, project_blobs in _iter_sessions_from_source(source):
             userdir_context[user_key]["session_names"].add(session_name)
             if session_time:
                 userdir_context[user_key]["session_times"].append(session_time)
 
-            url_stats_file = session_dir / "urlStatistics.txt"
-            if url_stats_file.exists():
-                try:
-                    with url_stats_file.open("r", encoding="utf-8", errors="ignore") as f:
-                        for line in f:
-                            line = line.strip()
-                            if not line:
-                                continue
-                            parts = line.split(" ", 1)
-                            token = parts[0]
-                            maybe_dt = parse_urlstats_dt(token)
-                            if maybe_dt:
-                                userdir_context[user_key]["url_times"].append(maybe_dt)
-                            url = parts[1].strip() if len(parts) > 1 else ""
-                            domain = get_domain(url)
-                            if domain and is_external_domain(domain):
-                                userdir_context[user_key]["url_domains"][domain] += 1
-                                userdir_context[user_key]["url_events"] += 1
-                except Exception:
-                    pass
-
-            for file_path in session_dir.iterdir():
-                if not file_path.is_file():
+            for line in url_lines:
+                line = line.strip()
+                if not line:
                     continue
-                proj_match = PROJECT_ZIP_RE.match(file_path.name)
+                parts = line.split(" ", 1)
+                token = parts[0]
+                url = parts[1].strip() if len(parts) > 1 else ""
+                dedupe_key = (token, url)
+                if dedupe_key in userdir_context[user_key]["url_seen_keys"]:
+                    continue
+                userdir_context[user_key]["url_seen_keys"].add(dedupe_key)
+
+                maybe_dt = parse_urlstats_dt(token)
+                if maybe_dt:
+                    userdir_context[user_key]["url_times"].append(maybe_dt)
+                domain = get_domain(url)
+                if domain and is_external_domain(domain):
+                    userdir_context[user_key]["url_domains"][domain] += 1
+                    userdir_context[user_key]["url_events"] += 1
+
+            for project_name, project_blob in project_blobs:
+                proj_match = PROJECT_ZIP_RE.match(project_name)
                 if not proj_match:
                     continue
 
@@ -653,7 +818,7 @@ def analyze() -> None:
                 last_edit_time: Optional[datetime] = None
 
                 try:
-                    with zipfile.ZipFile(file_path) as zf:
+                    with zipfile.ZipFile(io.BytesIO(project_blob)) as zf:
                         history_names = [n for n in zf.namelist() if n.startswith("history-")]
                         if not history_names:
                             continue
@@ -718,7 +883,7 @@ def analyze() -> None:
                 operations = derive_operations(action_pairs, actions, history_state)
                 theme, theme_tags = classify_theme(domains, action_pairs, actions, history_state, urls)
 
-                project_key = f"{guid}::{session_name}::{file_path.name}"
+                project_key = f"{guid}::{session_name}::{project_name}"
                 for dbg in debug_records:
                     err = dbg.get("Error") or {}
                     message = (err.get("Message") or "").strip()
@@ -755,7 +920,7 @@ def analyze() -> None:
                     user_dir=user_key,
                     session=session_name,
                     session_time=session_time,
-                    project_file=file_path.name,
+                    project_file=project_name,
                     project_number=project_number,
                     project_id=project_id,
                     variant=variant,
@@ -954,9 +1119,7 @@ def analyze() -> None:
         else:
             first_activity = None
             last_activity = None
-        inactive_hours = (
-            (WINDOW_END - last_activity).total_seconds() / 3600.0 if last_activity else None
-        )
+        inactive_hours = ((window_end - last_activity).total_seconds() / 3600.0 if last_activity else None)
         left_flag = bool(inactive_hours is not None and inactive_hours > 24.0)
         churn_counter["ушел_>1д"] += 1 if left_flag else 0
         churn_counter["активен_<=1д"] += 0 if left_flag else 1
@@ -986,7 +1149,7 @@ def analyze() -> None:
                 "active_days": len(user.active_days),
                 "first_activity": first_activity.isoformat(sep=" ") if first_activity else "",
                 "last_activity": last_activity.isoformat(sep=" ") if last_activity else "",
-                "inactive_hours_till_2026_02_24_end": f"{inactive_hours:.1f}" if inactive_hours is not None else "",
+                "inactive_hours_till_window_end": f"{inactive_hours:.1f}" if inactive_hours is not None else "",
                 "left_more_than_1_day": "yes" if left_flag else "no",
                 "top_sites": ", ".join(top_domains[:5]),
                 "top_themes": ", ".join(top_themes[:4]),
@@ -1011,7 +1174,7 @@ def analyze() -> None:
             "lite_or_pro": user_variant,
             "level": level,
             "left_more_than_1_day": "yes" if left_flag else "no",
-            "inactive_hours_till_2026_02_24_end": f"{inactive_hours:.1f}" if inactive_hours is not None else "",
+            "inactive_hours_till_window_end": f"{inactive_hours:.1f}" if inactive_hours is not None else "",
             "projects_count": str(projects_count),
         }
 
@@ -1150,7 +1313,7 @@ def analyze() -> None:
                 "lite_or_pro": user_meta.get("lite_or_pro", ""),
                 "level": user_meta.get("level", ""),
                 "left_more_than_1_day": "yes",
-                "inactive_hours_till_2026_02_24_end": user_meta.get("inactive_hours_till_2026_02_24_end", ""),
+                "inactive_hours_till_window_end": user_meta.get("inactive_hours_till_window_end", ""),
                 "user_projects_count": user_meta.get("projects_count", ""),
                 "session": project.session,
                 "project_file": project.project_file,
@@ -1172,7 +1335,7 @@ def analyze() -> None:
 
     terminal_error_churned_rows.sort(
         key=lambda r: (
-            float(r["inactive_hours_till_2026_02_24_end"] or "0"),
+            float(r["inactive_hours_till_window_end"] or "0"),
             r["last_error_time"] or "",
         ),
         reverse=True,
@@ -1205,18 +1368,18 @@ def analyze() -> None:
             writer.writeheader()
             writer.writerows(rows)
 
-    write_csv(OUT_DIR / "dashboard_top_sites.csv", top_sites_rows)
-    write_csv(OUT_DIR / "dashboard_top_themes.csv", top_themes_rows)
-    write_csv(OUT_DIR / "dashboard_top_errors.csv", top_errors_rows)
-    write_csv(OUT_DIR / "dashboard_last_errors.csv", last_errors_rows)
-    write_csv(OUT_DIR / "dashboard_errors_by_level.csv", errors_by_level_rows)
-    write_csv(OUT_DIR / "dashboard_last_errors_by_level.csv", last_errors_by_level_rows)
-    write_csv(OUT_DIR / "dashboard_errors_by_plan.csv", errors_by_plan_rows)
-    write_csv(OUT_DIR / "dashboard_last_errors_by_plan.csv", last_errors_by_plan_rows)
-    write_csv(OUT_DIR / "dashboard_terminal_error_churned_projects.csv", terminal_error_churned_rows)
-    write_csv(OUT_DIR / "dashboard_terminal_error_churned_summary.csv", terminal_error_summary_rows)
-    write_csv(OUT_DIR / "users_profile_dashboard.csv", per_user_rows)
-    write_csv(OUT_DIR / "projects_detailed_dashboard.csv", per_project_rows)
+    write_csv(out_dir / "dashboard_top_sites.csv", top_sites_rows)
+    write_csv(out_dir / "dashboard_top_themes.csv", top_themes_rows)
+    write_csv(out_dir / "dashboard_top_errors.csv", top_errors_rows)
+    write_csv(out_dir / "dashboard_last_errors.csv", last_errors_rows)
+    write_csv(out_dir / "dashboard_errors_by_level.csv", errors_by_level_rows)
+    write_csv(out_dir / "dashboard_last_errors_by_level.csv", last_errors_by_level_rows)
+    write_csv(out_dir / "dashboard_errors_by_plan.csv", errors_by_plan_rows)
+    write_csv(out_dir / "dashboard_last_errors_by_plan.csv", last_errors_by_plan_rows)
+    write_csv(out_dir / "dashboard_terminal_error_churned_projects.csv", terminal_error_churned_rows)
+    write_csv(out_dir / "dashboard_terminal_error_churned_summary.csv", terminal_error_summary_rows)
+    write_csv(out_dir / "users_profile_dashboard.csv", per_user_rows)
+    write_csv(out_dir / "projects_detailed_dashboard.csv", per_project_rows)
 
     # Markdown dashboard.
     users_count = len(per_user_rows)
@@ -1230,7 +1393,7 @@ def analyze() -> None:
     active_users = churn_counter["активен_<=1д"]
     left_users = churn_counter["ушел_>1д"]
     lines = []
-    lines.append("# ZennoPoster Dashboard (16 Feb - 24 Feb 2026)")
+    lines.append(f"# ZennoPoster Dashboard ({window_label})")
     lines.append("")
     lines.append("## Кратко")
     lines.append(f"- Пользователей (по GUID): **{users_count}**")
@@ -1247,7 +1410,7 @@ def analyze() -> None:
     lines.append(f"- Логических проектов (по ProjectId): **{len(project_records)}**")
     lines.append(f"- Разобранных zip-снапшотов: **{len(snapshot_records)}**")
     lines.append(f"- Ошибок парсинга zip/history: **{parse_failures}**")
-    lines.append(f"- Ушли (>1 дня неактивности к 2026-02-24 23:59): **{left_users}**")
+    lines.append(f"- Ушли (>1 дня неактивности к {window_end.strftime('%Y-%m-%d %H:%M')}): **{left_users}**")
     lines.append(f"- Активны в последние 24ч окна: **{active_users}**")
     lines.append("")
 
@@ -1343,24 +1506,24 @@ def analyze() -> None:
 
     lines.append("## Выходные файлы")
     lines.append("")
-    lines.append(f"- `{OUT_DIR / 'dashboard_top_sites.csv'}`")
-    lines.append(f"- `{OUT_DIR / 'dashboard_top_themes.csv'}`")
-    lines.append(f"- `{OUT_DIR / 'dashboard_top_errors.csv'}`")
-    lines.append(f"- `{OUT_DIR / 'dashboard_last_errors.csv'}`")
-    lines.append(f"- `{OUT_DIR / 'dashboard_errors_by_level.csv'}`")
-    lines.append(f"- `{OUT_DIR / 'dashboard_last_errors_by_level.csv'}`")
-    lines.append(f"- `{OUT_DIR / 'dashboard_errors_by_plan.csv'}`")
-    lines.append(f"- `{OUT_DIR / 'dashboard_last_errors_by_plan.csv'}`")
-    lines.append(f"- `{OUT_DIR / 'dashboard_terminal_error_churned_projects.csv'}`")
-    lines.append(f"- `{OUT_DIR / 'dashboard_terminal_error_churned_summary.csv'}`")
-    lines.append(f"- `{OUT_DIR / 'users_profile_dashboard.csv'}`")
-    lines.append(f"- `{OUT_DIR / 'projects_detailed_dashboard.csv'}`")
-    lines.append(f"- `{OUT_DIR / 'dashboard_report.md'}`")
+    lines.append(f"- `{out_dir / 'dashboard_top_sites.csv'}`")
+    lines.append(f"- `{out_dir / 'dashboard_top_themes.csv'}`")
+    lines.append(f"- `{out_dir / 'dashboard_top_errors.csv'}`")
+    lines.append(f"- `{out_dir / 'dashboard_last_errors.csv'}`")
+    lines.append(f"- `{out_dir / 'dashboard_errors_by_level.csv'}`")
+    lines.append(f"- `{out_dir / 'dashboard_last_errors_by_level.csv'}`")
+    lines.append(f"- `{out_dir / 'dashboard_errors_by_plan.csv'}`")
+    lines.append(f"- `{out_dir / 'dashboard_last_errors_by_plan.csv'}`")
+    lines.append(f"- `{out_dir / 'dashboard_terminal_error_churned_projects.csv'}`")
+    lines.append(f"- `{out_dir / 'dashboard_terminal_error_churned_summary.csv'}`")
+    lines.append(f"- `{out_dir / 'users_profile_dashboard.csv'}`")
+    lines.append(f"- `{out_dir / 'projects_detailed_dashboard.csv'}`")
+    lines.append(f"- `{out_dir / 'dashboard_report.md'}`")
     lines.append("")
 
-    (OUT_DIR / "dashboard_report.md").write_text("\n".join(lines), encoding="utf-8")
+    (out_dir / "dashboard_report.md").write_text("\n".join(lines), encoding="utf-8")
 
-    print(f"Done. Output dir: {OUT_DIR}")
+    print(f"Done. Output dir: {out_dir}")
     print(
         f"Users: {users_count}, Projects(ProjectId): {projects_count}, "
         f"ZipSnapshots: {len(snapshot_records)}, Domains: {len(top_sites_rows)}"
