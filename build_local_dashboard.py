@@ -303,7 +303,7 @@ HTML_TEMPLATE = """<!doctype html>
   <div class="container">
     <div class="sticky-actions">
       <h1>ZennoPoster Local Dashboard</h1>
-      <div class="subtitle">Интерактивный просмотр выгрузки 16-28 Feb 2026 • Сгенерировано: __GENERATED_AT__</div>
+      <div class="subtitle">Интерактивный просмотр выгрузки 16 Feb - 04 Mar 2026 • Сгенерировано: __GENERATED_AT__</div>
       <div class="top-links">
         <a href="dashboard_report.md" target="_blank">dashboard_report.md</a>
         <a href="users_profile_dashboard.csv" target="_blank">users_profile_dashboard.csv</a>

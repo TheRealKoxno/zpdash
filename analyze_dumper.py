@@ -17,10 +17,11 @@ from urllib.parse import urlparse
 DEFAULT_DATA_SOURCES = [
     Path("/Users/ilyazenno/Downloads/Dumper (16feb-24feb)"),
     Path("/Users/ilyazenno/Downloads/24feb-28feb-20260305T203619Z-1-001.zip"),
+    Path("/Users/ilyazenno/Downloads/01mar-04mar-20260311T083131Z-1-001.zip"),
 ]
 OUT_DIR = Path("/Users/ilyazenno/Desktop/zp_dumper/dashboard_output")
-WINDOW_END = datetime(2026, 2, 28, 23, 59, 59)
-WINDOW_LABEL = "16 Feb - 28 Feb 2026"
+WINDOW_END = datetime(2026, 3, 4, 23, 59, 59)
+WINDOW_LABEL = "16 Feb - 04 Mar 2026"
 
 
 URL_RE = re.compile(r"https?://[^\s\"'<>]+", re.IGNORECASE)
