@@ -239,6 +239,7 @@
 - `/Users/ilyazenno/Desktop/zp_dumper/dashboard_output/dashboard_last_errors_by_plan.csv`
 - `/Users/ilyazenno/Desktop/zp_dumper/dashboard_output/dashboard_terminal_error_churned_projects.csv`
 - `/Users/ilyazenno/Desktop/zp_dumper/dashboard_output/dashboard_terminal_error_churned_summary.csv`
+- `/Users/ilyazenno/Desktop/zp_dumper/dashboard_output/dashboard_projects_per_user_by_day.csv`
 - `/Users/ilyazenno/Desktop/zp_dumper/dashboard_output/users_profile_dashboard.csv`
 - `/Users/ilyazenno/Desktop/zp_dumper/dashboard_output/projects_detailed_dashboard.csv`
 - `/Users/ilyazenno/Desktop/zp_dumper/dashboard_output/dashboard_report.md`

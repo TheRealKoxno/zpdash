@@ -67,6 +67,18 @@ SEARCH_EMAIL_UTILITY = {
     "gmail.com",
 }
 
+LEARNING_PROJECT_DOMAINS = {
+    "lessons.zennolab.com",
+    "check.zennolab.com",
+    "check2.zennolab.com",
+    "chek.zennolab.com",
+    "chekfast.zennolab.com",
+    "help.zennolab.com",
+    "wiki.zennolab.com",
+    "zennolab.com",
+    "zennolab.atlassian.net",
+}
+
 LEVEL_ORDER = ["новичок", "средний", "продвинутый", "профессионал"]
 
 # Domain canonicalization for "same site" aliases/subdomains.
@@ -434,6 +446,113 @@ def mean_and_median(values: List[int]) -> Tuple[float, float]:
     else:
         median = (vals[mid - 1] + vals[mid]) / 2.0
     return mean, median
+
+
+def meaningful_external_domains(domains: Set[str]) -> Set[str]:
+    return {
+        domain
+        for domain in (domains or set())
+        if domain
+        and is_external_domain(domain)
+        and domain not in LEARNING_PROJECT_DOMAINS
+    }
+
+
+def project_meaningfulness(project: ProjectRecord) -> Tuple[bool, int, str]:
+    score = 0
+    reasons: List[str] = []
+    live_domains = meaningful_external_domains(project.domains)
+    non_trivial_ops = [op for op in project.operations if op and op != "Прочие действия"]
+    learning_only = bool(project.domains) and not live_domains
+
+    if live_domains:
+        score += 2
+        reasons.append("внешние_домены")
+    elif learning_only:
+        score -= 1
+        reasons.append("только_учебные_домены")
+    else:
+        reasons.append("без_доменов")
+
+    if project.unique_actions >= 3:
+        score += 2
+        reasons.append("действий>=3")
+    elif project.unique_actions == 2:
+        score += 1
+        reasons.append("действий=2")
+    else:
+        score -= 1
+        reasons.append("действий<=1")
+
+    if project.edit_versions >= 3:
+        score += 1
+        reasons.append("редактирований>=3")
+    elif project.edit_versions <= 1:
+        score -= 1
+        reasons.append("редактирований<=1")
+
+    if len(non_trivial_ops) >= 2:
+        score += 1
+        reasons.append("операций>=2")
+    elif not non_trivial_ops:
+        score -= 1
+        reasons.append("нет_нетривиальных_операций")
+
+    if project.table_names:
+        score += 1
+        reasons.append("есть_таблицы")
+
+    if (
+        not live_domains
+        and project.unique_actions <= 1
+        and len(non_trivial_ops) == 0
+    ):
+        return False, score, "пустой_или_одношаговый"
+
+    if (
+        learning_only
+        and project.unique_actions <= 2
+        and project.edit_versions <= 2
+        and len(non_trivial_ops) <= 1
+    ):
+        return False, score, "учебный_zennolab"
+
+    return score >= 2, score, ", ".join(reasons[:4])
+
+
+def build_meaningful_projects_per_user_by_day_rows(
+    project_records: List[ProjectRecord],
+) -> List[Dict[str, str]]:
+    by_date_plan: Dict[Tuple[str, str], Counter] = defaultdict(Counter)
+
+    for project in project_records:
+        if not project.project_time:
+            continue
+        plan = (project.variant or "").lower()
+        if plan not in {"lite", "pro"}:
+            continue
+        is_meaningful, _, _ = project_meaningfulness(project)
+        if not is_meaningful:
+            continue
+        date_key = project.project_time.strftime("%Y-%m-%d")
+        by_date_plan[(date_key, plan)][project.guid] += 1
+
+    rows: List[Dict[str, str]] = []
+    for (date_key, plan), per_user_counter in sorted(by_date_plan.items()):
+        counts = list(per_user_counter.values())
+        meaningful_projects_count = sum(counts)
+        avg_projects, median_projects = mean_and_median(counts)
+        rows.append(
+            {
+                "date": date_key,
+                "lite_or_pro": plan,
+                "meaningful_projects_count": str(meaningful_projects_count),
+                "users_count": str(len(per_user_counter)),
+                "avg_projects_per_user": f"{avg_projects:.2f}",
+                "median_projects_per_user": f"{median_projects:.2f}",
+            }
+        )
+    return rows
 
 
 def _project_file_sort_key(name: str) -> Tuple[int, str]:
@@ -1032,6 +1151,7 @@ def analyze(
             t["ops"][op] += 1
 
         project_last_error = max(project.error_events, key=lambda e: e.time or datetime.min) if project.error_events else None
+        is_meaningful_project, project_quality_score, project_quality_reason = project_meaningfulness(project)
         per_project_rows.append(
             {
                 "guid": project.guid,
@@ -1056,6 +1176,9 @@ def analyze(
                 "last_error_message": project_last_error.message[:500] if project_last_error else "",
                 "last_edit_time": project.last_edit_time.isoformat(sep=" ") if project.last_edit_time else "",
                 "ended_on_error": "yes" if project.ended_on_error else "no",
+                "is_meaningful_project": "yes" if is_meaningful_project else "no",
+                "project_quality_score": str(project_quality_score),
+                "project_quality_reason": project_quality_reason,
             }
         )
 
@@ -1356,6 +1479,8 @@ def analyze(
             }
         )
 
+    meaningful_projects_per_user_by_day_rows = build_meaningful_projects_per_user_by_day_rows(project_records)
+
     per_user_rows.sort(key=lambda r: int(r["projects_count"]), reverse=True)
     per_project_rows.sort(key=lambda r: (r["guid"], int(r["project_number"]) if str(r["project_number"]).isdigit() else -1))
 
@@ -1379,6 +1504,7 @@ def analyze(
     write_csv(out_dir / "dashboard_last_errors_by_plan.csv", last_errors_by_plan_rows)
     write_csv(out_dir / "dashboard_terminal_error_churned_projects.csv", terminal_error_churned_rows)
     write_csv(out_dir / "dashboard_terminal_error_churned_summary.csv", terminal_error_summary_rows)
+    write_csv(out_dir / "dashboard_projects_per_user_by_day.csv", meaningful_projects_per_user_by_day_rows)
     write_csv(out_dir / "users_profile_dashboard.csv", per_user_rows)
     write_csv(out_dir / "projects_detailed_dashboard.csv", per_project_rows)
 
@@ -1517,6 +1643,7 @@ def analyze(
     lines.append(f"- `{out_dir / 'dashboard_last_errors_by_plan.csv'}`")
     lines.append(f"- `{out_dir / 'dashboard_terminal_error_churned_projects.csv'}`")
     lines.append(f"- `{out_dir / 'dashboard_terminal_error_churned_summary.csv'}`")
+    lines.append(f"- `{out_dir / 'dashboard_projects_per_user_by_day.csv'}`")
     lines.append(f"- `{out_dir / 'users_profile_dashboard.csv'}`")
     lines.append(f"- `{out_dir / 'projects_detailed_dashboard.csv'}`")
     lines.append(f"- `{out_dir / 'dashboard_report.md'}`")

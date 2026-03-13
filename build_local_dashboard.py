@@ -276,6 +276,58 @@ HTML_TEMPLATE = """<!doctype html>
       transform: translate(10px, 10px);
       display: none;
     }
+    .line-chart-wrap {
+      margin-top: 8px;
+    }
+    .chart-legend {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      display: inline-block;
+    }
+    .chart-frame {
+      width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+    }
+    .chart-svg {
+      min-width: 760px;
+      height: 270px;
+      display: block;
+    }
+    .chart-grid-line {
+      stroke: rgba(154, 168, 209, 0.18);
+      stroke-width: 1;
+    }
+    .chart-axis-text {
+      fill: var(--muted);
+      font-size: 11px;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+    }
+    .chart-line {
+      fill: none;
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .chart-point {
+      cursor: pointer;
+      stroke: #0b1020;
+      stroke-width: 2;
+    }
     .muted { color: var(--muted); }
     .danger { color: var(--danger); }
     .warn { color: var(--warn); }
@@ -352,6 +404,11 @@ HTML_TEMPLATE = """<!doctype html>
           <h2>Топ-10 тем по дням</h2>
           <div class="mini">Каждая строка: день. Наведи на сегмент, чтобы увидеть тему и количество.</div>
           <div class="stackhist" id="themeDayHistogram"></div>
+        </div>
+        <div class="col-12 panel">
+          <h2>Проектов на пользователя по дням: Lite vs Pro</h2>
+          <div class="mini">Считаются только нормальные проекты: не одношаговые и не чисто учебные шаблоны на доменах ZennoLab lessons/check/help. Наведи на точку, чтобы увидеть проекты, пользователей, average и median.</div>
+          <div id="projectsPerUserDailyChart"></div>
         </div>
         <div class="col-12 panel">
           <h2>Сайты: users vs projects</h2>
@@ -538,6 +595,7 @@ HTML_TEMPLATE = """<!doctype html>
       errorsByPlan: "dashboard_errors_by_plan.csv",
       lastErrorsByPlan: "dashboard_last_errors_by_plan.csv",
       terminalErrors: "dashboard_terminal_error_churned_projects.csv",
+      dailyProjectsPerUser: "dashboard_projects_per_user_by_day.csv",
       users: "users_profile_dashboard.csv",
       projects: "projects_detailed_dashboard.csv"
     };
@@ -857,6 +915,127 @@ HTML_TEMPLATE = """<!doctype html>
       });
     }
 
+    function renderProjectsPerUserDailyChart(containerId, rows, selectedPlan = "all") {
+      const root = document.getElementById(containerId);
+      if (!root) return;
+
+      const dates = Array.from(
+        new Set((rows || []).map(r => (r.date || "").trim()).filter(Boolean))
+      ).sort();
+      if (!dates.length) {
+        root.innerHTML = `<div class="mini">Нет данных</div>`;
+        return;
+      }
+
+      const rowIndex = new Map();
+      (rows || []).forEach(r => {
+        rowIndex.set(`${r.date}::${(r.lite_or_pro || "").toLowerCase()}`, r);
+      });
+
+      const seriesMeta = [
+        { plan: "lite", label: "Lite", color: "#69f0ae" },
+        { plan: "pro", label: "Pro", color: "#4ad2ff" },
+      ];
+      const activeSeries = seriesMeta.filter(item => {
+        if (selectedPlan === "all") return true;
+        return item.plan === selectedPlan;
+      }).map(item => ({
+        ...item,
+        points: dates.map(date => {
+          const row = rowIndex.get(`${date}::${item.plan}`);
+          return {
+            date,
+            avg: row ? asFloat(row.avg_projects_per_user) : 0,
+            median: row ? asFloat(row.median_projects_per_user) : 0,
+            projects: row ? asInt(row.meaningful_projects_count) : 0,
+            users: row ? asInt(row.users_count) : 0,
+          };
+        })
+      }));
+
+      const rawMax = Math.max(
+        1,
+        ...activeSeries.flatMap(series => series.points.map(point => point.avg))
+      );
+      const maxValue = Math.max(1, Math.ceil(rawMax * 4) / 4);
+      const width = Math.max(760, dates.length * 58);
+      const height = 270;
+      const left = 54;
+      const right = 20;
+      const top = 18;
+      const bottom = 54;
+      const innerWidth = width - left - right;
+      const innerHeight = height - top - bottom;
+      const xAt = idx => (
+        dates.length === 1
+          ? left + innerWidth / 2
+          : left + (idx * innerWidth) / (dates.length - 1)
+      );
+      const yAt = value => top + innerHeight - ((value / maxValue) * innerHeight);
+
+      const tickValues = [];
+      for (let idx = 0; idx < 5; idx += 1) {
+        tickValues.push((maxValue / 4) * idx);
+      }
+
+      const grid = tickValues.map(value => {
+        const y = yAt(value);
+        return `
+          <line class="chart-grid-line" x1="${left}" y1="${y}" x2="${width - right}" y2="${y}"></line>
+          <text class="chart-axis-text" x="${left - 8}" y="${y + 4}" text-anchor="end">${value.toFixed(2)}</text>
+        `;
+      }).join("");
+
+      const xLabels = dates.map((date, idx) => {
+        const x = xAt(idx);
+        return `<text class="chart-axis-text" x="${x}" y="${height - 18}" text-anchor="middle">${escapeHtml(date.slice(5))}</text>`;
+      }).join("");
+
+      const lines = activeSeries.map(series => {
+        const polyline = series.points.map((point, idx) => `${xAt(idx)},${yAt(point.avg)}`).join(" ");
+        const circles = series.points.map((point, idx) => {
+          const x = xAt(idx);
+          const y = yAt(point.avg);
+          const tip = `${series.label} — ${point.date} | avg ${point.avg.toFixed(2)} | median ${point.median.toFixed(2)} | projects ${point.projects} | users ${point.users}`;
+          return `<circle class="chart-point" cx="${x}" cy="${y}" r="4.5" fill="${series.color}" data-tip="${escapeAttr(tip)}"></circle>`;
+        }).join("");
+        return `
+          <polyline class="chart-line" points="${polyline}" stroke="${series.color}"></polyline>
+          ${circles}
+        `;
+      }).join("");
+
+      const legend = activeSeries.map(series => (
+        `<span class="legend-item"><span class="legend-dot" style="background:${series.color}"></span>${series.label}</span>`
+      )).join("");
+
+      root.innerHTML = `
+        <div class="line-chart-wrap">
+          <div class="chart-legend">${legend}</div>
+          <div class="chart-frame">
+            <svg class="chart-svg" viewBox="0 0 ${width} ${height}" preserveAspectRatio="none">
+              ${grid}
+              <line class="chart-grid-line" x1="${left}" y1="${height - bottom}" x2="${width - right}" y2="${height - bottom}"></line>
+              ${lines}
+              ${xLabels}
+            </svg>
+          </div>
+        </div>
+      `;
+
+      root.querySelectorAll(".chart-point").forEach(el => {
+        el.addEventListener("mouseenter", evt => {
+          showHoverTip(el.getAttribute("data-tip") || "", evt.clientX, evt.clientY);
+        });
+        el.addEventListener("mousemove", evt => {
+          moveHoverTip(evt.clientX, evt.clientY);
+        });
+        el.addEventListener("mouseleave", () => {
+          hideHoverTip();
+        });
+      });
+    }
+
     function statCards(users, projects) {
       const totalUsers = users.length;
       const totalProjects = projects.length;
@@ -1066,7 +1245,7 @@ HTML_TEMPLATE = """<!doctype html>
       render();
     }
 
-    function renderOverview(sites, themes, projects) {
+    function renderOverview(sites, themes, projects, dailyProjectsPerUser) {
       const planEl = document.getElementById("ovPlan");
       const render = () => {
         const plan = planEl.value || "all";
@@ -1084,6 +1263,7 @@ HTML_TEMPLATE = """<!doctype html>
         ]);
         renderTop10DailyStack("siteDayHistogram", agg.dates || [], agg.dailySiteCounts);
         renderTop10DailyStack("themeDayHistogram", agg.dates || [], agg.dailyThemeCounts);
+        renderProjectsPerUserDailyChart("projectsPerUserDailyChart", dailyProjectsPerUser, plan);
       };
       planEl.addEventListener("input", render);
       planEl.addEventListener("change", render);
@@ -1202,7 +1382,7 @@ HTML_TEMPLATE = """<!doctype html>
       try {
         const data = await loadAll();
         statCards(data.users, data.projects);
-        renderOverview(data.sites, data.themes, data.projects);
+        renderOverview(data.sites, data.themes, data.projects, data.dailyProjectsPerUser);
         wireUsers(data.users);
         wireProjects(data.projects);
         renderErrors(
